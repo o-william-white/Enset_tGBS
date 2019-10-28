@@ -19,6 +19,13 @@ hist(d2b.trimmed$d2b.trimmed, breaks=seq(0, round_any(max(d2b.trimmed$d2b.trimme
 hist(trimmomatic$trimmomatic, breaks=seq(0, round_any(max(trimmomatic$trimmomatic), 5e5, f = ceiling),  by=5e5), main="Trimmomatic output" , xlab="Number of reads per sample")
 dev.off()
 
+png("plot-read-count-histograms.png")
+par(mfrow=c(2,2))
+hist(d2b.raw$d2b.raw,         breaks=seq(0, round_any(max(d2b.raw$d2b.raw),         5e5, f = ceiling),  by=5e5), main="Data2bio raw data" , xlab="Number of reads per sample")
+hist(d2b.trimmed$d2b.trimmed, breaks=seq(0, round_any(max(d2b.trimmed$d2b.trimmed), 5e5, f = ceiling),  by=5e5), main="Data2bio trimmed data" , xlab="Number of reads per sample")
+hist(trimmomatic$trimmomatic, breaks=seq(0, round_any(max(trimmomatic$trimmomatic), 5e5, f = ceiling),  by=5e5), main="Trimmomatic output" , xlab="Number of reads per sample")
+dev.off()
+
 # plot bar charts of read counts for first five samples 
 df <- data.frame(d2b.raw, d2b.trimmed, trimmomatic)
 
@@ -27,6 +34,10 @@ row.names(df) <- sample.list$V1
 df <- t(df)
 
 pdf("plot-read-count-samples-1-5-barplot.pdf")
+barplot(df[,1:5], cex.names=0.7, beside=TRUE, legend=rownames(df))
+dev.off()
+
+png("plot-read-count-samples-1-5-barplot.png")
 barplot(df[,1:5], cex.names=0.7, beside=TRUE, legend=rownames(df))
 dev.off()
 
