@@ -183,48 +183,12 @@ cp /data/SBCS-Ethiopia/databases/genomes/enset/GCA_000331365.3_Ensete_JungleSeed
 gunzip GCA_000331365.3_Ensete_JungleSeeds_v3.0_genomic.fna.gz
 
 # index genome
-cat script-bwa-index.sh
-#!/bin/sh
-#$ -cwd
-#$ -pe smp 1
-#$ -l h_rt=1:0:0
-#$ -l h_vmem=1G
-#$ -N job-bwa-index
-
-module add bwa
-
-# index the reference genome
-bwa index GCA_000331365.3_Ensete_JungleSeeds_v3.0_genomic.fna
-
 qsub script-bwa-index.sh
-```
 
-Map trimmomatic output to reference
+# map trimmomatic output to reference
 
-```
 mkdir bwa-map-output
 mkdir trimmomatic-fq
-
-cat script-bwa-mem.sh
-#!/bin/sh
-#$ -cwd
-#$ -j y
-#$ -l h_rt=2:0:0
-#$ -pe smp 1
-#$ -l h_vmem=1G
-#$ -t 1-283
-#$ -tc 283
-#$ -N job-bwa-map
-
-module add bwa
-
-INPUT_FILE=$(sed -n "${SGE_TASK_ID}p" /data/scratch/mpx469/sample-list.txt)
-
-cp /data/scratch/mpx469/trimmomatic/trimmomatic-output/${INPUT_FILE}.digested.trimmomatic.fq.gz ./trimmomatic-fq/
-
-gunzip ./trimmomatic-fq/${INPUT_FILE}.digested.trimmomatic.fq.gz
-
-bwa mem GCA_000331365.3_Ensete_JungleSeeds_v3.0_genomic.fna ./trimmomatic-fq/${INPUT_FILE}.digested.trimmomatic.fq > ${INPUT_FILE}.mapped.sam
 
 qsub script-bwa-mem.sh
 
@@ -246,75 +210,29 @@ cd /data/scratch/mpx469/stacks/ref-map/samtools
 
 mkdir samtools-output
 
-cat script-samtools-filter-sort-index.sh
-#!/bin/sh
-#$ -cwd
-#$ -j y
-#$ -l h_rt=2:0:0
-#$ -pe smp 1
-#$ -l h_vmem=1G
-#$ -N job-samtools
-#$ -t 1-283
-#$ -tc 36
-
-module add samtools
-
-INPUT_FILE=$(sed -n "${SGE_TASK_ID}p" /data/scratch/mpx469/sample-list.txt)
-
-# filter out reads that have not mapped uniquely
-# XA - alternative hits
-# SA - chimeric read
-samtools view -h /data/scratch/mpx469/stacks/ref-map/bwa/bwa-map-output/${INPUT_FILE}.mapped.sam | grep -v -e 'XA:Z:' -e 'SA:Z:' | samtools view -h > samtools-output/${INPUT_FILE}.mapped.unique.sam
-
-# test if all mapped reads are unique
-if [ "`samtools view samtools-output/${INPUT_FILE}.mapped.unique.sam |  wc -l`" == "`samtools view samtools-output/${INPUT_FILE}.mapped.unique.sam | cut -f 1 | sort | uniq | wc -l`" ]; then
-	   echo "all good";
-else
-   echo "not good"
-fi
-
-# sort from name order into coordinate order
-samtools sort -O bam -o samtools-output/${INPUT_FILE}.mapped.unique.sorted.bam -T ${INPUT_FILE}.tmp samtools-output/${INPUT_FILE}.mapped.unique.sam
-
-# create index to allow viewing in igv
-samtools index samtools-output/${INPUT_FILE}.mapped.unique.sorted.bam
-
 qsub script-samtools-filter-sort-index.sh
 
-
+# tidy up job files
 mkdir samtools-output/job-files
 mv job-samtools.o* samtools-output/job-files/
 
+# should be 283
 cat samtools-output/job-files/job-samtools.* | grep -e "all good" -c
-283
+
 ```
 
 How many reads filtered and mapped 
 
 ```
-cat script-samtools-flagstat.sh
-#!/bin/sh
-#$ -cwd
-#$ -j y
-#$ -l h_rt=1:0:0
-#$ -pe smp 1
-#$ -l h_vmem=1G
-#$ -N job-samtools-flagstat
-#$ -t 1-283
-#$ -tc 283
-
-module add samtools
-
-INPUT_FILE=$(sed -n "${SGE_TASK_ID}p" /data/scratch/mpx469/sample-list.txt)
-
-samtools flagstat /data/scratch/mpx469/stacks/ref-map/bwa/bwa-map-output/${INPUT_FILE}.mapped.sam > samtools-output/${INPUT_FILE}.flagstat.txt
-
-samtools flagstat /data/scratch/mpx469/stacks/ref-map/samtools/samtools-output/${INPUT_FILE}.mapped.unique.sam > samtools-output/${INPUT_FILE}.flagstat.filtered.txt
-
-qsub script-samtools-flagstat.sh
+script-samtools-flagstat.sh
 
 # job files not needed or useful
 rm job-samtools-flagstat.o*
+```
+
+Create plot
+
+```
 
 mkdir flagstat-plot
 
@@ -330,28 +248,9 @@ cat /data/scratch/mpx469/sample-list.txt | while read i; do
    awk 'NR==5' samtools-output/${i}.flagstat.filtered.txt | cut -f 1 -d " "; 
 done > flagstat-plot/reads-unique-mapped.txt
 
-module add R
-R
-
-# read in data
-total <- read.table("flagstat-plot/reads-total.txt", header=FALSE)
-unique <- read.table("flagstat-plot/reads-unique.txt", header=FALSE)
-unique.mapped <- read.table("flagstat-plot/reads-unique-mapped.txt", header=FALSE)
-
-# rbind data in long format
-df <- rbind(total, unique, unique.mapped)
-
-# add class info
-df <- cbind(df, c(rep("total", nrow(total)), rep("unique", nrow(unique)), rep("unique mapped", nrow(unique))))
-
-colnames(df) <- c("count", "class")
-
-pdf(file="flagstat-plot/plot-flagstat.pdf")
-boxplot(count ~ class, df, xlab = "", sub=paste("Mean proportion of uniquely mapped reads = ", signif(mean(unique.mapped$V1 / unique$V1), digits=2), "%", sep =""))
-dev.off()
-
-q(save="no")
+Rscript Rscript-samtools-flagstat-plot.R
 ```
+
 
 
 
