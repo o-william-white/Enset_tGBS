@@ -94,10 +94,12 @@ module add R
 Rscript Rscript-plot-read-number-count.R
 ```
 
-Read count histograms
+**Read count histograms**
+
 ![plot-read-count-histograms](figures/plot-read-count-histograms.png)
 
-Read counts for samples one to five only
+**Read counts for samples one to five only**
+
 ![plot-read-count-samples-1-5-barplot](figures/plot-read-count-samples-1-5-barplot.png)
 
 
