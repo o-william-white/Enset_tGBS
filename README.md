@@ -138,7 +138,7 @@ Rscript Rscript-plot-single-sample-comparison.R
 ![plot.read_length.EXS11ID000851.digested](figures/plot.read_length.EXS11ID000851.digested.png)
 
 
-Get read length distributions for all trimmomatic samples
+### Get read length distributions for all trimmomatic samples
 
 ```
 mkdir /data/scratch/mpx469/read-length-distribution/read-length-distribution-trimmomatic
@@ -146,83 +146,29 @@ mkdir /data/scratch/mpx469/read-length-distribution/read-length-distribution-tri
 
 cd /data/scratch/mpx469/read-length-distribution/read-length-distribution-trimmomatic/
 
-cat script-read-length-distribution-trimmomatic.sh
-#!/bin/bash
-#$ -pe smp 1
-#$ -l h_vmem=1G
-#$ -l h_rt=2:0:0
-#$ -cwd
-#$ -j y
-#$ -N job-read-length-distribution-trimmomatic
-
-cat /data/scratch/mpx469/sample-list.txt | while read i; do
-   zcat /data/scratch/mpx469/trimmomatic/trimmomatic-output/$i'.digested.trimmomatic.fq.gz' | awk '{if(NR%4==2) print length($1)}' | sort -n | uniq -c > output-read-length-distribution-trimmomatic/read_length.$i'.digested.trimmomatic.txt'
-done
-
 qsub script-read-length-distribution-trimmomatic.sh
+
 ```
 Create plot 
 
 ```
-module add R/3.6.1
-R
-
-# install.packages('dplyr',   lib="/data/home/mpx469/software/R/3.6.1/", repos = 'https://cloud.r-project.org')
-# install.packages('ggplot2', lib="/data/home/mpx469/software/R/3.6.1/", repos = 'https://cloud.r-project.org')
-
-# set lib path
-.libPaths("/data/home/mpx469/software/R/3.6.1/")
-
-# import libraries
-library(dplyr)
-library(ggplot2)
-
-input.files <- list.files(path="output-read-length-distribution-trimmomatic/", pattern="read_length*", full.names=TRUE)
-
-input.list <- lapply(input.files, read.table)
-
-head(input.list[[1]])
-head(input.list[[2]])
-
-# V1 = number of reads
-# V2 = read length
-
-# plot read length distribution of all input files
-pdf("plot-read-dristribution-trimmomatic.pdf")
-plot(0,0,xlim = c(0,250),ylim = c(0, 200000), type = "n", xlab="Read length", ylab="Number of reads")
-lapply(input.list, function(x) lines(x$V2, x$V1, col = "blue"))
-dev.off()
-
-my_func <- function(x) {
-  x %>%
-    summarise(cut60  = sum(x[x$V2>=60 ,"V1"]),
-              cut80  = sum(x[x$V2>=80 ,"V1"]),
-              cut100 = sum(x[x$V2>=100,"V1"]),
-              cut120 = sum(x[x$V2>=120,"V1"]),
-              cut140 = sum(x[x$V2>=140,"V1"]),
-              cut160 = sum(x[x$V2>=160,"V1"])) 
-} 
-
-read.length.number <- lapply(input.list, my_func)
-
-# plot the number of reads after truncating read lengths
-pdf("plot-read-numbers-after-truncating-lengths.pdf")
-plot(0,0,xlim = c(60,160),ylim = c(0, 10000000), type = "n", xlab="Read length", ylab="Number of reads")
-for (i in 1:length(read.length.number)) {
-  lines(seq(60,160,by=20), read.length.number[[i]], col = "blue")
-}
-dev.off()
-
-q(save="no")
-
-# overcrowded plot
-# is there a way to average across?
-# perhaps more importantly, should we drop certain samples that have minimum number of samples?
+Rscript Rscript-plot-read-length-distribution-trimmomatic.R
 ```
- 
+**Read length distribution of all trimmomatic samples**
+
+Plot is overcrowded and there is likely to be a better way of averaing across? Note that certain samples appear to have very few reads
+
+![plot-read-dristribution-trimmomatic](figures/plot-read-dristribution-trimmomatic.png)
+
+**Number of trimmomatic reads after truncating to a uniform length**
+
+This would only be important if we decide to use a denovo methodology
+
+![plot-read-numbers-after-truncating-lengths](figures/plot-read-numbers-after-truncating-lengths.png)
 
 
-# stacks pipeline reference guided - BWA
+
+### stacks pipeline reference guided - BWA
 
 Create genome index and map reads to genome using BWA 
 
