@@ -94,8 +94,7 @@ module add R
 Rscript Rscript-plot-read-number-count.R
 ```
 
-![GitHub Logo](/figure/plot-read-count-histograms.png)
-Format: ![Alt Text](url)
+![plot](figures/plot-read-count-samples-1-5-barplot.png)
 
 
 ### Read length distributions
