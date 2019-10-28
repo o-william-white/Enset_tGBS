@@ -1,7 +1,7 @@
 # ensete-tGBS
 Ensete tGBS methodology
 
-This readme file details the methodolgy used in the analysis of ensete tGBS data. All work was completed in QMUL apocrita cluster.
+This readme file details the methodolgy used in the analysis of ensete tGBS data. All work was completed on the QMUL apocrita cluster.
 
 ### Import data from local hard drive into apocrita
 Set up directory for raw data
