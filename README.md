@@ -129,7 +129,6 @@ zcat /data/scratch/mpx469/trimmomatic/trimmomatic-output/EXS11ID000851.digested.
 Create plot
 
 ```
-module add R
 Rscript Rscript-plot-single-sample-comparison.R
 ```
 
@@ -251,6 +250,9 @@ done > flagstat-plot/reads-unique-mapped.txt
 Rscript Rscript-samtools-flagstat-plot.R
 ```
 
+**Proportion of unique and uniqule maped reads**
+
+![plot.flagstat](figures/plot.flagstat.png)
 
 
 
