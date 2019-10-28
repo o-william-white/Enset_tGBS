@@ -251,10 +251,12 @@ Rscript Rscript-samtools-flagstat-plot.R
 ```
 
 **Proportion of unique and uniqule maped reads**
-
 ![plot-flagstat](figures/plot-flagstat.png)
 
+
 ### stacks pipeline reference guided - gstacks
+
+# AQUI
 
 ```
 mkdir /data/scratch/mpx469/stacks/ref-map/gstacks
