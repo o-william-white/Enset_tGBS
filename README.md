@@ -53,7 +53,6 @@ cut -f 2 GBS_metadata.txt | tail -n +2 > sample-list.txt
 
 
 
-
 ### Use trimmomatic to filter raw reads
 
 ```
@@ -61,36 +60,11 @@ cut -f 2 GBS_metadata.txt | tail -n +2 > sample-list.txt
 mkdir /data/scratch/mpx469/trimmomatic
 mkdir /data/scratch/mpx469/trimmomatic/trimmomatic-output
 cd /data/scratch/mpx469/trimmomatic
-```
 
-Trimmoatic array script
+qsub script-trimmomatic-array.sh
+```
 
 Note LEADING paramter not used, in attempt to preserve the 5' end of the GBS loci which are used to align stacks
-
-```
-cat script-trimmomatic-array.sh
-#!/bin/sh
-#$ -cwd
-#$ -j y
-#$ -pe smp 1
-#$ -l h_vmem=1G
-#$ -t 1-283
-
-INPUT_FILE=$(sed -n "${SGE_TASK_ID}p" /data/scratch/mpx469/sample-list.txt)
-
-module load trimmomatic/0.36
-
-java -jar /share/apps/centos7/trimmomatic/0.36/trimmomatic-0.36.jar  \
-   SE \
-   /data/scratch/mpx469/Data2Bio_final/raw/$INPUT_FILE'.digested.fq.gz' \
-   /data/scratch/mpx469/trimmomatic/trimmomatic-output/$INPUT_FILE'.digested.trimmomatic.fq.gz' \
-   TRAILING:15 \
-   SLIDINGWINDOW:4:15 \
-   MINLEN:36
-
-
-qsub script-trimmomatic.sh
-```
 
 ```
 # tidy up jobfiles
@@ -99,7 +73,7 @@ cp job-trimmomatic-array.o* trimmomatic-output/jobfiles/
 
 # all jobs should have run successfully
 cat trimmomatic-output/jobfiles/job-trimmomatic-array.o* | grep -e "TrimmomaticSE: Completed successfully" -c
-#283
+# should return 283
 ```
 
 
@@ -109,29 +83,6 @@ cat trimmomatic-output/jobfiles/job-trimmomatic-array.o* | grep -e "TrimmomaticS
 ```
 mkdir /data/scratch/mpx469/read-count
 cd /data/scratch/mpx469/read-count
-
-cat script-read-number-count.sh
-#!/bin/sh
-#$ -cwd
-#$ -pe smp 1
-#$ -l h_rt=04:0:0
-#$ -l h_vmem=1G
-#$ -N job-read-number-count
-
-# count raw read number from data2bio
-cat /data/scratch/mpx469/sample-list.txt | while read i; do
-   zcat /data/scratch/mpx469/Data2Bio_final/raw/$i'.digested.fq.gz' | echo $((`wc -l`/4)) >> count-data2bio-raw.txt
-done
-
-# count trimmed read number from data2bio
-cat /data/scratch/mpx469/sample-list.txt | while read i; do
-   zcat /data/scratch/mpx469/Data2Bio_final/trimmed/$i'.digested.trimmed.fq.gz' | echo $((`wc -l`/4)) >> count-data2bio-trimmed.txt
-done
-
-# count read number after running trimmomatic
-cat /data/scratch/mpx469/sample-list.txt | while read i; do
-   zcat /data/scratch/mpx469/trimmomatic/$i'.digested.trimmomatic.fq.gz' | echo $((`wc -l`/4)) >> count-trimmomatic.txt
-done
 
 qsub script-read-number-count.sh
 ```
