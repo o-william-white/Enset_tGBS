@@ -15,9 +15,9 @@ This readme file details the methodolgy used in the analysis of ensete tGBS data
 
 [Stacks ref map pipeline](#stacks-ref-map-pipeline)
    - [BWA](#bwa)
-   - [samtools](#samtools)
-   - [gstacks](#gstacks)
-   - [populations](#populations)
+   - [Samtools](#samtools)
+   - [Gstacks](#gstacks)
+   - [Populations](#populations)
 
 [Post-processing of SNP data](#post-processing-of-snp-data)
    - [Identifying duplicated loci](identifying-duplicated-loci)  
@@ -224,7 +224,7 @@ cat bwa-map-output/job-files/job-bwa-map.o* | grep -e "Real time" -c
 
 
 
-### samtools
+### Samtools
 
 ```
 mkdir /data/scratch/mpx469/stacks/ref-map/samtools
@@ -278,7 +278,7 @@ Rscript Rscript-samtools-flagstat-plot.R
 ![plot-flagstat](figures/plot-flagstat.png)
 
 
-### gstacks
+### Gstacks
 
 ```
 mkdir /data/scratch/mpx469/stacks/ref-map/gstacks
@@ -331,7 +331,7 @@ qsub script-gstacks-separate.sh
 
 
 
-### populations
+### Populations
 
 As above populations is run on a selsction of samples, after remving those identifed as "Disease" or "NA", and treating all samples together as a single poplation or separately. 
 
