@@ -357,7 +357,7 @@ Stacks assembles and defines loci with the same 5' startng point. Therefore, if 
 
 These loci need to be filtered out prior to analyses. 
 
-#### Populations together output 
+#### Filter the populations together output 
 
 ```
 mkdir /data/scratch/mpx469/stacks/ref-map/filter-duplicates-together
