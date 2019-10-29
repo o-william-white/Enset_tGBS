@@ -20,7 +20,7 @@ This readme file details the methodolgy used in the analysis of ensete tGBS data
    - [Populations](#populations)
 
 [Post-processing of SNP data](#post-processing-of-snp-data)
-   - [Identifying duplicated loci](identifying-duplicated-loci)  
+   - [Filtering duplicated loci](filtering-duplicated-loci)  
 
 
 ## Pre-processing of tGBS data
@@ -349,39 +349,57 @@ qsub script-populations-separate.sh
 
 ## Post-processing of SNP data
 
-### Identifying duplicated loci 
+### Filtering duplicated loci 
 
-```
-# how many mapped loci in total
+Stacks assembles and defines loci with the same 5' startng point. Therefore, if the tGBS loci are not trimmmed to uniform length at the 5' end, overlapping loci that share the SNPs at the same chromosome number and position can be defined as are as different loci. An example of this is shown below, idenfited in IGV viewer.
+
+
+
+These loci need to be filtered out prior to analyses. 
+
+mkdir /data/scratch/mpx469/stacks/ref-map/filter-duplicates-together
+cd /data/scratch/mpx469/stacks/ref-map/filter-duplicates-together
+
+# copy populations output (together) to dir
+cp /data/scratch/mpx469/stacks/ref-map/populations/populations-together-output/populations.snps.vcf .
+
+# how many mapped loci in total?
 grep -e ^# -v populations.snps.vcf | wc -l
-576099
+#576099
 
-# how many mapped loci after filtering those with identical chromosome and position
-# nout -u call needed to only print unique lines
-grep -e ^# -v populations.snps.vcf | awk ' { print $1"\t"$2 } ' | sort | uniq -u | wc -l
-570318
-
-# how many lines represent duplicated loci
-expr 576099 - 570318
-5781
-
-# check the number of duplicated lines
+# of these, how many represent duplicated loci, with the same chromosome and position?
+# -D prints all duplicate lines
 grep -e ^# -v populations.snps.vcf | awk ' { print $1"\t"$2 } ' | sort | uniq -D | wc -l
-5781
+#5781
+
+# how many loci after filtering those with identical chromosome and position?
+# -u only print unique lines
+grep -e ^# -v populations.snps.vcf | awk ' { print $1"\t"$2 } ' | sort | uniq -u | wc -l
+#570318
+
+# duplicate + unique = total
+expr 5781 + 570318
+# 576099
 
 
-# grep out info lines begining with #
-# select first and second lines with chomosome and position
-# sort
-# uniq - filter for duplicate lines
-#      -d only print duplicate lines, one for each group  
+# create text file with loci to filter
+
+# uniq -d only print duplicate lines, one for each group  
 #      -c prefix lines by the number of occurrences
 grep -e ^# -v populations.snps.vcf | awk ' { print $1"\t"$2 } ' | sort | uniq -dc > duplicated-sites.txt
+
+
+# create text file to grep against
+# needs to  be tab delimited and have a tab on the end to avoid false matches
+
+# for example 
+"AMZH1 123" will match "AMZH1 1234" if tab not added to end of text to search
 
 
 module add R
 R
 
+# read in duplicated sites
 x <- read.table("duplicated-sites.txt", header=FALSE)
 
 head(x)
@@ -393,16 +411,19 @@ head(x)
 #5  2 AMZH03000010.1 31555
 #6  2 AMZH03000010.1 31564
 
+# confirm sum equals total number of duplicated sites
 sum(x$V1)
 #[1] 5781
 
-# add an empty column 
-# I would like the to be a tab on the end of each line
+
+# add an empty column such that a tab will be created on the end of each line
 x$V4 <- rep("", nrow(x))
 
+# write table
 write.table(x[,-1], "duplicated-sites-edit.txt", sep ="\t", col.names=FALSE, row.names=FALSE, quote=FALSE)
 
 q(save="no")
+
 
 grep -f duplicated-sites-edit.txt -c populations.snps.vcf
 #5781
@@ -412,22 +433,5 @@ grep -f duplicated-sites-edit.txt -v populations.snps.vcf > populations.snps.dup
 
 grep -e ^# -v populations.snps.duplicates.removed.vcf | wc -l
 #570318
-
-
-
-
-wc -l duplicated-sites.txt
-2871 duplicated-sites.txt
-
-# what is the maximum number of duplicates
-cut -f 7 -d " " duplicated-sites.txt | sort | uniq
-2
-3
-
-grep -e ^# -v populations.snps.vcf | awk ' { print $1"\t"$2 } ' | sort | uniq -D > duplicated-sites-all.txt
-```
-
-
-
 
 
