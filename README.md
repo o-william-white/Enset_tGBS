@@ -19,6 +19,8 @@ This readme file details the methodolgy used in the analysis of ensete tGBS data
    - [gstacks](#gstacks)
    - [populations](#populations)
 
+[Post-processing of SNP data](#post-processing-of-snp-data)
+   - [Identifying duplicated loci](identifying-duplicated-loci)  
 
 
 ## Pre-processing of tGBS data
@@ -345,8 +347,9 @@ qsub script-populations-separate.sh
 ```
 
 
+## Post-processing of SNP data
 
-### identify duplicated loci 
+### Identifying duplicated loci 
 
 ```
 # how many mapped loci in total
