@@ -5,9 +5,23 @@ This readme file details the methodolgy used in the analysis of ensete tGBS data
 
 ## Table of contents
 
-[Use trimmomatic to filter raw reads](#use-trimmomatic-to-filter-raw-reads)
+[Pre-processing of tGBS data](#pre-processing-of-tgbs-data)
+   - [Import data from local hard drive into apocrita](#import-data-from-local-hard-drive-into-apocrita)
+   - [Create sample list to iterate through](#create-sample-list-to-iterate-through)
+   - [Use trimmomatic to filter raw reads](#use-trimmomatic-to-filter-raw-reads)
+   - [Get sample read counts for data2bio raw, data3bio trimmed and trimmomatic](#get-sample-read-counts-for-data2bio-raw-data3bio-trimmed-and-trimmomatic)
+   - [Read length distributions](#read-length-distributions)
+   - [Get read length distributions for all trimmomatic samples](#get-read-length-distributions-for-all-trimmomatic-samples)
+
+[Stacks ref map pipeline](#stacks-ref-map-pipeline)
+   - [BWA](#bwa)
+   - [samtools](#samtools)
+   - [gstacks](#gstacks)
+   - [populations](#populations)
 
 
+
+## Pre-processing of tGBS data
 
 ### Import data from local hard drive into apocrita
 Set up directory for raw data
@@ -172,8 +186,9 @@ This would only be important if we decide to use a denovo methodology
 ![plot-read-numbers-after-truncating-lengths](figures/plot-read-numbers-after-truncating-lengths.png)
 
 
+## Stacks ref map pipeline
 
-### stacks pipeline reference guided - BWA
+### BWA
 
 Create genome index and map reads to genome using BWA 
 
@@ -207,7 +222,7 @@ cat bwa-map-output/job-files/job-bwa-map.o* | grep -e "Real time" -c
 
 
 
-### stacks pipeline reference guided - samtools
+### samtools
 
 ```
 mkdir /data/scratch/mpx469/stacks/ref-map/samtools
@@ -260,7 +275,7 @@ Rscript Rscript-samtools-flagstat-plot.R
 ![plot-flagstat](figures/plot-flagstat.png)
 
 
-### stacks pipeline reference guided - gstacks
+### gstacks
 
 # AQUI
 
@@ -339,7 +354,7 @@ qsub script-gstacks-separate.sh
 
 
 
-### stacks pipeline reference guided - populations
+### populations
 
 Run populations after removing unneccessary samples (Disease or NA)
 
