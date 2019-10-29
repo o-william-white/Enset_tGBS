@@ -272,12 +272,11 @@ Rscript Rscript-samtools-flagstat-plot.R
 ```
 
 **Proportion of unique and uniqule maped reads**
+
 ![plot-flagstat](figures/plot-flagstat.png)
 
 
 ### gstacks
-
-# AQUI
 
 ```
 mkdir /data/scratch/mpx469/stacks/ref-map/gstacks
@@ -285,68 +284,44 @@ cd /data/scratch/mpx469/stacks/ref-map/gstacks
 
 # run gstacks after removing unneccessary samples (Disease or NA)
 # run as all sample lumped together and all samples treated separately
+```
 
+Create stacks popmap, filtering out samples classed as "Disease" or "NA". two pomap files are generate, one grouping all individuals as a single population, the other treating samples separately. 
 
-module add R
-R
+```
+Rscript Rscript-write-popmap-selection.R
 
-sample.metadata <- read.csv("/data/scratch/mpx469/GBS_metadata.csv", header=TRUE, na.strings=NULL)
+ head popmap-selection-*
+==> popmap-selection-separate.txt <==
+EXS11ID000851.mapped.unique.sorted      1
+EXS12ID000488.mapped.unique.sorted      2
+EXS13ID000895.mapped.unique.sorted      3
+EXS16ID000913.mapped.unique.sorted      4
+EXS17ID000914.mapped.unique.sorted      5
+EXS1ID000384.mapped.unique.sorted       6
+EXS5ID000604.mapped.unique.sorted       7
+EXS8ID000683.mapped.unique.sorted       8
+P1EN003.mapped.unique.sorted    9
+P1EN004.mapped.unique.sorted    10
 
-# filter out disease and NA samples
-sample.metadata <- sample.metadata[-which(sample.metadata$TYPE == "Disease" | sample.metadata$TYPE == "NA"),]
+==> popmap-selection-together.txt <==
+EXS11ID000851.mapped.unique.sorted      1
+EXS12ID000488.mapped.unique.sorted      1
+EXS13ID000895.mapped.unique.sorted      1
+EXS16ID000913.mapped.unique.sorted      1
+EXS17ID000914.mapped.unique.sorted      1
+EXS1ID000384.mapped.unique.sorted       1
+EXS5ID000604.mapped.unique.sorted       1
+EXS8ID000683.mapped.unique.sorted       1
+P1EN003.mapped.unique.sorted    1
+P1EN004.mapped.unique.sorted    1
+```
 
-samples <- paste(sample.metadata$SAMPLE_ID, ".mapped.unique.sorted", sep="")
+Run gstacks
 
-population.together <- rep(1, length(samples))
-population.separate <- 1:length(samples)
-
-popmap.together <- cbind(samples, population.together)
-popmap.separate <- cbind(samples, population.separate)
-
-write.table(file="popmap-selection-together.txt", popmap.together, col.names=FALSE, row.names=FALSE, quote=FALSE, sep="\t")
-write.table(file="popmap-selection-separate.txt", popmap.separate, col.names=FALSE, row.names=FALSE, quote=FALSE, sep="\t")
-
-q(save="no")
-
+```
 mkdir gstacks-together-output
 mkdir gstacks-separate-output
-
-
-cat script-gstacks-together.sh
-#!/bin/sh
-#$ -cwd
-#$ -j y
-#$ -pe smp 12
-#$ -l h_rt=12:0:0
-#$ -l h_vmem=2G
-#$ -N job-gstacks-together
-
-module load use.dev
-module add stacks/2.41
-
-gstacks \
-   -I /data/scratch/mpx469/stacks/ref-map/samtools/samtools-output/ \
-   -M popmap-selection-together.txt \
-   -O gstacks-together-output \
-   -t 12
-
-cat script-gstacks-separate.sh
-#!/bin/sh
-#$ -cwd
-#$ -j y
-#$ -pe smp 12
-#$ -l h_rt=12:0:0
-#$ -l h_vmem=2G
-#$ -N job-gstacks-separate
-
-module load use.dev
-module add stacks/2.41
-
-gstacks \
-   -I /data/scratch/mpx469/stacks/ref-map/samtools/samtools-output/ \
-   -M popmap-selection-separate.txt \
-   -O gstacks-separate-output \
-   -t 12
 
 qsub script-gstacks-together.sh
 qsub script-gstacks-separate.sh
@@ -356,9 +331,7 @@ qsub script-gstacks-separate.sh
 
 ### populations
 
-Run populations after removing unneccessary samples (Disease or NA)
-
-Also run and as all sample lumped together as a single populaytion and and all samples treated separately
+As above populations is run on a selsction of samples, after remving those identifed as "Disease" or "NA", and treating all samples together as a single poplation or separately. 
 
 ```
 mkdir /data/scratch/mpx469/stacks/ref-map/populations
@@ -367,48 +340,8 @@ cd /data/scratch/mpx469/stacks/ref-map/populations
 mkdir populations-together-output
 mkdir populations-separate-output
 
-cat script-populations-together.sh
-#!/bin/bash
-#$ -pe smp 12
-#$ -l h_vmem=4G
-#$ -l h_rt=2:0:0
-#$ -cwd
-#$ -j y
-#$ -N job-populations-together
-
-module load use.dev
-module add stacks/2.41
-
-populations \
-   -P /data/scratch/mpx469/stacks/ref-map/gstacks/gstacks-together-output/ \
-   -O populations-together-output \
-   -M /data/scratch/mpx469/stacks/ref-map/gstacks/popmap-selection-together.txt \
-   -r 0.4 \
-   --vcf --plink --structure \
-   -t 12
-
-cat script-populations-separate.sh
-#!/bin/bash
-#$ -pe smp 12
-#$ -l h_vmem=24G
-#$ -l h_rt=10:0:0
-#$ -l node_type=sm
-#$ -l highmem
-#$ -cwd
-#$ -j y
-#$ -N job-populations-separate
-
-module load use.dev
-module add stacks/2.41
-
-populations \
-   -P /data/scratch/mpx469/stacks/ref-map/gstacks/gstacks-separate-output/ \
-   -O populations-separate-output \
-   -M /data/scratch/mpx469/stacks/ref-map/gstacks/popmap-selection-separate.txt \
-   -R 0.4 \
-   --write-single-snp \
-   --phylip --phylip-var --phylip-var-all --vcf \
-   -t 12
+qsub script-populations-together.sh
+qsub script-populations-separate.sh
 ```
 
 
