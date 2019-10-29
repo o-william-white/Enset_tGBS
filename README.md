@@ -353,10 +353,13 @@ qsub script-populations-separate.sh
 
 Stacks assembles and defines loci with the same 5' startng point. Therefore, if the tGBS loci are not trimmmed to uniform length at the 5' end, overlapping loci that share the SNPs at the same chromosome number and position can be defined as are as different loci. An example of this is shown below, idenfited in IGV viewer.
 
-
+![gbs-5-endTrimming](figures/gbs-5-endTrimming.png)
 
 These loci need to be filtered out prior to analyses. 
 
+#### Populations together output 
+
+```
 mkdir /data/scratch/mpx469/stacks/ref-map/filter-duplicates-together
 cd /data/scratch/mpx469/stacks/ref-map/filter-duplicates-together
 
@@ -433,5 +436,5 @@ grep -f duplicated-sites-edit.txt -v populations.snps.vcf > populations.snps.dup
 
 grep -e ^# -v populations.snps.duplicates.removed.vcf | wc -l
 #570318
-
+```
 
