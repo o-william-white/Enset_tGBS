@@ -553,11 +553,13 @@ wc -l blacklist.txt
 
 ##### rerun population separate with blacklist
 
+```
 cd /data/scratch/mpx469/stacks/ref-map/populations/
 
 mkdir populations-separate-blacklist-output/
 
 qsub script-populations-separate-blacklist.sh
+```
 
 
 
