@@ -21,8 +21,8 @@ This readme file details the methodolgy used in the analysis of ensete tGBS data
 
 [Post-processing of SNP data](#post-processing-of-snp-data)
    - [Filtering duplicated loci](#filtering-duplicated-loci)  
-      - [Filter the populations together output](#Filter the populations together output) 
-      - [Filter the populations separate output](#Filter the populations separate output)
+      - [Filter the populations together output](#filter-the-populations-together-output) 
+      - [Filter the populations separate output](#filter-the-populations-separate-output)
       
 
 ## Pre-processing of tGBS data
