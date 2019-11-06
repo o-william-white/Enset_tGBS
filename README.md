@@ -438,3 +438,126 @@ grep -e ^# -v populations.snps.duplicates.removed.vcf | wc -l
 #570318
 ```
 
+#### Filter the populations seperate output
+
+We need the populations seperate output to generate a phylip file. As a reult, we cannot simply grep out duplicated loci, rather we have to re-run populations using the blacklist parameter.
+
+Above we could filter by snps sharing the same chromosome number and position, but the the --blacklist options work at the locus level, not SNP level. i.e. they expect a file with only one column.
+
+##### Identify duplicated/blacklist markers
+
+```
+mkdir /data/scratch/mpx469/stacks/ref-map/filter-duplicates-separate
+cd /data/scratch/mpx469/stacks/ref-map/filter-duplicates-separate
+
+# copy populations output (separate) to dir
+cp /data/scratch/mpx469/stacks/ref-map/populations/populations-separate-output/populations.snps.vcf .
+
+# how many mapped loci in total?
+grep -e ^# -v populations.snps.vcf | wc -l
+#29017
+
+# of these, how many represent duplicated loci, with the same chromosome and position?
+# -D prints all duplicate lines
+grep -e ^# -v populations.snps.vcf | awk ' { print $1"\t"$2 } ' | sort | uniq -D | wc -l
+#54
+
+# how many loci after filtering those with identical chromosome and position?
+# -u only print unique lines
+grep -e ^# -v populations.snps.vcf | awk ' { print $1"\t"$2 } ' | sort | uniq -u | wc -l
+#28963
+
+# duplicate + unique = total
+expr 54 + 28963
+#29017
+
+# we can't simple grep out the duplicated loci as above, becuase we need the loci in a phylip format
+# will need to run populations again with a blacklist
+
+# uniq -d only print duplicate lines, one for each group  
+#      -c prefix lines by the number of occurrences
+grep -e ^# -v populations.snps.vcf | awk ' { print $1"\t"$2 } ' | sort | uniq -dc > duplicated-sites.txt
+
+# get chr number, locus id and bp
+grep -e "^#" -v /data/scratch/mpx469/stacks/ref-map/populations/populations-separate-output/populations.sumstats.tsv | awk ' { print $1"\t"$2"\t"$3 } ' | uniq > sumstats-info.txt
+
+head sumstats-info.txt
+#79      AMZH03000001.1  13346
+#83      AMZH03000001.1  13411
+#185     AMZH03000001.1  26523
+#312     AMZH03000001.1  45297
+#379     AMZH03000001.1  54337
+#478     AMZH03000001.1  63257
+#495     AMZH03000002.1  1886
+#502     AMZH03000002.1  2033
+#666     AMZH03000002.1  27445
+#836     AMZH03000002.1  48534
+
+module add R/3.6.1
+R
+
+.libPaths("/data/home/mpx469/software/R/3.6.1/")
+
+library(dplyr)
+
+dupl <- read.table("duplicated-sites.txt", header=FALSE, col.names=c("count", "chr", "bp"))
+
+info <- read.table("sumstats-info.txt", header=FALSE, col.names=c("locus", "chr", "bp"))
+
+head(dupl)
+#  count            chr    bp
+#1     2 AMZH03000319.1  6213
+#2     2 AMZH03000730.1 10645
+#3     2 AMZH03001363.1 14822
+#4     2 AMZH03001486.1  7745
+#5     2 AMZH03001646.1 10882
+#6     2 AMZH03001984.1  9557
+
+head(info)
+#  locus            chr    bp
+#1    79 AMZH03000001.1 13346
+#2    83 AMZH03000001.1 13411
+#3   185 AMZH03000001.1 26523
+#4   312 AMZH03000001.1 45297
+#5   379 AMZH03000001.1 54337
+#6   478 AMZH03000001.1 63257
+
+# confirm sum equals total number of duplicated sites
+sum(dupl$count)
+#[1] 54
+
+out <- left_join(dupl, info, by = c("chr"="chr", "bp"="bp"))
+
+head(out)
+#   count            chr    bp  locus
+#1      2 AMZH03000018.1   673   5924
+#2      2 AMZH03000018.1   673   5925
+#3      2 AMZH03000024.1 43010   8072
+#4      2 AMZH03000024.1 43010   8073
+#5      2 AMZH03000319.1  6213  74372
+#6      2 AMZH03000319.1  6213  74374
+
+# select locus id
+out.select <- (select(out, locus))
+
+# write table
+write.table(out.select, "blacklist.txt", sep ="\t", col.names=FALSE, row.names=FALSE, quote=FALSE)
+
+q(save="no")
+
+wc -l blacklist.txt
+#54 blacklist.txt
+```
+
+##### rerun population separate with blacklist
+
+cd /data/scratch/mpx469/stacks/ref-map/populations/
+
+mkdir populations-separate-blacklist-output/
+
+qsub script-populations-separate-blacklist.sh
+
+
+
+
+
