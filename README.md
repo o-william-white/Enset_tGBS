@@ -10,7 +10,7 @@ This readme file details the methodolgy used in the analysis of ensete tGBS data
    - [Create sample list to iterate through](#create-sample-list-to-iterate-through)
    - [Use trimmomatic to filter raw reads](#use-trimmomatic-to-filter-raw-reads)
    - [Use cutadapt to filter reads without restriction enzyme cutsites](#use-cutadapt-to-filter-reads-without-restriction-enzyme-cutsites)
-   - [Get sample read counts for data2bio raw, data3bio trimmed and trimmomatic](#get-sample-read-counts-for-data2bio-raw-data3bio-trimmed-and-trimmomatic)
+   - [Get sample read counts for data2bio raw, trimmomatic and cutadpat](#get-sample-read-counts-for-data2bio-raw,-trimmomatic-and cutadpat)
    - [Read length distributions](#read-length-distributions)
    - [Get read length distributions for all trimmomatic samples](#get-read-length-distributions-for-all-trimmomatic-samples)
 
@@ -122,7 +122,7 @@ cat cutadapt-job-files/job-cutadapt-array.o* | grep Summary -c
 
 
 
-### Get sample read counts for data2bio raw, data3bio trimmed and trimmomatic
+### Get sample read counts for data2bio raw, trimmomatic and cutadpat
 
 ```
 mkdir /data/scratch/mpx469/read-count
