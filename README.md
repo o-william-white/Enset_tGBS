@@ -83,20 +83,17 @@ cut -f 2 GBS_metadata.txt | tail -n +2 > sample-list.txt
 # set dir
 mkdir /data/scratch/mpx469/trimmomatic
 mkdir /data/scratch/mpx469/trimmomatic/trimmomatic-output
+mkdir /data/scratch/mpx469/trimmomatic/trimmomatic-job-files
+
 cd /data/scratch/mpx469/trimmomatic
 
 qsub script-trimmomatic-array.sh
-```
 
-Note LEADING paramter not used, in attempt to preserve the 5' end of the GBS loci which are used to align stacks
-
-```
 # tidy up jobfiles
-mkdir trimmomatic-output/jobfiles
-cp job-trimmomatic-array.o* trimmomatic-output/jobfiles/
+mv job-trimmomatic-array.o* trimmomatic-job-files/
 
 # all jobs should have run successfully
-cat trimmomatic-output/jobfiles/job-trimmomatic-array.o* | grep -e "TrimmomaticSE: Completed successfully" -c
+cat trimmomatic-job-files/job-trimmomatic-array.o* | grep -e "TrimmomaticSE: Completed successfully" -c
 # should return 283
 ```
 
