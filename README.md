@@ -138,9 +138,9 @@ module add R/3.6.1
 Rscript Rscript-read-number-count-summary.R
 ```
 
-**Read count histograms**
+**Read count histograms and boxplot**
 
-![plot-read-count-histograms](figures/plot-read-count-histograms.png)
+![plot-read-count-histograms-boxplot](figures/plot-read-count-histograms-boxplot.png)
 
 **Read counts for samples one to five only**
 
