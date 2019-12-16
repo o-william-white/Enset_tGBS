@@ -135,7 +135,7 @@ Get summary statisitics and create plots
 
 ```
 module add R/3.6.1
-Rscript Rscript-plot-read-number-count.R
+Rscript Rscript-read-number-count-summary.R
 ```
 
 **Read count histograms**
