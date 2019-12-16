@@ -9,6 +9,7 @@ This readme file details the methodolgy used in the analysis of ensete tGBS data
    - [Import data from local hard drive into apocrita](#import-data-from-local-hard-drive-into-apocrita)
    - [Create sample list to iterate through](#create-sample-list-to-iterate-through)
    - [Use trimmomatic to filter raw reads](#use-trimmomatic-to-filter-raw-reads)
+   - [Use cutadapt to filter reads without restriction enzyme cutsites](#use-cutadapt-to-filter-reads-without-restriction-enzyme-cutsites)
    - [Get sample read counts for data2bio raw, data3bio trimmed and trimmomatic](#get-sample-read-counts-for-data2bio-raw-data3bio-trimmed-and-trimmomatic)
    - [Read length distributions](#read-length-distributions)
    - [Get read length distributions for all trimmomatic samples](#get-read-length-distributions-for-all-trimmomatic-samples)
@@ -94,6 +95,28 @@ mv job-trimmomatic-array.o* trimmomatic-job-files/
 
 # all jobs should have run successfully
 cat trimmomatic-job-files/job-trimmomatic-array.o* | grep -e "TrimmomaticSE: Completed successfully" -c
+# should return 283
+```
+
+
+
+### Use cutadapt to filter reads without restriction enzyme cutsites
+
+```
+# set dir
+mkdir /data/scratch/mpx469/cutadapt
+mkdir /data/scratch/mpx469/cutadapt/cutadapt-output
+mkdir /data/scratch/mpx469/cutadapt/cutadapt-job-files
+
+cd /data/scratch/mpx469/cutadapt
+
+qsub script-cutadapt-array.sh
+
+# tidy up jobfiles
+mv job-cutadapt-array.o* cutadapt-job-files/
+
+# all jobs should have run successfully
+cat cutadapt-job-files/job-cutadapt-array.o* | grep Summary -c
 # should return 283
 ```
 
