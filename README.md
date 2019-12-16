@@ -10,7 +10,7 @@ This readme file details the methodolgy used in the analysis of ensete tGBS data
    - [Create sample list to iterate through](#create-sample-list-to-iterate-through)
    - [Use trimmomatic to filter raw reads](#use-trimmomatic-to-filter-raw-reads)
    - [Use cutadapt to filter reads without restriction enzyme cutsites](#use-cutadapt-to-filter-reads-without-restriction-enzyme-cutsites)
-   - [Get sample read counts for data2bio raw, trimmomatic and cutadapt](#get-sample-read-counts-for-data2bio-raw-trimmomatic-and cutadapt)
+   - [Get sample read counts for data2bio raw, trimmomatic and cutadapt](#get-sample-read-counts-for-data2bio-raw,-trimmomatic-and-cutadapt)
    - [Read length distributions](#read-length-distributions)
    - [Get read length distributions for all trimmomatic samples](#get-read-length-distributions-for-all-trimmomatic-samples)
 
