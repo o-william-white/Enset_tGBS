@@ -131,10 +131,10 @@ cd /data/scratch/mpx469/read-count
 qsub script-read-number-count.sh
 ```
 
-Create plots
+Get summary statisitics and create plots
 
 ```
-module add R
+module add R/3.6.1
 Rscript Rscript-plot-read-number-count.R
 ```
 
