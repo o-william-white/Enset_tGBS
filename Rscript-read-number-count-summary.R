@@ -27,7 +27,7 @@ df <- data.frame(raw, trimmomatic, cutadapt)
 # add sample names
 df$sample <- sample.list$V1
 
-# join sample metadata 
+# join sample metadata
 df <- left_join(df, sample.metadata, by = c("sample" = "SAMPLE_ID"))  %>% select(sample, raw, trimmomatic, cutadapt, TYPE)
 
 # remove NA and disease rows
@@ -37,15 +37,15 @@ df <- filter(df, !TYPE %in% c("NA", "Disease"))
 df.long <- melt(df)
 
 # get summary stats for each
-summary.df <- df.long %>% 
-   group_by(variable) %>% 
+summary.df <- df.long %>%
+   group_by(variable) %>%
    summarise(total = sum(value), mean = mean(value), min = min(value), max = max(value))
 
 # write summary table
 write.table(summary.df, "summary-read-counts.txt", sep="\t", col.names=TRUE, row.names=FALSE, quote=FALSE)
 
 # plot histograms of reads per sample with a bin size of 5e5
-pdf("plot-read-count-histograms.pdf")
+pdf("plot-read-count-histograms-boxplot.pdf")
 par(mfrow=c(2,2))
 hist(df$raw,         breaks=seq(0, round_any(max(df$raw),         5e5, f = ceiling),  by=5e5), main="Raw data",            xlab="Number of reads per sample")
 hist(df$trimmomatic, breaks=seq(0, round_any(max(df$trimmomatic), 5e5, f = ceiling),  by=5e5), main="Trimmomatic output" , xlab="Number of reads per sample")
@@ -53,13 +53,11 @@ hist(df$cutadapt,    breaks=seq(0, round_any(max(df$cutadapt),    5e5, f = ceili
 boxplot(value ~ variable, df.long, xlab = "", ylab = "Number of reads", main="Boxplot comparison")
 dev.off()
 
-png("plot-read-count-histograms.png")
+png("plot-read-count-histograms-boxplot.png")
 par(mfrow=c(2,2))
 hist(df$raw,         breaks=seq(0, round_any(max(df$raw),         5e5, f = ceiling),  by=5e5), main="Raw data",            xlab="Number of reads per sample")
 hist(df$trimmomatic, breaks=seq(0, round_any(max(df$trimmomatic), 5e5, f = ceiling),  by=5e5), main="Trimmomatic output" , xlab="Number of reads per sample")
 hist(df$cutadapt,    breaks=seq(0, round_any(max(df$cutadapt),    5e5, f = ceiling),  by=5e5), main="Cutadapt output",     xlab="Number of reads per sample")
 boxplot(value ~ variable, df.long, xlab = "", ylab = "Number of reads", main="Boxplot comparison")
 dev.off()
-
-
 
