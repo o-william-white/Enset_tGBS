@@ -142,11 +142,6 @@ Rscript Rscript-read-number-count-summary.R
 
 ![plot-read-count-histograms-boxplot](figures/plot-read-count-histograms-boxplot.png)
 
-**Read counts for samples one to five only**
-
-![plot-read-count-samples-1-5-barplot](figures/plot-read-count-samples-1-5-barplot.png)
-
-
 
 
 ### Read length distributions
