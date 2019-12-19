@@ -147,6 +147,17 @@ The R script creates a table summary statisitcs: summary-read-counts.txt
 | cutadapt    | 623050341 | 2396347.46538462 | 359094 | 9016585  |
 
 
+And the numbers rounded to the nearest Mb, no decimal paces for total and two dp for mean, min and max: summary-read-counts-round-M.txt
+
+| variable    | total | mean | min  | max  |
+|-------------|-------|------|------|------|
+| raw         | 832   | 3.2  | 0.47 | 11.8 | 
+| trimmomatic | 640   | 2.46 | 0.37 | 9.18 |
+| cutadapt    | 623   | 2.4  | 0.36 | 9.02 |
+
+
+
+
 **Read count histograms and boxplot**
 
 ![plot-read-count-histograms-boxplot](figures/plot-read-count-histograms-boxplot.png)
