@@ -138,6 +138,12 @@ module add R/3.6.1
 Rscript Rscript-read-number-count-summary.R
 ```
 
+| variable    | total     | mean             | min    | max      |
+|-------------|-----------|------------------|--------|----------|
+| raw         | 832111644 | 3200429.4        | 473966 | 11802029 |
+| trimmomatic | 639727144 | 2460489.01538462 | 366170 | 9180476  |
+| cutadapt    | 623050341 | 2396347.46538462 | 359094 | 9016585  |
+
 **Read count histograms and boxplot**
 
 ![plot-read-count-histograms-boxplot](figures/plot-read-count-histograms-boxplot.png)
