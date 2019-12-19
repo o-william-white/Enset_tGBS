@@ -138,6 +138,8 @@ module add R/3.6.1
 Rscript Rscript-read-number-count-summary.R
 ```
 
+The R script creates a table summary statisitcs: summary-read-counts.txt
+
 | variable    | total     | mean             | min    | max      |
 |-------------|-----------|------------------|--------|----------|
 | raw         | 832111644 | 3200429.4        | 473966 | 11802029 |
