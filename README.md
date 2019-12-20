@@ -186,54 +186,30 @@ cat bwa-mem-jobfiles/job-bwa-mem.o* | grep -e "Real time" -c
 
 ### Samtools
 
+Filter reads that are not mapped uniquely, flagged as alternative (XA:Z) or chimeric (SA:Z) alignments
+
 ```
-mkdir /data/scratch/mpx469/stacks/ref-map/samtools
-cd /data/scratch/mpx469/stacks/ref-map/samtools
+mkdir /data/scratch/mpx469/samtools
+mkdir /data/scratch/mpx469/samtoools/samtools-output
+mkdir /data/scratch/mpx469/samtoools/samtools-job-files
 
-mkdir samtools-output
+cd /data/scratch/mpx469/samtools
 
-qsub script-samtools-filter-sort-index.sh
+qsub script-samtools.sh
 
 # tidy up job files
-mkdir samtools-output/job-files
-mv job-samtools.o* samtools-output/job-files/
+mv job-samtools.o* samtools-job-files/
 
 # should be 283
-cat samtools-output/job-files/job-samtools.* | grep -e "all good" -c
+cat samtools-job-files/job-samtools.* | grep -e "all mapped reads are unique" -c
 
-```
+# get summary counts for mapped reads
+qsub script-summary-flagstat-counts.sh
 
-How many reads filtered and mapped 
+module add R/3.6.1
+Rscript Rscript-summary-flagstat-counts.R
 
-```
-script-samtools-flagstat.sh
-
-# job files not needed or useful
-rm job-samtools-flagstat.o*
-```
-
-Create plot
-
-```
-
-mkdir flagstat-plot
-
-cat /data/scratch/mpx469/sample-list.txt | while read i; do  
-   head -n 1 samtools-output/${i}.flagstat.txt | cut -f 1 -d " "; 
-done > flagstat-plot/reads-total.txt
-
-cat /data/scratch/mpx469/sample-list.txt | while read i; do  
-   head -n 1 samtools-output/${i}.flagstat.filtered.txt | cut -f 1 -d " "; 
-done > flagstat-plot/reads-unique.txt
-
-cat /data/scratch/mpx469/sample-list.txt | while read i; do  
-   awk 'NR==5' samtools-output/${i}.flagstat.filtered.txt | cut -f 1 -d " "; 
-done > flagstat-plot/reads-unique-mapped.txt
-
-Rscript Rscript-samtools-flagstat-plot.R
-```
-
-**Proportion of unique and uniqule maped reads**
+**Total and mapped reads from BWA and samtools**
 
 ![plot-flagstat](figures/plot-flagstat.png)
 
