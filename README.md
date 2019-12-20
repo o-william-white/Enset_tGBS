@@ -138,91 +138,19 @@ module add R/3.6.1
 Rscript Rscript-read-number-count-summary.R
 ```
 
-The R script creates a table summary statisitcs: summary-read-counts.txt
+**Table of summarys statistics** 
+A full summary on an invididual basis can be found in the supplementaty material
 
-| variable    | total     | mean             | min    | max      |
-|-------------|-----------|------------------|--------|----------|
-| raw         | 832111644 | 3200429.4        | 473966 | 11802029 |
-| trimmomatic | 639727144 | 2460489.01538462 | 366170 | 9180476  |
-| cutadapt    | 623050341 | 2396347.46538462 | 359094 | 9016585  |
-
-
-And the numbers rounded to the nearest Mb, no decimal paces for total and two dp for mean, min and max: summary-read-counts-round-M.txt
-
-| variable    | total | mean | min  | max  |
-|-------------|-------|------|------|------|
-| raw         | 832   | 3.2  | 0.47 | 11.8 | 
-| trimmomatic | 640   | 2.46 | 0.37 | 9.18 |
-| cutadapt    | 623   | 2.4  | 0.36 | 9.02 |
-
-
+|         | raw (M) | trimmomatic (M) | removed by trimmomatic (%) | cutadapt (M)| removed by cutadapt (%) |
+|---------|---------|-----------------|----------------------------|-------------|-------------------------|
+| Total   |	832.11  | 639.73          | NA                         | 623.05      | NA                      |
+| Mean	 | 3.20    | 2.46            | 0.23                       | 2.40        | 0.03                    |
+| Min	    | 0.47    | 0.37            | 0.20                       | 0.36        | 0.01                    |
+| Max	    | 11.80   | 9.18            | 0.32                       | 9.02        | 0.08                    |
 
 
 **Read count histograms and boxplot**
-
 ![plot-read-count-histograms-boxplot](figures/plot-read-count-histograms-boxplot.png)
-
-
-
-### Read length distributions
-
-Ion proton sequencing has variable read lengths. Quantify read lengths in a given sample, raw and trimmed. Code adapted from https://www.biostars.org/p/72433/#72441
-
-```
-mkdir /data/scratch/mpx469/read-length-distribution
-cd /data/scratch/mpx469/read-length-distribution
-
-# compare read length distributions of a single sample for the different trimming options
-mkdir /data/scratch/mpx469/read-length-distribution/single-sample-comparison
-cd /data/scratch/mpx469/read-length-distribution/single-sample-comparison/
-
-# get read lengths
-zcat /data/scratch/mpx469/Data2Bio_final/raw/EXS11ID000851.digested.fq.gz | awk '{if(NR%4==2) print length($1)}' | sort -n | uniq -c > read_length.EXS11ID000851.digested.txt
-zcat /data/scratch/mpx469/Data2Bio_final/trimmed/EXS11ID000851.digested.trimmed.fq.gz | awk '{if(NR%4==2) print length($1)}' | sort -n | uniq -c > read_length.EXS11ID000851.digested.trimmed.txt
-zcat /data/scratch/mpx469/trimmomatic/trimmomatic-output/EXS11ID000851.digested.trimmomatic.fq.gz | awk '{if(NR%4==2) print length($1)}' | sort -n | uniq -c > read_length.EXS11ID000851.digested.trimmomatic.txt
-
-# column 1 is the number of sequnces
-# column 2 is the length category
-```
-
-Create plot
-
-```
-Rscript Rscript-plot-single-sample-comparison.R
-```
-
-**Read length distribution for a single sample**
-
-![plot.read_length.EXS11ID000851.digested](figures/plot.read_length.EXS11ID000851.digested.png)
-
-
-### Get read length distributions for all trimmomatic samples
-
-```
-mkdir /data/scratch/mpx469/read-length-distribution/read-length-distribution-trimmomatic
-mkdir /data/scratch/mpx469/read-length-distribution/read-length-distribution-trimmomatic/output-read-length-distribution-trimmomatic
-
-cd /data/scratch/mpx469/read-length-distribution/read-length-distribution-trimmomatic/
-
-qsub script-read-length-distribution-trimmomatic.sh
-
-```
-Create plot 
-
-```
-Rscript Rscript-plot-read-length-distribution-trimmomatic.R
-```
-**Read length distribution of all trimmomatic samples**
-
-Plot is overcrowded and there is likely to be a better way of averaing across? Note that certain samples appear to have very few reads
-
-![plot-read-dristribution-trimmomatic](figures/plot-read-dristribution-trimmomatic.png)
-
-**Number of trimmomatic reads after truncating to a uniform length**
-
-This would only be important if we decide to use a denovo methodology
-
-![plot-read-numbers-after-truncating-lengths](figures/plot-read-numbers-after-truncating-lengths.png)
 
 
 ## Stacks ref map pipeline
