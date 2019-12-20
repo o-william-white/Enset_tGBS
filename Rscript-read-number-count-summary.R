@@ -1,4 +1,3 @@
-
 # module add R/3.6.1
 # R
 
@@ -27,22 +26,22 @@ df <- data.frame(raw, trimmomatic, cutadapt)
 # add sample names
 df$sample <- sample.list$V1
 
+# caluclate the number removed by trimmomatic and cutadapt
+df$pct.rm.by.trimmomatic <- (df$raw - df$trimmomatic) / df$raw
+df$pct.rm.by.cutadapt <- (df$trimmomatic - df$cutadapt) / df$trimmomatic
+
 # join sample metadata
-df <- left_join(df, sample.metadata, by = c("sample" = "SAMPLE_ID"))  %>% select(sample, raw, trimmomatic, cutadapt, TYPE)
+df <- left_join(df, sample.metadata, by = c("sample" = "SAMPLE_ID"))%>%
+      select(sample, raw, trimmomatic, pct.rm.by.trimmomatic, cutadapt, pct.rm.by.cutadapt, TYPE)
 
 # remove NA and disease rows
 df <- filter(df, !TYPE %in% c("NA", "Disease"))
 
+# write summary table
+write.table(df, "summary-read-counts.txt", sep="\t", col.names=TRUE, row.names=FALSE, quote=FALSE)
+
 # convert data to long format
 df.long <- melt(df)
-
-# get summary stats for each
-summary.df <- df.long %>%
-   group_by(variable) %>%
-   summarise(total = sum(value), mean = mean(value), min = min(value), max = max(value))
-
-# write summary table
-write.table(summary.df, "summary-read-counts.txt", sep="\t", col.names=TRUE, row.names=FALSE, quote=FALSE)
 
 # plot histograms of reads per sample with a bin size of 5e5
 pdf("plot-read-count-histograms-boxplot.pdf", height=8, width=8)
