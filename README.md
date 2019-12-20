@@ -218,14 +218,13 @@ Rscript Rscript-summary-flagstat-counts.R
 ### Gstacks
 
 ```
-mkdir /data/scratch/mpx469/stacks/ref-map/gstacks
-cd /data/scratch/mpx469/stacks/ref-map/gstacks
+mkdir /data/scratch/mpx469/STACKS
+mkdir /data/scratch/mpx469/STACKS/gstacks
 
-# run gstacks after removing unneccessary samples (Disease or NA)
-# run as all sample lumped together and all samples treated separately
+cd /data/scratch/mpx469/STACKS/gstacks
 ```
 
-Create stacks popmap, filtering out samples classed as "Disease" or "NA". two pomap files are generate, one grouping all individuals as a single population, the other treating samples separately. 
+Create popmap, filtering out samples classed as "Disease" or "NA". two pomap files are generate, one grouping all individuals as a single population, the other treating samples separately. 
 
 ```
 Rscript Rscript-write-popmap-selection.R
