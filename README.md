@@ -220,6 +220,8 @@ Rscript Rscript-summary-flagstat-counts.R
 ```
 mkdir /data/scratch/mpx469/STACKS
 mkdir /data/scratch/mpx469/STACKS/gstacks
+mkdir /data/scratch/mpx469/STACKS/gstacks/gstacks-together-output
+mkdir /data/scratch/mpx469/STACKS/gstacks/gstacks-separate-output
 
 cd /data/scratch/mpx469/STACKS/gstacks
 ```
@@ -258,9 +260,6 @@ P1EN004.mapped.unique.sorted    1
 Run gstacks
 
 ```
-mkdir gstacks-together-output
-mkdir gstacks-separate-output
-
 qsub script-gstacks-together.sh
 qsub script-gstacks-separate.sh
 ```
@@ -269,17 +268,21 @@ qsub script-gstacks-separate.sh
 
 ### Populations
 
-As above populations is run on a selsction of samples, after remving those identifed as "Disease" or "NA", and treating all samples together as a single poplation or separately. 
+Run populatios using the popmaps created above
 
 ```
-mkdir /data/scratch/mpx469/stacks/ref-map/populations
-cd /data/scratch/mpx469/stacks/ref-map/populations
+mkdir /data/scratch/mpx469/STACKS/populations
+mkdir /data/scratch/mpx469/STACKS/populations/populations-together-output
+mkdir /data/scratch/mpx469/STACKS/populations/populations-separate-output
 
-mkdir populations-together-output
-mkdir populations-separate-output
+cd /data/scratch/mpx469/STACKS/populations
 
-qsub script-populations-together.sh
-qsub script-populations-separate.sh
+qsub script-populations-separate-all-snps-R80-default-1.sh
+qsub script-populations-separate-all-snps-R80-maf-het-1.sh
+qsub script-populations-separate-single-snp-R80-default-1.sh
+qsub script-populations-separate-single-snp-R80-maf-het-1.sh
+qsub script-populations-together-all-snps-r80-default-1.sh
+
 ```
 
 
