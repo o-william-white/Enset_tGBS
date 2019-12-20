@@ -208,6 +208,7 @@ qsub script-summary-flagstat-counts.sh
 
 module add R/3.6.1
 Rscript Rscript-summary-flagstat-counts.R
+```
 
 **Total and mapped reads from BWA and samtools**
 
