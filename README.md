@@ -137,7 +137,7 @@ Rscript Rscript-read-number-count-summary.R
 ```
 
 **Table of summarys statistics** 
-A full summary on an invididual basis can be found in the supplementaty material
+A full summary on an invididual basis can be found in the supplementary materials.
 
 |         | raw (M) | trimmomatic (M) | removed by trimmomatic (%) | cutadapt (M)| removed by cutadapt (%) |
 |---------|---------|-----------------|----------------------------|-------------|-------------------------|
