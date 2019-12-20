@@ -141,7 +141,7 @@ A full summary on an invididual basis can be found in the supplementary material
 
 |         | raw (M) | trimmomatic (M) | removed by trimmomatic (%) | cutadapt (M)| removed by cutadapt (%) |
 |---------|---------|-----------------|----------------------------|-------------|-------------------------|
-| Total   |	832.11  | 639.73          | NA                         | 623.05      | NA                      |
+| Total   |	832.11  | 639.73          | 0.23                       | 623.05      | 0.03                    |
 | Mean	 | 3.20    | 2.46            | 0.23                       | 2.40        | 0.03                    |
 | Min	    | 0.47    | 0.37            | 0.20                       | 0.36        | 0.01                    |
 | Max	    | 11.80   | 9.18            | 0.32                       | 9.02        | 0.08                    |
@@ -158,31 +158,28 @@ A full summary on an invididual basis can be found in the supplementary material
 Create genome index and map reads to genome using BWA 
 
 ```
-mkdir /data/scratch/mpx469/stacks/ref-map/
-mkdir /data/scratch/mpx469/stacks/ref-map/bwa
-cd /data/scratch/mpx469/stacks/ref-map/bwa
+mkdir /data/scratch/mpx469/bwa/bwa-mem-output
+mkdir /data/scratch/mpx469/bwa/bwa-mem-jobfiles
+mkdir /data/scratch/mpx469/bwa/cutadapt-fq
+cd /data/scratch/mpx469/bwa
 
 # copy across genome
 cp /data/SBCS-Ethiopia/databases/genomes/enset/GCA_000331365.3_Ensete_JungleSeeds_v3.0_genomic.fna.gz .
 
+# gunzip
 gunzip GCA_000331365.3_Ensete_JungleSeeds_v3.0_genomic.fna.gz
 
 # index genome
 qsub script-bwa-index.sh
 
 # map trimmomatic output to reference
-
-mkdir bwa-map-output
-mkdir trimmomatic-fq
-
 qsub script-bwa-mem.sh
 
 # tidy up job files
-mkdir bwa-map-output/job-files
-mv job-bwa-map.o* bwa-map-output/job-files/
+mv job-bwa-mem.o* bwa-mem-jobfiles/
 
 # should be 283
-cat bwa-map-output/job-files/job-bwa-map.o* | grep -e "Real time" -c
+cat bwa-mem-jobfiles/job-bwa-mem.o* | grep -e "Real time" -c
 ```
 
 
