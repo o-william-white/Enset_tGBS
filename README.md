@@ -339,6 +339,29 @@ qsub script-populations-together-all-snps-r80-default-2-blacklist.sh
 
 ```
 
+Count snps in each dataset
+
+```
+grep ^# -v -c populations-*/populations.snps.vcf | sed -e 's/populations-//g' -e 's:/populations.snps.vcf::g'
+separate-all-snps-R80-default-1:204436
+separate-all-snps-R80-default-2-blacklist:204164
+separate-all-snps-R80-maf-het-1:23707
+separate-all-snps-R80-maf-het-2-blacklist:23698
+separate-single-snp-R80-default-1:28729
+separate-single-snp-R80-default-2-blacklist:28725
+separate-single-snp-R80-maf-het-1:11193
+separate-single-snp-R80-maf-het-2-blacklist:11189
+together-all-snps-r80-default-1:204437
+together-all-snps-r80-default-2-blacklist:204165
+```
+
+Copy populations output to shared space
+
+```
+cp -r /data/scratch/mpx469/STACKS/populations/ /data/SBCS-Ethiopia/tGBS_enset_project/
+```
+
+
 
 
 
