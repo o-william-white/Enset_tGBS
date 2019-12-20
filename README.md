@@ -20,8 +20,10 @@ This readme file details the methodolgy used in the analysis of ensete tGBS data
 
 [Post-processing of SNP data](#post-processing-of-snp-data)
    - [Filtering duplicated loci](#filtering-duplicated-loci)  
-      - [Filter the populations together output](#filter-the-populations-together-output) 
-      - [Filter the populations separate output](#filter-the-populations-separate-output)
+   - [Create blacklist for duplicated loci](#create-blacklist-for-duplicated-loci) 
+   - [rerun populations with blacklists](rerun-populations-with-blacklists)
+
+
       
 
 ## Pre-processing of tGBS data
@@ -272,8 +274,12 @@ Run populatios using the popmaps created above
 
 ```
 mkdir /data/scratch/mpx469/STACKS/populations
-mkdir /data/scratch/mpx469/STACKS/populations/populations-together-output
-mkdir /data/scratch/mpx469/STACKS/populations/populations-separate-output
+
+mkdir /data/scratch/mpx469/STACKS/populations/populations-separate-all-snps-R80-default-1
+mkdir /data/scratch/mpx469/STACKS/populations/populations-separate-all-snps-R80-maf-het-1
+mkdir /data/scratch/mpx469/STACKS/populations/populations-separate-single-snp-R80-default-1
+mkdir /data/scratch/mpx469/STACKS/populations/populations-separate-single-snp-R80-maf-het-1
+mkdir /data/scratch/mpx469/STACKS/populations/populations-together-all-snps-r80-default-1
 
 cd /data/scratch/mpx469/STACKS/populations
 
@@ -311,21 +317,28 @@ bash script-blacklist-separate-all-snps-R80-maf-het.sh
 bash script-blacklist-separate-single-snp-R80-default.sh
 bash script-blacklist-separate-single-snp-R80-maf-het.sh
 bash script-blacklist-together-all-snps-r80-default.sh
+```
 
 
-
-
-
-
-##### rerun population separate with blacklist
+##### rerun populations with blacklists
 
 ```
-cd /data/scratch/mpx469/stacks/ref-map/populations/
+cd /data/scratch/mpx469/STACKS/populations
 
-mkdir populations-separate-blacklist-output/
+mkdir /data/scratch/mpx469/STACKS/populations/populations-separate-all-snps-R80-default-2-blacklist
+mkdir /data/scratch/mpx469/STACKS/populations/populations-separate-all-snps-R80-maf-het-2-blacklist
+mkdir /data/scratch/mpx469/STACKS/populations/populations-separate-single-snp-R80-default-2-blacklist
+mkdir /data/scratch/mpx469/STACKS/populations/populations-separate-single-snp-R80-maf-het-2-blacklist
+mkdir /data/scratch/mpx469/STACKS/populations/populations-together-all-snps-r80-default-2-blacklist
 
-qsub script-populations-separate-blacklist.sh
+qsub script-populations-separate-all-snps-R80-default-2-blacklist.sh
+qsub script-populations-separate-all-snps-R80-maf-het-2-blacklist.sh
+qsub script-populations-separate-single-snp-R80-default-2-blacklist.sh
+qsub script-populations-separate-single-snp-R80-maf-het-2-blacklist.sh
+qsub script-populations-together-all-snps-r80-default-2-blacklist.sh
+
 ```
+
 
 
 
