@@ -21,7 +21,7 @@ This readme file details the methodolgy used in the analysis of ensete tGBS data
 [Post-processing of SNP data](#post-processing-of-snp-data)
    - [Filtering duplicated loci](#filtering-duplicated-loci)  
    - [Create blacklist for duplicated loci](#create-blacklist-for-duplicated-loci) 
-   - [rerun populations with blacklists](rerun-populations-with-blacklists)
+   - [Repeat populations with blacklists](#repeat-populations-with-blacklists)
 
 
       
@@ -320,7 +320,7 @@ bash script-blacklist-together-all-snps-r80-default.sh
 ```
 
 
-##### rerun populations with blacklists
+#### Repeat populations with blacklists
 
 ```
 cd /data/scratch/mpx469/STACKS/populations
