@@ -8,8 +8,8 @@ cd /data/scratch/mpx469/tGBS_enset_project
 
 ## Table of contents
 
+[Import data from local hard drive into apocrita](#import-data-from-local-hard-drive-into-apocrita)
 [Pre-processing of tGBS data](#pre-processing-of-tgbs-data)
-   - [Import data from local hard drive into apocrita](#import-data-from-local-hard-drive-into-apocrita)
    - [Create sample list to iterate through](#create-sample-list-to-iterate-through)
    - [Use trimmomatic to filter raw reads](#use-trimmomatic-to-filter-raw-reads)
    - [Use cutadapt to filter reads without restriction enzyme cutsites](#use-cutadapt-to-filter-reads-without-restriction-enzyme-cutsites)
@@ -27,11 +27,7 @@ cd /data/scratch/mpx469/tGBS_enset_project
    - [Repeat populations with blacklists](#repeat-populations-with-blacklists)
 
 
-
-
-## Pre-processing of tGBS data
-
-### Import data from local hard drive into apocrita
+## Import data from local hard drive into apocrita
 Set up directory for raw data
 
 ```
@@ -52,6 +48,7 @@ chmod -R u=rwx,g=r,o=r Data2Bio_final
 ```
 
 
+## Pre-processing of tGBS data
 
 ### Create sample list to iterate through
 
