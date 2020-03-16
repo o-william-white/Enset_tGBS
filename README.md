@@ -45,7 +45,7 @@ rsync -avz --partial /drives/f/Genomic_data/Data2Bio_final/alignment.BAM mpx469@
 Set file permissions of Data2Bio directory
 
 ```
-chmod -R u=rwx,g=r,o=r Data2Bio_final
+chmod -R u=rwx,g=r,o=r /data/scratch/mpx469/Data2Bio_final
 ```
 
 
@@ -73,11 +73,10 @@ cut -f 2 GBS_metadata.txt | tail -n +2 > sample_list.txt
 
 ```
 # set dir
-mkdir /data/scratch/mpx469/trimmomatic
-mkdir /data/scratch/mpx469/trimmomatic/trimmomatic-output
-mkdir /data/scratch/mpx469/trimmomatic/trimmomatic-job-files
+mkdir /data/scratch/mpx469/tGBS_enset_project/trimmomatic
+mkdir /data/scratch/mpx469/tGBS_enset_project/trimmomatic/trimmomatic_output
 
-cd /data/scratch/mpx469/trimmomatic
+cd /data/scratch/mpx469/tGBS_enset_project/trimmomatic
 
 qsub script-trimmomatic-array.sh
 
