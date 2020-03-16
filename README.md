@@ -9,6 +9,7 @@ cd /data/scratch/mpx469/tGBS_enset_project
 ## Table of contents
 
 [Import data from local hard drive into apocrita](#import-data-from-local-hard-drive-into-apocrita)
+
 [Pre-processing of tGBS data](#pre-processing-of-tgbs-data)
    - [Create sample list to iterate through](#create-sample-list-to-iterate-through)
    - [Use trimmomatic to filter raw reads](#use-trimmomatic-to-filter-raw-reads)
