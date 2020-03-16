@@ -3,6 +3,11 @@ Ensete tGBS methodology
 
 This readme file details the methodolgy used in the analysis of ensete tGBS data. All work was completed on the QMUL apocrita cluster.
 
+All analyses were performed in the follwowing directory
+```
+cd /data/scratch/mpx469/tGBS_enset_project
+```
+
 ## Table of contents
 
 [Pre-processing of tGBS data](#pre-processing-of-tgbs-data)
@@ -24,7 +29,7 @@ This readme file details the methodolgy used in the analysis of ensete tGBS data
    - [Repeat populations with blacklists](#repeat-populations-with-blacklists)
 
 
-      
+
 
 ## Pre-processing of tGBS data
 
