@@ -51,7 +51,16 @@ Set file permissions of Data2Bio directory
 chmod -R u=rwx,g=r,o=r Data2Bio_final
 ```
 
-Import sample meta data into /data/scratch/mpx469 in .csv and .txt formats
+
+
+### Create sample list to iterate through
+
+```
+# set dir
+cd /data/scratch/mpx469/tGBS_enset_project
+```
+
+Sample metadata in .csv or .txt format
 
 ```
 head GBS_metadata.txt
@@ -67,22 +76,18 @@ EXS8ID000683.digested.trimmed.fq.gz     EXS8ID000683    1       Domestic        
 P1EN003.digested.trimmed.fq.gz  P1EN003 1       Domestic        162     Achachet        8.491123519     38.01776645     0f21ebee-c784-4174-9e60-a046b3f5ab97    2018-01-27
 ```
 
-
-
-### Create sample list to iterate through
+# get working sample list from metadata
 
 ```
-# set dir
-cd /data/scratch/mpx469
-
-# get list from metadata
 cut -f 2 GBS_metadata.txt | tail -n +2 > sample-list.txt
-
 ```
+
+
 
 
 
 ### Use trimmomatic to filter raw reads
+
 
 ```
 # set dir
