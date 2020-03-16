@@ -3,7 +3,7 @@ Enset tGBS methodology
 
 This readme file details the methodolgy used in the analysis of ensete tGBS data. All work was completed on the QMUL apocrita cluster in the follwowing directory:
 ```
-cd /data/scratch/mpx469/tGBS_enset_project
+/data/scratch/mpx469/tGBS_enset_project
 ```
 
 ## Table of contents
