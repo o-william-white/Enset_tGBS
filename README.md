@@ -64,8 +64,6 @@ cut -f 2 GBS_metadata.txt | tail -n +2 > sample_list.txt
 
 
 
-
-
 ### Use trimmomatic to filter raw reads
 
 
@@ -76,13 +74,10 @@ mkdir /data/scratch/mpx469/tGBS_enset_project/trimmomatic/trimmomatic_output
 
 cd /data/scratch/mpx469/tGBS_enset_project/trimmomatic
 
-qsub script-trimmomatic-array.sh
-
-# tidy up jobfiles
-mv job-trimmomatic-array.o* trimmomatic-job-files/
+qsub script_trimmomatic_array.sh
 
 # all jobs should have run successfully
-cat trimmomatic-job-files/job-trimmomatic-array.o* | grep -e "TrimmomaticSE: Completed successfully" -c
+cat job_trimmomatic_array.o* | grep "done" -c
 # should return 283
 ```
 
@@ -97,14 +92,38 @@ mkdir /data/scratch/mpx469/tGBS_enset_project/cutadapt/cutadapt_output
 
 cd /data/scratch/mpx469/tGBS_enset_project/cutadapt
 
-qsub script-cutadapt-array.sh
+qsub script_cutadapt_array.sh
 
 # tidy up jobfiles
 mv job-cutadapt-array.o* cutadapt-job-files/
 
 # all jobs should have run successfully
-cat cutadapt-job-files/job-cutadapt-array.o* | grep Summary -c
+cat job_cutadapt_array.o* | grep done -c
 # should return 283
+```
+
+
+
+### Use process radtags to truncate reads to uniform length
+
+```
+# set dir
+mkdir /data/scratch/mpx469/tGBS_enset_project/process_radtags
+
+# will truncate reads at varying read lengths
+
+# create output files
+for i in `seq 70 10 120`; do  
+   mkdir /data/scratch/mpx469/tGBS_enset_project/process_radtags/process_radtags_${i}_output
+done
+
+# submit jobs
+for i in `seq 70 10 120`; do  
+   qsub script_process_radtags_array_${i}.sh
+done
+
+# check output
+
 ```
 
 
