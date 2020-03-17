@@ -43,7 +43,7 @@ rsync -avz --partial /drives/f/Genomic_data/Data2Bio_final/raw mpx469@login.hpc.
 Set file permissions of Data2Bio directory
 
 ```
-chmod -R u=rwx,g=r,o=r /data/scratch/mpx469/Data2Bio_final
+chmod -R u=rwx,g=r,o=r /data/scratch/mpx469/tGBS_enset_project/Data2Bio_final
 ```
 
 
