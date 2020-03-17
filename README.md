@@ -92,11 +92,10 @@ cat trimmomatic-job-files/job-trimmomatic-array.o* | grep -e "TrimmomaticSE: Com
 
 ```
 # set dir
-mkdir /data/scratch/mpx469/cutadapt
-mkdir /data/scratch/mpx469/cutadapt/cutadapt-output
-mkdir /data/scratch/mpx469/cutadapt/cutadapt-job-files
+mkdir /data/scratch/mpx469/tGBS_enset_project/cutadapt
+mkdir /data/scratch/mpx469/tGBS_enset_project/cutadapt/cutadapt_output
 
-cd /data/scratch/mpx469/cutadapt
+cd /data/scratch/mpx469/tGBS_enset_project/cutadapt
 
 qsub script-cutadapt-array.sh
 
