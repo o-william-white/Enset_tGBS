@@ -123,7 +123,10 @@ for i in `seq 70 10 120`; do
 done
 
 # check output
-
+for i in `seq 70 10 120`; do  
+   cat job_process_radtags_${i}.o* | grep done -c
+done
+# should all equal 283
 ```
 
 
