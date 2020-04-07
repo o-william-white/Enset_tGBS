@@ -94,9 +94,6 @@ cd /data/scratch/mpx469/tGBS_enset_project/cutadapt
 
 qsub script_cutadapt_array.sh
 
-# tidy up jobfiles
-mv job-cutadapt-array.o* cutadapt-job-files/
-
 # all jobs should have run successfully
 cat job_cutadapt_array.o* | grep done -c
 # should return 283
