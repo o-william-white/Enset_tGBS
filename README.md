@@ -56,7 +56,7 @@ chmod -R u=rwx,g=r,o=r /data/scratch/mpx469/tGBS_enset_project/Data2Bio_final
 cd /data/scratch/mpx469/tGBS_enset_project
 ```
 
-Import GBS_metadata in .csv and .txt format.
+Import GBS_metadata in .csv and .txt format and create a sample list to iterate through
 
 ```
 cut -f 2 GBS_metadata.txt | tail -n +2 > sample_list.txt
@@ -125,6 +125,44 @@ for i in `seq 70 10 120`; do
 done
 # should all equal 283
 ```
+
+
+### map reads against the Bedadeti reference genome assembly
+
+```
+mkdir /data/scratch/mpx469/tGBS_enset_project/map_reads_bedadeti
+
+for i in `seq 70 10 120`; do  
+   mkdir /data/scratch/mpx469/tGBS_enset_project/map_reads_bedadeti/bwa_mem_${i}_output
+   mkdir /data/scratch/mpx469/tGBS_enset_project/map_reads_bedadeti/samtools_${i}_output
+done
+
+# index genome 
+qsub script_bwa_index.sh
+
+# map reads with bwa
+for i in `seq 70 10 120`; do  
+   qsub script_bwa_mem_${i}_array.sh
+done
+
+# check all jobs finished
+for i in `seq 70 10 120`; do  
+   cat job_bwa_mem_${i}_array.* | grep done -c 
+done
+
+# filter and sort with samtools
+for i in `seq 70 10 120`; do  
+   qsub script_samtools_${i}_array.sh
+done
+
+# check all jobs finished
+for i in `seq 70 10 120`; do  
+   cat job_samtools_${i}_array.* | grep done -c 
+done
+
+```
+
+
 
 
 
