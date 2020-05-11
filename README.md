@@ -56,10 +56,10 @@ chmod -R u=rwx,g=r,o=r /data/scratch/mpx469/tGBS_enset_project/Data2Bio_final
 cd /data/scratch/mpx469/tGBS_enset_project
 ```
 
-Import GBS_metadata in .csv and .txt format and create a sample list to iterate through
+Import GBS_metadata in .csv format and create a sample list to iterate through
 
 ```
-cut -f 2 GBS_metadata.txt | tail -n +2 > sample_list.txt
+cut -f 2 -d "," tGBS_metadata.csv | tail -n +2 > sample_list.txt
 ```
 
 
@@ -161,6 +161,49 @@ for i in `seq 70 10 120`; do
 done
 
 ```
+
+
+
+### assemble loci with gstacks 
+
+```
+mkdir /data/scratch/mpx469/tGBS_enset_project/gstacks
+
+for i in `seq 70 10 120`; do  
+   mkdir /data/scratch/mpx469/tGBS_enset_project/gstacks/gstacks_${i}_output
+done
+
+cd /data/scratch/mpx469/tGBS_enset_project/gstacks
+```
+
+Create popmap, filtering out samples classed as "Disease" or "NA" and submit script
+
+```
+Rscript write_popmap.R
+
+qsub script_gstacks_array.sh
+```
+
+
+### call snps with populations
+
+```
+mkdir /data/scratch/mpx469/tGBS_enset_project/populations
+
+for i in `seq 70 10 120`; do  
+   mkdir /data/scratch/mpx469/tGBS_enset_project/populations/populations_${i}_single_snp_output
+   mkdir /data/scratch/mpx469/tGBS_enset_project/populations/populations_${i}_all_snps_output
+done
+
+cd /data/scratch/mpx469/tGBS_enset_project/populations
+
+qsub script_populations_all_snps_array.sh
+qsub script_populations_single_snp_array.sh
+
+grep "Populations is done" -c job_populations_*
+```
+
+
 
 
 
