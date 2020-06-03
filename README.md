@@ -201,6 +201,16 @@ qsub script_populations_all_snps_array.sh
 qsub script_populations_single_snp_array.sh
 
 grep "Populations is done" -c job_populations_*
+
+# get summary stats for each assembly
+echo -e 'loci sites filtered variant' > summary_all_snps
+echo -e 'loci sites filtered variant' > summary_single_snp
+
+for i in `seq 70 10 120`; do 
+    echo ${i} $(grep Kept populations_${i}_all_snps_output/populations.log | cut -f 2,6,8,14 -d " ") >> summary_all_snps
+    echo ${i} $(grep Kept populations_${i}_single_snp_output/populations.log | cut -f 2,6,8,14 -d " ") >> summary_single_snp
+done
+
 ```
 
 
