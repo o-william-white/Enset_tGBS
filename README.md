@@ -77,7 +77,7 @@ cd /data/scratch/mpx469/tGBS_enset_project/trimmomatic
 qsub script_trimmomatic_array.sh
 
 # all jobs should have run successfully
-cat job_trimmomatic_array.o* | grep "done" -c
+cat job_trimmomatic_array.o* | grep "Completed successfully" -c
 # should return 283
 ```
 
