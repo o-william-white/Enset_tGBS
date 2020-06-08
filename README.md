@@ -122,17 +122,6 @@ for l in `seq 70 10 120`; do
 done
 
 qsub script_process_radtags_array.sh
-
-# submit jobs
-for i in `seq 70 10 120`; do  
-   qsub script_process_radtags_array_${i}.sh
-done
-
-# check output
-for i in `seq 70 10 120`; do  
-   cat job_process_radtags_${i}.o* | grep done -c
-done
-# should all equal 283
 ```
 
 
@@ -141,33 +130,20 @@ done
 ```
 mkdir /data/scratch/mpx469/tGBS_enset_project/map_reads_bedadeti
 
-for i in `seq 70 10 120`; do  
-   mkdir /data/scratch/mpx469/tGBS_enset_project/map_reads_bedadeti/bwa_mem_${i}_output
-   mkdir /data/scratch/mpx469/tGBS_enset_project/map_reads_bedadeti/samtools_${i}_output
+for l in `seq 70 10 120`; do  
+   mkdir /data/scratch/mpx469/tGBS_enset_project/map_reads_bedadeti/bwa_mem_${l}_output
+   mkdir /data/scratch/mpx469/tGBS_enset_project/map_reads_bedadeti/samtools_${l}_output
 done
+
+cd /data/scratch/mpx469/tGBS_enset_project/map_reads_bedadeti
 
 # index genome 
 qsub script_bwa_index.sh
 
-# map reads with bwa
-for i in `seq 70 10 120`; do  
-   qsub script_bwa_mem_${i}_array.sh
-done
+# cp input_args to dir
+cp /data/scratch/mpx469/tGBS_enset_project/process_radtags/input_args .
 
-# check all jobs finished
-for i in `seq 70 10 120`; do  
-   cat job_bwa_mem_${i}_array.* | grep done -c 
-done
-
-# filter and sort with samtools
-for i in `seq 70 10 120`; do  
-   qsub script_samtools_${i}_array.sh
-done
-
-# check all jobs finished
-for i in `seq 70 10 120`; do  
-   cat job_samtools_${i}_array.* | grep done -c 
-done
+qsub script_map_reads_bedadeti_array.sh
 
 ```
 
