@@ -174,14 +174,8 @@ done
 
 cd /data/scratch/mpx469/tGBS_enset_project/populations
 
-# create input args for array script
-for l in `seq 70 10 120`; do 
-   for d in single_snp all_snps; do
-      echo $l $d >> input_args
-   done	  
-done
-
-qsub script_populations_array.sh
+qsub script_populations_all_snps_array.sh
+qsub script_populations_single_snp_array.sh
 
 # get summary stats for each assembly
 echo -e 'loci sites filtered variant' > summary_all_snps
