@@ -191,10 +191,12 @@ grep "Populations is done" -c job_populations_*
 echo -e 'loci sites filtered variant' > summary_all_snps
 echo -e 'loci sites filtered variant' > summary_single_snp
 
-for i in `seq 70 10 120`; do 
-    echo ${i} $(grep Kept populations_${i}_all_snps_output/populations.log | cut -f 2,6,8,14 -d " ") >> summary_all_snps
-    echo ${i} $(grep Kept populations_${i}_single_snp_output/populations.log | cut -f 2,6,8,14 -d " ") >> summary_single_snp
+for l in `seq 70 10 120`; do 
+    echo ${l} $(grep Kept populations_${l}_all_snps_output/populations.log | cut -f 2,6,8,14 -d " ") >> summary_all_snps
+    echo ${l} $(grep Kept populations_${l}_single_snp_output/populations.log | cut -f 2,6,8,14 -d " ") >> summary_single_snp
 done
+
+
 
 ```
 
