@@ -75,10 +75,6 @@ mkdir /data/scratch/mpx469/tGBS_enset_project/trimmomatic/trimmomatic_output
 cd /data/scratch/mpx469/tGBS_enset_project/trimmomatic
 
 qsub script_trimmomatic_array.sh
-
-# all jobs should have run successfully
-cat job_trimmomatic_array.o* | grep "Completed successfully" -c
-# should return 283
 ```
 
 
@@ -93,10 +89,6 @@ mkdir /data/scratch/mpx469/tGBS_enset_project/cutadapt/cutadapt_output
 cd /data/scratch/mpx469/tGBS_enset_project/cutadapt
 
 qsub script_cutadapt_array.sh
-
-# all jobs should have run successfully
-cat job_cutadapt_array.o* | grep done -c
-# should return 283
 ```
 
 
@@ -175,17 +167,21 @@ qsub script_gstacks_array.sh
 ```
 mkdir /data/scratch/mpx469/tGBS_enset_project/populations
 
-for i in `seq 70 10 120`; do  
-   mkdir /data/scratch/mpx469/tGBS_enset_project/populations/populations_${i}_single_snp_output
-   mkdir /data/scratch/mpx469/tGBS_enset_project/populations/populations_${i}_all_snps_output
+for l in `seq 70 10 120`; do  
+   mkdir /data/scratch/mpx469/tGBS_enset_project/populations/populations_${l}_single_snp_output
+   mkdir /data/scratch/mpx469/tGBS_enset_project/populations/populations_${l}_all_snps_output
 done
 
 cd /data/scratch/mpx469/tGBS_enset_project/populations
 
-qsub script_populations_all_snps_array.sh
-qsub script_populations_single_snp_array.sh
+# create input args for array script
+for l in `seq 70 10 120`; do 
+   for d in single_snp all_snps; do
+      echo $l $d >> input_args
+   done	  
+done
 
-grep "Populations is done" -c job_populations_*
+qsub script_populations_array.sh
 
 # get summary stats for each assembly
 echo -e 'loci sites filtered variant' > summary_all_snps
