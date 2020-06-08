@@ -110,9 +110,18 @@ mkdir /data/scratch/mpx469/tGBS_enset_project/process_radtags
 # will truncate reads at varying read lengths
 
 # create output files
-for i in `seq 70 10 120`; do  
-   mkdir /data/scratch/mpx469/tGBS_enset_project/process_radtags/process_radtags_${i}_output
+for l in `seq 70 10 120`; do  
+   mkdir /data/scratch/mpx469/tGBS_enset_project/process_radtags/process_radtags_${l}_output
 done
+
+# create input args for array script
+for l in `seq 70 10 120`; do 
+   cat /data/scratch/mpx469/tGBS_enset_project/sample_list.txt | while read i; do
+      echo $l $i >> input_args
+   done	  
+done
+
+qsub script_process_radtags_array.sh
 
 # submit jobs
 for i in `seq 70 10 120`; do  
