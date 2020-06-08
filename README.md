@@ -186,7 +186,7 @@ for l in `seq 70 10 120`; do
     echo ${l} $(grep Kept populations_${l}_single_snp_output/populations.log | cut -f 2,6,8,14 -d " ") >> summary_single_snp
 done
 
-
+Rscript plot_summary.R
 
 ```
 
