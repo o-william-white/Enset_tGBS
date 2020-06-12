@@ -21,22 +21,16 @@ This readme file details the methodolgy used in the analysis of ensete tGBS data
    - [Assemble loci with gstacks](#assemble-loci-with-gstacks)
    - [Call snps with populations](#call-snps-with-populations)
    - [Blacklist contaminants and paralogues](#blacklist-contaminants-and-paralogues)
-   - [Identify loci that map to contaminant sequeces in Bedadeti assembly](identify-loci-that-map-to-contaminant-sequeces-in-Bedadeti-assembly)
+   - [Identify loci that map to contaminant sequeces in Bedadeti assembly](identify-loci-that-map-to-contaminant-sequeces-in-bedadeti-assembly)
    - [Identify loci that show high sequence homology to organlle genomes](#identify-loci-that-show-high-sequence-homology-to-organlle-genomes)
    - [Identify loci that show consistently high site depth](#identify-loci-that-show-consistently-high-site-depth)
-   - [Identify duplicate loci with differing 5' start sites](#identify-duplicate-loci-with-differing-start-sites)
+   - [Identify duplicate loci with differing start sites](#identify-duplicate-loci-with-differing-start-sites)
 
 [Blast tGBS reads against a custom refseq bacterial database](#blast-tgbs-reads-against-a-custom-refseq-bacterial-database)
    - [Creating custom blast db from refseq genomes](#creating-custom-blast-db-from-refseq-genomes)
    - [Blast all samples against custom refseq reference](#blast-all-samples-against-custom-refseq-reference)
-   - [Count the Xanthomonas campestris pv. musacearum genome contigs/scaffolds hit in each sample](#count-the-xanthomonas-campestris-pv.-musacearum-genome-contigs/scaffolds-hit-in-each-sample)
-   - [Calculate proportion of the Xanthomonas campestris pv. musacearum genome identified in the blast search](#calculate-proportion-of-the-Xanthomonas-campestris-pv.-musacearum-genome-identified-in-the-blast-search)
-   - [](#)
-   - [](#)
-  
-  
-   
-  
+   - [Count the Xanthomonas campestris pv musacearum genome contigs/scaffolds hit in each sample](#count-the-xanthomonas-campestris-pv-musacearum-genome-contigs/scaffolds-hit-in-each-sample)
+   - [Calculate proportion of the Xanthomonas campestris pv musacearum genome identified in the blast search](#calculate-proportion-of-the-Xanthomonas-campestris-pv-musacearum-genome-identified-in-the-blast-search)
    
 
 
@@ -489,7 +483,7 @@ Rscript create_summary_tables_species_genera.R
 
 
 
-### Count the Xanthomonas campestris pv. musacearum genome contigs/scaffolds hit in each sample 
+### Count the Xanthomonas campestris pv musacearum genome contigs/scaffolds hit in each sample 
 
 ```
 cat /data/scratch/mpx469/tGBS_enset_project/sample_list.txt | while read i; do 
@@ -499,7 +493,7 @@ done > summary_table_output/summary_xcm_contigs.txt
 
 
 
-### Calculate proportion of the Xanthomonas campestris pv. musacearum genome identified in the blast search
+### Calculate proportion of the Xanthomonas campestris pv musacearum genome identified in the blast search
 
 ```
 # get ref names for all contigs in xcm assembly
