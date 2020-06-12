@@ -192,7 +192,7 @@ Rscript plot_summary.R
 
 <br/>
 <div align="right">
-    <b><a href="#----">↥ back to top</a></b>
+    <b><a ## Table of contents>↥ back to top</a></b>
 </div>
 <br/>
 
