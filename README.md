@@ -17,12 +17,27 @@ This readme file details the methodolgy used in the analysis of ensete tGBS data
    - [Use process radtags to truncate reads to uniform length](#use-process-radtags-to-truncate-reads-to-uniform-length)
    
    [STACKs reference mapped pipeline](#stacks-reference-mapped-pipeline)
-   - [map reads against the Bedadeti reference genome assembly](#map-reads-against-the-Bedadeti-reference-genome-assembly)
-   - [assemble loci with gstacks](#assemble-loci-with-gstacks)
-   - [call snps with populations](#call-snps-with-populations)
-   - [blacklist contaminants and paralogues](#blacklist-contaminants-and-paralogues)
+   - [Map reads against the Bedadeti reference genome assembly](#map-reads-against-the-Bedadeti-reference-genome-assembly)
+   - [Assemble loci with gstacks](#assemble-loci-with-gstacks)
+   - [Call snps with populations](#call-snps-with-populations)
+   - [Blacklist contaminants and paralogues](#blacklist-contaminants-and-paralogues)
+   - [Identify loci that map to contaminant sequeces in Bedadeti assembly](identify-loci-that-map-to-contaminant-sequeces-in-Bedadeti-assembly)
+   - [Identify loci that show high sequence homology to organlle genomes](#identify-loci-that-show-high-sequence-homology-to-organlle-genomes)
+   - [Identify loci that show consistently high site depth](#identify-loci-that-show-consistently-high-site-depth)
+   - [Identify duplicate loci with differing 5' start sites](#identify-duplicate-loci-with-differing-start-sites)
+
+[Blast tGBS reads against a custom refseq bacterial database](#blast-tgbs-reads-against-a-custom-refseq-bacterial-database)
+   - [Creating custom blast db from refseq genomes](#creating-custom-blast-db-from-refseq-genomes)
+   - [Blast all samples against custom refseq reference](#blast-all-samples-against-custom-refseq-reference)
+   - [Count the Xanthomonas campestris pv. musacearum genome contigs/scaffolds hit in each sample](#count-the-xanthomonas-campestris-pv.-musacearum-genome-contigs/scaffolds-hit-in-each-sample)
+   - [Calculate proportion of the Xanthomonas campestris pv. musacearum genome identified in the blast search](#calculate-proportion-of-the-Xanthomonas-campestris-pv.-musacearum-genome-identified-in-the-blast-search)
    - [](#)
    - [](#)
+  
+  
+   
+  
+   
 
 
 ## Import data from local hard drive into apocrita
@@ -381,7 +396,7 @@ qsub script_identify_sites_with_high_depth_array.sh
 
 
 
-### Identify duplicate loci with differing 5' start sites
+### Identify duplicate loci with differing start sites
 
 ```
 mkdir /data/scratch/mpx469/tGBS_enset_project/blacklists/duplicates
@@ -397,17 +412,15 @@ qsub script_duplicates_array.sh
 ```
 
 
-
-
-
-
-## Blast tGBS reads against a custom refseq bacterial database
 <br/>
 <div align="right">
     <b><a href="#enset-tgbs">↥ back to top</a></b>
 </div>
 <br/>
-### creating custom blast db from refseq genomes
+
+## Blast tGBS reads against a custom refseq bacterial database
+
+### Creating custom blast db from refseq genomes
 
 adapted from https://github.com/dmnfarrell/epitopepredict/wiki/Creating-a-local-refseq-blast-db
 
@@ -444,7 +457,7 @@ qsub script_ftp_refseq_bacteria.sh
 ```
 
 
-### blast all samples against custom refseq reference
+### Blast all samples against custom refseq reference
 
 ```
 # create blast databse
@@ -481,7 +494,7 @@ Rscript create_summary_tables_species_genera.R
 
 
 
-### count the Xanthomonas campestris pv. musacearum genome contigs/scaffolds hit in each sample 
+### Count the Xanthomonas campestris pv. musacearum genome contigs/scaffolds hit in each sample 
 
 ```
 cat /data/scratch/mpx469/tGBS_enset_project/sample_list.txt | while read i; do 
@@ -491,7 +504,7 @@ done > summary_table_output/summary_xcm_contigs.txt
 
 
 
-### calculate proportion of the Xanthomonas campestris pv. musacearum genome identified in the blast search
+### Calculate proportion of the Xanthomonas campestris pv. musacearum genome identified in the blast search
 
 ```
 # get ref names for all contigs in xcm assembly
