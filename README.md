@@ -33,6 +33,8 @@ This readme file details the methodolgy used in the analysis of ensete tGBS data
    - [Count the Xanthomonas campestris pv musacearum genome contigs hit in each sample](#count-the-xanthomonas-campestris-pv-musacearum-genome-contigs-hit-in-each-sample)
    - [Calculate proportion of the Xanthomonas campestris pv musacearum genome identified in the blast search](#calculate-proportion-of-the-Xanthomonas-campestris-pv-musacearum-genome-identified-in-the-blast-search)
    
+[Save script files to be exported to github](save-script-files-to-be-exported-to-github)
+
 
 
 
@@ -520,3 +522,29 @@ qsub script_bp_coverage_per_chr_array.sh
 # create a summary tables
 create_summary_tables_xcm_bp_cov.R
 ```
+
+
+
+
+
+<br/>
+<div align="right">
+    <b><a href="#enset-tgbs">↥ back to top</a></b>
+</div>
+<br/>
+
+## Save script files to be exported to github
+
+```
+cd /data/scratch/mpx469/tGBS_enset_project/
+mkdir /data/scratch/mpx469/tGBS_enset_project/git
+
+# cp files with *.R or *sh endings to git folder
+for i in .R .sh; do 
+   find . -type f -name \*${i}
+done | while read i; do 
+   cp ${i} git/ 
+done
+```
+
+
