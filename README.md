@@ -34,7 +34,11 @@ This readme file details the methodolgy used in the analysis of ensete tGBS data
    - [Calculate proportion of the Xanthomonas campestris pv musacearum genome identified in the blast search](#calculate-proportion-of-the-Xanthomonas-campestris-pv-musacearum-genome-identified-in-the-blast-search)
    
 
-
+<br/>
+<div align="right">
+    <b><a href="#enset-tgbs">↥ back to top</a></b>
+</div>
+<br/>
 
 ## Import data from local hard drive into apocrita
 
@@ -216,7 +220,11 @@ Rscript plot_summary.R
 ```
 
 
-
+<br/>
+<div align="right">
+    <b><a href="#enset-tgbs">↥ back to top</a></b>
+</div>
+<br/>
 
 ## Blacklist contaminants and paralogues
 
