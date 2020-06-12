@@ -537,13 +537,13 @@ create_summary_tables_xcm_bp_cov.R
 
 ```
 cd /data/scratch/mpx469/tGBS_enset_project/
-mkdir /data/scratch/mpx469/tGBS_enset_project/git
+mkdir /data/scratch/mpx469/tGBS_enset_project/github
 
 # cp files with *.R or *sh endings to git folder
 for i in .R .sh; do 
    find . -type f -name \*${i}
 done | while read i; do 
-   cp ${i} git/ 
+   cp ${i} github/ 
 done
 ```
 
