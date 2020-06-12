@@ -34,6 +34,8 @@ This readme file details the methodolgy used in the analysis of ensete tGBS data
    - [Calculate proportion of the Xanthomonas campestris pv musacearum genome identified in the blast search](#calculate-proportion-of-the-Xanthomonas-campestris-pv-musacearum-genome-identified-in-the-blast-search)
    
 
+
+
 <br/>
 <div align="right">
     <b><a href="#enset-tgbs">↥ back to top</a></b>
@@ -270,7 +272,6 @@ cat ftp_refseq_chloro/plastid.*.1.genomic.fna |     sed -e 's/ /_/g' -e 's/,//g'
 cat ftp_refseq_mito/mitochondrion.*.1.genomic.fna | sed -e 's/ /_/g' -e 's/,//g' > ftp_refseq_mito/mitochondrion.genomic.fna
 
 
-
 # get novoplasty assembly for Bedadeti SRA data
 
 mkdir /data/scratch/mpx469/tGBS_enset_project/blacklists/blastn/novoplasty
@@ -280,7 +281,6 @@ cp /data/scratch/mpx469/sra_enset_project/novoplasty/Option_1_Bedadeti1_chloro.f
 
 # change name of fasta sequence "Contig1" to something more meaningful
 sed -i -e 's/Contig1/Bedadeti_chloro_novoplasty/g' novoplasty/Option_1_Bedadeti1_chloro.fasta
-
 
 
 # get ensete partial chloroplast asssembly
@@ -312,7 +312,6 @@ seqtk subseq musa/musa_acuminata_v2_pseudochromosome.fna musa/mito.contigs > mus
 
 # change names to something more meaningful
 sed -i -e 's/mito/musa_acuminata_v2_mito/g' musa/mito.contigs.fasta
-
 
 
 # create blast db
@@ -351,7 +350,6 @@ mkdir /data/scratch/mpx469/tGBS_enset_project/blacklists/site_depth
 cd /data/scratch/mpx469/tGBS_enset_project/blacklists/site_depth
 
 
-
 # sort and index vcf 
 
 mkdir /data/scratch/mpx469/tGBS_enset_project/blacklists/site_depth/vcf_sorted_indexed
@@ -365,7 +363,6 @@ done >> input_args
 qsub script_vcf_sort_index_array.sh
 
 
-
 # get site depth per loci across samples
 
 for l in `seq 70 10 120`; do 
@@ -377,7 +374,6 @@ for l in `seq 70 10 120`; do
 done >> input_args_site_depth
 
 qsub script_site_depth_array.sh
-
 
 
 # get loci info (loci chr pos) for each dataset
