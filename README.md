@@ -35,6 +35,7 @@ This readme file details the methodolgy used in the analysis of ensete tGBS data
    
 
 
+
 ## Import data from local hard drive into apocrita
 
 Set up directory for raw data
@@ -130,6 +131,9 @@ done
 qsub script_process_radtags_array.sh
 ```
 
+
+
+
 <br/>
 <div align="right">
     <b><a href="#enset-tgbs">↥ back to top</a></b>
@@ -137,7 +141,6 @@ qsub script_process_radtags_array.sh
 <br/>
 
 ## STACKs reference mapped pipeline
-
 
 ### Map reads against the Bedadeti reference genome assembly
 
@@ -210,8 +213,8 @@ for l in `seq 70 10 120`; do
 done
 
 Rscript plot_summary.R
-
 ```
+
 
 
 
@@ -329,7 +332,6 @@ for l in `seq 70 10 120`; do
 	   cut -f 1 blast_out_${l}_${d}_top_hits | sed 's/CLocus_//g' > blacklist_blast_${l}_${d}
 	done
 done
-
 ```
 
 
