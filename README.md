@@ -15,7 +15,8 @@ This readme file details the methodolgy used in the analysis of ensete tGBS data
    - [Use trimmomatic to filter raw reads](#use-trimmomatic-to-filter-raw-reads)
    - [Use cutadapt to filter reads without restriction enzyme cutsites](#use-cutadapt-to-filter-reads-without-restriction-enzyme-cutsites)
    - [Use process radtags to truncate reads to uniform length](#use-process-radtags-to-truncate-reads-to-uniform-length)
- [STACKs ref_map pipeline](#stackss-ref_map-pipeline)
+   
+   [STACKs reference mapped pipeline](#stacks-reference-mapped-pipeline)
    - [map reads against the Bedadeti reference genome assembly](#map-reads-against-the-Bedadeti-reference-genome-assembly)
    - [assemble loci with gstacks](#assemble-loci-with-gstacks)
    - [call snps with populations](#call-snps-with-populations)
@@ -115,7 +116,7 @@ done
 qsub script_process_radtags_array.sh
 ```
 
-## STACKs ref_map pipeline
+## STACKs reference mapped pipeline
 
 ### map reads against the Bedadeti reference genome assembly
 
