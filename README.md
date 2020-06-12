@@ -57,11 +57,7 @@ Set file permissions of Data2Bio directory in apocrita
 chmod -R u=rwx,g=r,o=r /data/scratch/mpx469/tGBS_enset_project/Data2Bio_final
 ```
 
-<br/>
-<div align="right">
-    <b><a href="#enset-tgbs">↥ back to top</a></b>
-</div>
-<br/>
+
 
 ## Pre-processing of tGBS data <b><a href="#enset-tgbs"> ↥ </a></b>
 
@@ -133,13 +129,8 @@ qsub script_process_radtags_array.sh
 ```
 
 
-<br/>
-<div align="right">
-    <b><a href="#enset-tgbs">↥ back to top</a></b>
-</div>
-<br/>
 
-## STACKs reference mapped pipeline
+## STACKs reference mapped pipeline <b><a href="#enset-tgbs"> ↥ </a></b>
 
 
 ### Map reads against the Bedadeti reference genome assembly
@@ -217,13 +208,8 @@ Rscript plot_summary.R
 ```
 
 
-<br/>
-<div align="right">
-    <b><a href="#enset-tgbs">↥ back to top</a></b>
-</div>
-<br/>
 
-## Blacklist contaminants and paralogues
+## Blacklist contaminants and paralogues <b><a href="#enset-tgbs"> ↥ </a></b>
 
 
 ```
@@ -412,13 +398,8 @@ qsub script_duplicates_array.sh
 ```
 
 
-<br/>
-<div align="right">
-    <b><a href="#enset-tgbs">↥ back to top</a></b>
-</div>
-<br/>
 
-## Blast tGBS reads against a custom refseq bacterial database
+## Blast tGBS reads against a custom refseq bacterial database <b><a href="#enset-tgbs"> ↥ </a></b>
 
 ### Creating custom blast db from refseq genomes
 
