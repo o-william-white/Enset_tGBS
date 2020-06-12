@@ -22,11 +22,7 @@ This readme file details the methodolgy used in the analysis of ensete tGBS data
    - [](#)
    - [](#)
 
-<br/>
-<div align="right">
-    <b><a href="#----">↥ back to top</a></b>
-</div>
-<br/>
+
 ## Import data from local hard drive into apocrita
 
 Set up directory for raw data
@@ -44,6 +40,11 @@ Set file permissions of Data2Bio directory in apocrita
 chmod -R u=rwx,g=r,o=r /data/scratch/mpx469/tGBS_enset_project/Data2Bio_final
 ```
 
+<br/>
+<div align="right">
+    <b><a href="#----">↥ back to top</a></b>
+</div>
+<br/>
 
 ## Pre-processing of tGBS data
 
@@ -189,7 +190,11 @@ Rscript plot_summary.R
 
 ```
 
-
+<br/>
+<div align="right">
+    <b><a href="#----">↥ back to top</a></b>
+</div>
+<br/>
 
 ## blacklist contaminants and paralogues
 
