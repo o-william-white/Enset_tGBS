@@ -42,7 +42,7 @@ chmod -R u=rwx,g=r,o=r /data/scratch/mpx469/tGBS_enset_project/Data2Bio_final
 
 <br/>
 <div align="right">
-    <b><a href="#table-of-contents">↥ back to toc</a></b>
+    <b><a href="#enset-tgbs">↥ back to top</a></b>
 </div>
 <br/>
 
