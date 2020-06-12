@@ -20,7 +20,8 @@ This readme file details the methodolgy used in the analysis of ensete tGBS data
    - [Map reads against the Bedadeti reference genome assembly](#map-reads-against-the-Bedadeti-reference-genome-assembly)
    - [Assemble loci with gstacks](#assemble-loci-with-gstacks)
    - [Call snps with populations](#call-snps-with-populations)
-   - [Blacklist contaminants and paralogues](#blacklist-contaminants-and-paralogues)
+
+[Blacklist contaminants and paralogues](#blacklist-contaminants-and-paralogues)
    - [Identify loci that map to contaminant sequeces in Bedadeti assembly](#identify-loci-that-map-to-contaminant-sequeces-in-bedadeti-assembly)
    - [Identify loci that show high sequence homology to organlle genomes](#identify-loci-that-show-high-sequence-homology-to-organlle-genomes)
    - [Identify loci that show consistently high site depth](#identify-loci-that-show-consistently-high-site-depth)
