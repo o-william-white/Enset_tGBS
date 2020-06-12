@@ -127,7 +127,7 @@ qsub script_process_radtags_array.sh
 ## STACKs reference mapped pipeline
 
 
-### map reads against the Bedadeti reference genome assembly
+### Map reads against the Bedadeti reference genome assembly
 
 ```
 mkdir /data/scratch/mpx469/tGBS_enset_project/map_reads_bedadeti
@@ -151,7 +151,7 @@ qsub script_map_reads_bedadeti_array.sh
 
 
 
-### assemble loci with gstacks 
+### Assemble loci with gstacks 
 
 ```
 mkdir /data/scratch/mpx469/tGBS_enset_project/gstacks
@@ -173,7 +173,7 @@ qsub script_gstacks_array.sh
 
 
 
-### call snps with populations
+### Call snps with populations
 
 ```
 mkdir /data/scratch/mpx469/tGBS_enset_project/populations
@@ -208,14 +208,14 @@ Rscript plot_summary.R
 </div>
 <br/>
 
-## blacklist contaminants and paralogues
+## Blacklist contaminants and paralogues
 
 
 ```
 mkdir /data/scratch/mpx469/tGBS_enset_project/blacklists
 ```
 
-### identify loci that map to contaminant sequeces in Bedadeti assembly
+### Identify loci that map to contaminant sequeces in Bedadeti assembly
 
 ```
 mkdir /data/scratch/mpx469/tGBS_enset_project/blacklists/blobtools
@@ -229,7 +229,7 @@ cut -f 6 blobtools_contigs_to_filter.txt  | grep id -v | grep -f - /data/scratch
 ```
 
 
-### identify loci that show high sequence homology to organlle genomes
+### Identify loci that show high sequence homology to organlle genomes
 
 
 ```
@@ -328,7 +328,7 @@ done
 
 
 
-### identify loci that show consistently high site depth
+### Identify loci that show consistently high site depth
 
 ```
 mkdir /data/scratch/mpx469/tGBS_enset_project/blacklists/site_depth
@@ -381,7 +381,7 @@ qsub script_identify_sites_with_high_depth_array.sh
 
 
 
-### identify duplicate loci with differing 5' start sites/banana-genome-hub
+### Identify duplicate loci with differing 5' start sites
 
 ```
 mkdir /data/scratch/mpx469/tGBS_enset_project/blacklists/duplicates
@@ -401,9 +401,12 @@ qsub script_duplicates_array.sh
 
 
 
-## blast tGBS reads against a custom refseq bacterial database
-
-
+## Blast tGBS reads against a custom refseq bacterial database
+<br/>
+<div align="right">
+    <b><a href="#enset-tgbs">↥ back to top</a></b>
+</div>
+<br/>
 ### creating custom blast db from refseq genomes
 
 adapted from https://github.com/dmnfarrell/epitopepredict/wiki/Creating-a-local-refseq-blast-db
