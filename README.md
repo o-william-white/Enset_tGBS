@@ -214,7 +214,7 @@ Rscript plot_summary.R
 
 
 
-## Blacklist contaminants and paralogues <b><a href="#enset-tgbs"> ↥ </a></b>
+## Blacklist contaminants and paralogues
 
 ```
 mkdir /data/scratch/mpx469/tGBS_enset_project/blacklists
