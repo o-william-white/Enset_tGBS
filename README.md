@@ -63,7 +63,7 @@ chmod -R u=rwx,g=r,o=r /data/scratch/mpx469/tGBS_enset_project/Data2Bio_final
 </div>
 <br/>
 
-## Pre-processing of tGBS data <b><a href="#enset-tgbs">↥ back to top</a></b>
+## Pre-processing of tGBS data <b><a href="#enset-tgbs"> ↥ </a></b>
 
 
 ### Create sample list to iterate through
