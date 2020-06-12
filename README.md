@@ -14,18 +14,13 @@ This readme file details the methodolgy used in the analysis of ensete tGBS data
    - [Create sample list to iterate through](#create-sample-list-to-iterate-through)
    - [Use trimmomatic to filter raw reads](#use-trimmomatic-to-filter-raw-reads)
    - [Use cutadapt to filter reads without restriction enzyme cutsites](#use-cutadapt-to-filter-reads-without-restriction-enzyme-cutsites)
-   - [Get sample read counts for data2bio raw, trimmomatic and cutadapt](#get-sample-read-counts-for-data2bio-raw-trimmomatic-and-cutadapt)
-
-[Stacks ref map pipeline](#stacks-ref-map-pipeline)
-   - [BWA](#bwa)
-   - [Samtools](#samtools)
-   - [Gstacks](#gstacks)
-   - [Populations](#populations)
-
-[Post-processing of SNP data](#post-processing-of-snp-data)
-   - [Filtering duplicated loci](#filtering-duplicated-loci)  
-   - [Create blacklist for duplicated loci](#create-blacklist-for-duplicated-loci) 
-   - [Repeat populations with blacklists](#repeat-populations-with-blacklists)
+   - [Use process radtags to truncate reads to uniform length](#use-process-radtags-to-truncate-reads-to-uniform-length)
+   - [map reads against the Bedadeti reference genome assembly](#map-reads-against-the-Bedadeti-reference-genome-assembly)
+   - [assemble loci with gstacks](#assemble-loci-with-gstacks)
+   - [call snps with populations](#call-snps-with-populations)
+   - [blacklist contaminants and paralogues](#blacklist-contaminants-and-paralogues)
+   - [](#)
+   - [](#)
 
 
 ## Import data from local hard drive into apocrita
