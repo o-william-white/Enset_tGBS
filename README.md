@@ -29,7 +29,7 @@ This readme file details the methodolgy used in the analysis of ensete tGBS data
 [Blast tGBS reads against a custom refseq bacterial database](#blast-tgbs-reads-against-a-custom-refseq-bacterial-database)
    - [Creating custom blast db from refseq genomes](#creating-custom-blast-db-from-refseq-genomes)
    - [Blast all samples against custom refseq reference](#blast-all-samples-against-custom-refseq-reference)
-   - [Count the Xanthomonas campestris pv musacearum genome contigs/scaffolds hit in each sample](#count-the-xanthomonas-campestris-pv-musacearum-genome-contigs/scaffolds-hit-in-each-sample)
+   - [Count the Xanthomonas campestris pv musacearum genome contigs hit in each sample](#count-the-xanthomonas-campestris-pv-musacearum-genome-contigs-hit-in-each-sample)
    - [Calculate proportion of the Xanthomonas campestris pv musacearum genome identified in the blast search](#calculate-proportion-of-the-Xanthomonas-campestris-pv-musacearum-genome-identified-in-the-blast-search)
    
 
@@ -483,7 +483,7 @@ Rscript create_summary_tables_species_genera.R
 
 
 
-### Count the Xanthomonas campestris pv musacearum genome contigs/scaffolds hit in each sample 
+### Count the Xanthomonas campestris pv musacearum genome contigs hit in each sample 
 
 ```
 cat /data/scratch/mpx469/tGBS_enset_project/sample_list.txt | while read i; do 
