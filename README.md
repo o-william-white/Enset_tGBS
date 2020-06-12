@@ -33,7 +33,7 @@ This readme file details the methodolgy used in the analysis of ensete tGBS data
    - [Count the Xanthomonas campestris pv musacearum genome contigs hit in each sample](#count-the-xanthomonas-campestris-pv-musacearum-genome-contigs-hit-in-each-sample)
    - [Calculate proportion of the Xanthomonas campestris pv musacearum genome identified in the blast search](#calculate-proportion-of-the-Xanthomonas-campestris-pv-musacearum-genome-identified-in-the-blast-search)
    
-[Save script files to be exported to github](save-script-files-to-be-exported-to-github)
+[Save script files to be exported to github](#save-script-files-to-be-exported-to-github)
 
 
 
