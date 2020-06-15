@@ -231,6 +231,8 @@ for l in `seq 70 10 120`; do
     echo ${l} $(grep Kept populations_${l}_single_snp_output/populations.log | cut -f 2,6,8,14 -d " ") >> summary_single_snp
 done
 
+Rscript plot_populations_summary.R
+
 ```
 
 
@@ -447,7 +449,7 @@ echo -e 'loci sites filtered variant' > summary_all_snps_blacklist
 echo -e 'loci sites filtered variant' > summary_single_snp_blacklist
 
 for l in `seq 70 10 120`; do 
-    echo ${l} $(grep Kept populations_${l}_all_snps_blacklist_output)/populations.log | cut -f 2,6,8,14 -d " ") >> summary_all_snps_blacklist
+    echo ${l} $(grep Kept populations_${l}_all_snps_blacklist_output/populations.log | cut -f 2,6,8,14 -d " ") >> summary_all_snps_blacklist
     echo ${l} $(grep Kept populations_${l}_single_snp_blacklist_output/populations.log | cut -f 2,6,8,14 -d " ") >> summary_single_snp_blacklist
 done
 
