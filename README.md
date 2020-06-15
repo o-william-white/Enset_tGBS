@@ -26,7 +26,9 @@ This readme file details the methodolgy used in the analysis of ensete tGBS data
    - [Identify loci that show high sequence homology to organlle genomes](#identify-loci-that-show-high-sequence-homology-to-organlle-genomes)
    - [Identify loci that show consistently high site depth](#identify-loci-that-show-consistently-high-site-depth)
    - [Identify duplicate loci with differing start sites](#identify-duplicate-loci-with-differing-start-sites)
-
+   - [Create overall blacklists](#create-overall-blacklists)
+   - [Repeat populations with blacklists](#repeat-populations-with-blacklists)
+   
 [Blast tGBS reads against a custom refseq bacterial database](#blast-tgbs-reads-against-a-custom-refseq-bacterial-database)
    - [Creating custom blast db from refseq genomes](#creating-custom-blast-db-from-refseq-genomes)
    - [Blast all samples against custom refseq reference](#blast-all-samples-against-custom-refseq-reference)
@@ -409,6 +411,21 @@ done >> input_args
 
 qsub script_duplicates_array.sh
 ```
+
+
+### Create overall blacklists
+
+cd /data/scratch/mpx469/tGBS_enset_project/blacklists
+
+bash blacklist_summary_stats.sh
+
+
+
+### Repeat populations with blacklists
+
+
+
+
 
 <br/>
 <div align="right">
