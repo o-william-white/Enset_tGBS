@@ -28,6 +28,8 @@ This readme file details the methodolgy used in the analysis of ensete tGBS data
    - [Identify duplicate loci with differing start sites](#identify-duplicate-loci-with-differing-start-sites)
    - [Create overall blacklists](#create-overall-blacklists)
    - [Repeat populations with blacklists](#repeat-populations-with-blacklists)
+
+[Read summary statistics](#read-summary-statistics)
    
 [Blast tGBS reads against a custom refseq bacterial database](#blast-tgbs-reads-against-a-custom-refseq-bacterial-database)
    - [Creating custom blast db from refseq genomes](#creating-custom-blast-db-from-refseq-genomes)
@@ -456,6 +458,31 @@ done
 Rscript plot_populations_blacklist_summary.R
 ```
 
+<br/>
+<div align="right">
+    <b><a href="#enset-tgbs">↥ back to top</a></b>
+</div>
+<br/>
+
+
+
+## Read summary statistics
+```
+mkdir /data/scratch/mpx469/tGBS_enset_project/summary_stats/
+cd /data/scratch/mpx469/tGBS_enset_project/summary_stats/
+
+qsub script_00_raw_reads.sh
+qsub script_01_trimmomatic_reads.sh
+qsub script_02_cutadapt_reads.sh
+qsub script_03_count_process_radtags_reads.sh
+qsub script_04_count_bwa_mapped_reads.sh
+qsub script_05_count_samtools_mapped_reads.sh
+
+# one all complete
+qsub script_06_write_summary_tables.sh
+```
+
+
 
 
 <br/>
@@ -463,6 +490,7 @@ Rscript plot_populations_blacklist_summary.R
     <b><a href="#enset-tgbs">↥ back to top</a></b>
 </div>
 <br/>
+
 
 ## Blast tGBS reads against a custom refseq bacterial database
 
