@@ -338,7 +338,7 @@ qsub script_blastn.sh
 # write blast blacklists
 for l in `seq 70 10 120`; do 
     for d in all_snps single_snp; do
-	   cut -f 1 blast_out_${l}_${d}_top_hits | sed 's/CLocus_//g' > blacklist_blast_${l}_${d}
+	   cut -f 1 blast_out_${l}_${d}_top_hits | sed 's/CLocus_//g' | grep qseqid -v > blacklist_blast_${l}_${d}
 	done
 done
 ```
