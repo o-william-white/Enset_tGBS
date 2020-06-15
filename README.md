@@ -30,6 +30,8 @@ This readme file details the methodolgy used in the analysis of ensete tGBS data
    - [Repeat populations with blacklists](#repeat-populations-with-blacklists)
 
 [Read summary statistics](#read-summary-statistics)
+
+[Principal components analysis](#principal-components-analysis)
    
 [Blast tGBS reads against a custom refseq bacterial database](#blast-tgbs-reads-against-a-custom-refseq-bacterial-database)
    - [Creating custom blast db from refseq genomes](#creating-custom-blast-db-from-refseq-genomes)
@@ -482,7 +484,26 @@ qsub script_05_count_samtools_mapped_reads.sh
 qsub script_06_write_summary_tables.sh
 ```
 
+<br/>
+<div align="right">
+    <b><a href="#enset-tgbs">↥ back to top</a></b>
+</div>
+<br/>
 
+
+
+
+## Principal components analysis
+
+```
+mkdir /data/scratch/mpx469/tGBS_enset_project/pca
+cd /data/scratch/mpx469/tGBS_enset_project/pca
+
+module load plink
+module load R/3.6.1
+
+bash plot_plink_pca.sh
+```
 
 
 <br/>
