@@ -186,14 +186,23 @@ for i in `seq 70 10 120`; do
 done
 
 cd /data/scratch/mpx469/tGBS_enset_project/gstacks
-```
 
-Create popmap, filtering out samples classed as "Disease" or "NA" and submit script
+# Create popmap, filtering out samples classed as "Disease" or "NA" and submit script
 
-```
 Rscript write_popmap.R
 
 qsub script_gstacks_array.sh
+
+# get summary stats for loci assembled at each read length
+echo -e 'loci reads' > summary_gstacks
+
+for l in `seq 70 10 120`; do 
+    echo ${l} $(grep Built gstacks_${l}_output/gstacks.log | cut -f 2,5 -d " ") >> summary_gstacks
+done
+
+# plot summary stats
+Rscript plot_gstacks_summary.R
+
 ```
 
 
@@ -222,7 +231,6 @@ for l in `seq 70 10 120`; do
     echo ${l} $(grep Kept populations_${l}_single_snp_output/populations.log | cut -f 2,6,8,14 -d " ") >> summary_single_snp
 done
 
-Rscript plot_summary.R
 ```
 
 
@@ -423,7 +431,28 @@ bash blacklist_summary_stats.sh
 
 ### Repeat populations with blacklists
 
+```
+cd /data/scratch/mpx469/tGBS_enset_project/populations
 
+for l in `seq 70 10 120`; do  
+   mkdir /data/scratch/mpx469/tGBS_enset_project/populations/populations_${l}_single_snp_blacklist_output
+   mkdir /data/scratch/mpx469/tGBS_enset_project/populations/populations_${l}_all_snps_blacklist_output
+done
+
+script_populations_all_snps_blacklist_array.sh
+script_populations_single_snp_blacklist_array.sh
+
+# get summary stats for each assembly
+echo -e 'loci sites filtered variant' > summary_all_snps_blacklist
+echo -e 'loci sites filtered variant' > summary_single_snp_blacklist
+
+for l in `seq 70 10 120`; do 
+    echo ${l} $(grep Kept populations_${l}_all_snps_blacklist_output)/populations.log | cut -f 2,6,8,14 -d " ") >> summary_all_snps_blacklist
+    echo ${l} $(grep Kept populations_${l}_single_snp_blacklist_output/populations.log | cut -f 2,6,8,14 -d " ") >> summary_single_snp_blacklist
+done
+
+Rscript plot_populations_blacklist_summary.R
+```
 
 
 
