@@ -32,7 +32,15 @@ This readme file details the methodolgy used in the analysis of ensete tGBS data
 [Read summary statistics](#read-summary-statistics)
 
 [Principal components analysis](#principal-components-analysis)
-   
+
+[Convert file formats](#convert-file-formats)
+
+[Modeltest](#modeltest)
+
+[Raxml](#raxml)
+
+[Iqtree](#iqtree)
+
 [Blast tGBS reads against a custom refseq bacterial database](#blast-tgbs-reads-against-a-custom-refseq-bacterial-database)
    - [Creating custom blast db from refseq genomes](#creating-custom-blast-db-from-refseq-genomes)
    - [Blast all samples against custom refseq reference](#blast-all-samples-against-custom-refseq-reference)
@@ -511,6 +519,110 @@ bash plot_plink_pca.sh
     <b><a href="#enset-tgbs">↥ back to top</a></b>
 </div>
 <br/>
+
+
+
+
+## Convert file formats
+
+The stack phylip output is in interleaved format. For raxml-ng it need to be in sequential format. We also create other potentailly useful formats including nexus and fasta.
+
+```
+mkdir /data/scratch/mpx469/tGBS_enset_project/convert_file_formats
+cd /data/scratch/mpx469/tGBS_enset_project/convert_file_formats
+
+for l in `seq 70 10 120`; do 
+    for d in all_snps single_snp; do
+	   echo ${l} ${d}
+	done
+done >> input_args
+
+qsub script_convert_file_formats_array.sh
+```
+
+
+<br/>
+<div align="right">
+    <b><a href="#enset-tgbs">↥ back to top</a></b>
+</div>
+<br/>
+
+
+
+
+
+## Modeltest
+
+Perform model test to identifiy the best substitution model for raxml-ng
+
+```
+mkdir /data/scratch/mpx469/tGBS_enset_project/modeltest_ng
+cd /data/scratch/mpx469/tGBS_enset_project/modeltest_ng
+
+script_modeltest_ng_array.sh
+```
+
+
+
+
+<br/>
+<div align="right">
+    <b><a href="#enset-tgbs">↥ back to top</a></b>
+</div>
+<br/>
+
+
+
+
+## Raxml
+
+Maximum likelihood tree eatimation with raxml-ng. We analyse the dataset with a read length of 80 and a single snp per locus.
+
+```
+mkdir /data/scratch/mpx469/tGBS_enset_project/raxml_ng
+mkdir /data/scratch/mpx469/tGBS_enset_project/raxml_ng/raxml_ng_80_single_snp
+cd /data/scratch/mpx469/tGBS_enset_project/raxml_ng/raxml_ng_80_single_snp
+
+qsub script_raxml_ng_01_parse.sh
+qsub script_raxml_ng_02_tree_search_rand_array.sh
+qsub script_raxml_ng_03_tree_search_pars_array.sh
+qsub script_raxml_ng_04_bootstrap_array.sh
+```
+
+
+
+<br/>
+<div align="right">
+    <b><a href="#enset-tgbs">↥ back to top</a></b>
+</div>
+<br/>
+
+
+## Iqtree
+
+Maximum likelihood tree estimation with iq-tree. We use the same data as above for raxml-ng. 
+
+```
+mkdir /data/scratch/mpx469/tGBS_enset_project/iq_tree
+mkdir /data/scratch/mpx469/tGBS_enset_project/iq_tree/iq_tree_80_single_snp
+cd /data/scratch/mpx469/tGBS_enset_project/iq_tree/iq_tree_80_single_snp
+
+for i in `seq 0.1 0.1 0.5`; do
+   for r in {1..100}; 
+      do echo -pers ${i} -nstop 1000 -pre iq_tre_output/out_pers_${i}_r${r}; 
+   done 
+done > input_args
+
+qsub script_iq_tree_array.sh
+```
+
+<br/>
+<div align="right">
+    <b><a href="#enset-tgbs">↥ back to top</a></b>
+</div>
+<br/>
+
+
 
 
 ## Blast tGBS reads against a custom refseq bacterial database
