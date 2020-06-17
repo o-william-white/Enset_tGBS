@@ -609,7 +609,7 @@ cd /data/scratch/mpx469/tGBS_enset_project/iq_tree/iq_tree_80_single_snp
 
 for i in `seq 0.1 0.1 0.5`; do
    for r in {1..100}; 
-      do echo -pers ${i} -nstop 1000 -pre iq_tre_output/out_pers_${i}_r${r}; 
+      do echo -pers ${i} -nstop 1000 -pre iq_tree_output/out_pers_${i}_r${r}; 
    done 
 done > input_args
 
