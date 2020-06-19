@@ -206,10 +206,10 @@ Rscript write_popmap.R
 qsub script_gstacks_array.sh
 
 # get summary stats for loci assembled at each read length
-echo -e 'loci reads' > summary_gstacks
+echo -e 'loci reads coverage' > summary_gstacks
 
 for l in `seq 70 10 120`; do 
-    echo ${l} $(grep Built gstacks_${l}_output/gstacks.log | cut -f 2,5 -d " ") >> summary_gstacks
+   echo ${l} $(grep Built gstacks_${l}_output/gstacks.log | cut -f 2,5 -d " ") $(grep coverage gstacks_${l}_output/gstacks.log | cut -f 6 -d " " | sed -e 's/mean=//g' -e 's/x,//g' )  >> summary_gstacks
 done
 
 # plot summary stats
