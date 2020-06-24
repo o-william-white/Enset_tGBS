@@ -587,6 +587,68 @@ qsub script_raxml_ng_01_parse.sh
 qsub script_raxml_ng_02_tree_search_rand_array.sh
 qsub script_raxml_ng_03_tree_search_pars_array.sh
 qsub script_raxml_ng_04_bootstrap_array.sh
+
+# check if jobs completed
+cat raxml_ng_output/all_tree_search_rand*.log | grep -e "Elapsed time" -c
+cat raxml_ng_output/all_tree_search_pars*.log | grep -e "Elapsed time" -c
+cat raxml_ng_output/all_bootstrap*.log | grep -e "Elapsed time" -c
+
+# resubmit jobs if they did not complete
+# raxml-ng will retart from checkpoint
+# note these jobs are submitted individually rather than as an array
+
+# rand tree search
+for i in {1..5000}; do
+   RAND=$(grep "Elapsed time" raxml_ng_output/all_tree_search_rand_${i}.raxml.log -c)
+   if [ $RAND -eq 0 ]; then
+      qsub -t ${i} script_raxml_ng_02_tree_search_rand_array.sh
+   fi
+done
+
+# pars tree search
+for i in {1..5000}; do
+   PARS=$(grep "Elapsed time" raxml_ng_output/all_tree_search_pars_${i}.raxml.log -c)
+   if [ $PARS -eq 0 ]; then
+      qsub -t ${i} script_raxml_ng_03_tree_search_pars_array.sh
+   fi
+done
+
+# bootstrap
+for i in {1..5000}; do
+   BOOT=$(grep "Elapsed time" raxml_ng_output/all_bootstrap_${i}.raxml.log -c)
+   if [ $BOOT -eq 0 ]; then
+      qsub -t ${i} script_raxml_ng_04_bootstrap_array.sh
+   fi
+done
+
+# check again that all jobs have completed as above
+
+# see best scoring trees
+grep "Final LogLikelihood:" raxml_ng_output/all_tree_search_*.raxml.log | sort -k 3 | head
+
+# create symbolic link to best tree
+ln -s `grep "Final LogLikelihood:" raxml_ng_output/all_tree_search_*.raxml.log | sort -k 3 | head -n 1 | cut -f 1 -d ":" | sed 's/log/bestTree/g'` best.tre
+
+
+# add bootstrap values to best tree
+
+module add gcc/7.1.0
+export PATH=/data/home/mpx469/software/raxml-ng-pthreads/raxml-ng/bin/:$PATH
+
+raxml-ng \
+   --support \
+   --tree best.tre \
+   --bs-trees raxml_ng_output/all_bootstraps \
+   --bs-metric fbp \
+   --prefix best.tre.fbp
+
+raxml-ng \
+   --support \
+   --tree best.tre \
+   --bs-trees raxml_ng_output/all_bootstraps \
+   --bs-metric tbe \
+   --prefix best.tre.tbe
+
 ```
 
 
