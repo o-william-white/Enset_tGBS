@@ -410,8 +410,6 @@ for l in `seq 70 10 120`; do
 	done
 done
 
-grep -e "^#" -v /data/scratch/mpx469/tGBS_enset_project/populations/populations_70_all_snps_output/populations.sumstats.tsv | cut -f 1-3 > loci_info_70_all_snps
-
 
 # run script to identify site with consistently high depth to be blacklisted
 qsub script_identify_sites_with_high_depth_array.sh
