@@ -435,10 +435,11 @@ qsub script_duplicates_array.sh
 
 ### Create overall blacklists
 
+```
 cd /data/scratch/mpx469/tGBS_enset_project/blacklists
 
 bash blacklist_summary_stats.sh
-
+```
 
 
 ### Repeat populations with blacklists
