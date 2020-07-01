@@ -31,6 +31,8 @@ This readme file details the methodolgy used in the analysis of ensete tGBS data
 
 [Read summary statistics](#read-summary-statistics)
 
+[Calculate missingness](calculate-missingness)
+
 [Principal components analysis](#principal-components-analysis)
 
 [Convert file formats](#convert-file-formats)
@@ -489,6 +491,23 @@ qsub script_05_count_samtools_mapped_reads.sh
 
 # one all complete
 qsub script_06_write_summary_tables.sh
+```
+
+<br/>
+<div align="right">
+    <b><a href="#enset-tgbs">↥ back to top</a></b>
+</div>
+<br/>
+
+
+
+## Calculate missingness 
+
+```
+mkdir /data/scratch/mpx469/tGBS_enset_project/missingness
+cd /data/scratch/mpx469/tGBS_enset_project/missingness
+
+qsub script_missingness.sh
 ```
 
 <br/>
