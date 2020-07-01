@@ -23,6 +23,7 @@ echo -e "sequence_id\traw\ttrimmomatic\tcutadapt\tprocess_radtags\tbwa_mem_mappe
 # cat colnames and summary .tmp summary table
 for i in `seq 70 10 120`; do
    cat colnames summary_table_${i}.tmp > summary_table_${i}
+   cut -f 1 /data/scratch/mpx469/tGBS_enset_project/gstacks/popmap.txt | sed 's/.unique.sorted//g' | grep -f - -e sequence_id summary_table_${i} > summary_table_${i}_popmap
 done
 
 # rm tmp summary file and colmanes

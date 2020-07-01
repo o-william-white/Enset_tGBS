@@ -12,12 +12,12 @@ library(dplyr)
 
 
 # get path to dir with site depths output from vcftools
-dir.path <- paste0("site_depth_", args[1], "_", args[2], "_output/")
+dir.path <- paste0("site_depth_distant_", args[1], "_", args[2], "_output/")
 
 
 
 # read loci info (required later to join chrom pos to loci no)
-loci.info <- read.table(paste0("loci_info_", args[1], "_", args[2]), col.names = c("loci", "chr", "pos"))
+loci.info <- read.table(paste0("loci_info_distant_", args[1], "_", args[2]), col.names = c("loci", "chr", "pos"))
 
 # paste chr and pos in new column called chr.pos
 loci.info$chr.pos <- paste(loci.info$chr, loci.info$pos)
@@ -60,7 +60,7 @@ plotSample <- function(x) {
 
 
 # run function and plot first nine samples
-pdf(paste0("site_depth_" , args[1], "_", args[2], "_sample.pdf"), height = 12, width = 12)
+pdf(paste0("site_depth_distant_" , args[1], "_", args[2], "_sample.pdf"), height = 12, width = 12)
 par(mfrow=c(3,3))
 lapply(names(list.depth.sample), plotSample)
 dev.off()
@@ -100,8 +100,8 @@ list.depth.filtered.uniq <- lapply(names(list.depth.filtered), uniqChromPos)
 # unlist and count unique chrom pos for sites across all samples
 site.counts <- table(unlist(list.depth.filtered.uniq))
 
-# identify chr and pos of sites with depth > 25 (10% of 250 samples) 
-chr.pos <- names(site.counts[ site.counts > 25 ])
+# identify chr and pos of sites with high depth in > 3 samples (just over 10% of 28 samples) 
+chr.pos <- names(site.counts[ site.counts > 3 ])
 
 # change into dataframe
 chr.pos <- data.frame(chr.pos)
@@ -113,6 +113,6 @@ df <- left_join(chr.pos, loci.info, by="chr.pos")
 blacklist <- select(df, loci) %>% unique
 
 # write blacklist
-write.table(blacklist, paste0("blacklist_site_depth_", args[1], "_", args[2]), row.names = FALSE, col.names = FALSE, quote = FALSE)
+write.table(blacklist, paste0("blacklist_site_depth_distant_", args[1], "_", args[2]), row.names = FALSE, col.names = FALSE, quote = FALSE)
 
 
