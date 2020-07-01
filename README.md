@@ -31,7 +31,7 @@ This readme file details the methodolgy used in the analysis of ensete tGBS data
 
 [Read summary statistics](#read-summary-statistics)
 
-[Calculate missingness](calculate-missingness)
+[Calculate missingness](#calculate-missingness)
 
 [Principal components analysis](#principal-components-analysis)
 
