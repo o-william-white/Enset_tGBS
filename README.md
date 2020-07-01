@@ -26,6 +26,22 @@ This readme file details the methodolgy used in the analysis of ensete tGBS data
    - [Identify loci that show high sequence homology to organlle genomes](#identify-loci-that-show-high-sequence-homology-to-organlle-genomes)
    - [Identify loci that show consistently high site depth](#identify-loci-that-show-consistently-high-site-depth)
    - [Identify duplicate loci with differing start sites](#identify-duplicate-loci-with-differing-start-sites)
+   - [Create overall blacklists](#create-overall-blacklists)
+   - [Repeat populations with blacklists](#repeat-populations-with-blacklists)
+
+[Read summary statistics](#read-summary-statistics)
+
+[Calculate missingness](#calculate-missingness)
+
+[Principal components analysis](#principal-components-analysis)
+
+[Convert file formats](#convert-file-formats)
+
+[Modeltest](#modeltest)
+
+[Raxml](#raxml)
+
+[Iqtree](#iqtree)
 
 [Blast tGBS reads against a custom refseq bacterial database](#blast-tgbs-reads-against-a-custom-refseq-bacterial-database)
    - [Creating custom blast db from refseq genomes](#creating-custom-blast-db-from-refseq-genomes)
@@ -184,14 +200,23 @@ for i in `seq 70 10 120`; do
 done
 
 cd /data/scratch/mpx469/tGBS_enset_project/gstacks
-```
 
-Create popmap, filtering out samples classed as "Disease" or "NA" and submit script
+# Create popmap, filtering out samples classed as "Disease" or "NA" and submit script
 
-```
 Rscript write_popmap.R
 
 qsub script_gstacks_array.sh
+
+# get summary stats for loci assembled at each read length
+echo -e 'loci reads coverage' > summary_gstacks
+
+for l in `seq 70 10 120`; do 
+   echo ${l} $(grep Built gstacks_${l}_output/gstacks.log | cut -f 2,5 -d " ") $(grep coverage gstacks_${l}_output/gstacks.log | cut -f 6 -d " " | sed -e 's/mean=//g' -e 's/x,//g' )  >> summary_gstacks
+done
+
+# plot summary stats
+Rscript plot_gstacks_summary.R
+
 ```
 
 
@@ -220,7 +245,8 @@ for l in `seq 70 10 120`; do
     echo ${l} $(grep Kept populations_${l}_single_snp_output/populations.log | cut -f 2,6,8,14 -d " ") >> summary_single_snp
 done
 
-Rscript plot_summary.R
+Rscript plot_populations_summary.R
+
 ```
 
 
@@ -338,7 +364,7 @@ qsub script_blastn.sh
 # write blast blacklists
 for l in `seq 70 10 120`; do 
     for d in all_snps single_snp; do
-	   cut -f 1 blast_out_${l}_${d}_top_hits | sed 's/CLocus_//g' > blacklist_blast_${l}_${d}
+	   cut -f 1 blast_out_${l}_${d}_top_hits | sed 's/CLocus_//g' | grep qseqid -v > blacklist_blast_${l}_${d}
 	done
 done
 ```
@@ -386,8 +412,6 @@ for l in `seq 70 10 120`; do
 	done
 done
 
-grep -e "^#" -v /data/scratch/mpx469/tGBS_enset_project/populations/populations_70_all_snps_output/populations.sumstats.tsv | cut -f 1-3 > loci_info_70_all_snps
-
 
 # run script to identify site with consistently high depth to be blacklisted
 qsub script_identify_sites_with_high_depth_array.sh
@@ -410,11 +434,276 @@ done >> input_args
 qsub script_duplicates_array.sh
 ```
 
+
+### Create overall blacklists
+
+```
+cd /data/scratch/mpx469/tGBS_enset_project/blacklists
+
+bash blacklist_summary_stats.sh
+```
+
+
+### Repeat populations with blacklists
+
+```
+cd /data/scratch/mpx469/tGBS_enset_project/populations
+
+for l in `seq 70 10 120`; do  
+   mkdir /data/scratch/mpx469/tGBS_enset_project/populations/populations_${l}_single_snp_blacklist_output
+   mkdir /data/scratch/mpx469/tGBS_enset_project/populations/populations_${l}_all_snps_blacklist_output
+done
+
+script_populations_all_snps_blacklist_array.sh
+script_populations_single_snp_blacklist_array.sh
+
+# get summary stats for each assembly
+echo -e 'loci sites filtered variant' > summary_all_snps_blacklist
+echo -e 'loci sites filtered variant' > summary_single_snp_blacklist
+
+for l in `seq 70 10 120`; do 
+    echo ${l} $(grep Kept populations_${l}_all_snps_blacklist_output/populations.log | cut -f 2,6,8,14 -d " ") >> summary_all_snps_blacklist
+    echo ${l} $(grep Kept populations_${l}_single_snp_blacklist_output/populations.log | cut -f 2,6,8,14 -d " ") >> summary_single_snp_blacklist
+done
+
+Rscript plot_populations_blacklist_summary.R
+```
+
 <br/>
 <div align="right">
     <b><a href="#enset-tgbs">↥ back to top</a></b>
 </div>
 <br/>
+
+
+
+## Read summary statistics
+```
+mkdir /data/scratch/mpx469/tGBS_enset_project/summary_stats/
+cd /data/scratch/mpx469/tGBS_enset_project/summary_stats/
+
+qsub script_00_raw_reads.sh
+qsub script_01_trimmomatic_reads.sh
+qsub script_02_cutadapt_reads.sh
+qsub script_03_count_process_radtags_reads.sh
+qsub script_04_count_bwa_mapped_reads.sh
+qsub script_05_count_samtools_mapped_reads.sh
+
+# one all complete
+qsub script_06_write_summary_tables.sh
+```
+
+<br/>
+<div align="right">
+    <b><a href="#enset-tgbs">↥ back to top</a></b>
+</div>
+<br/>
+
+
+
+## Calculate missingness 
+
+```
+mkdir /data/scratch/mpx469/tGBS_enset_project/missingness
+cd /data/scratch/mpx469/tGBS_enset_project/missingness
+
+qsub script_missingness.sh
+```
+
+<br/>
+<div align="right">
+    <b><a href="#enset-tgbs">↥ back to top</a></b>
+</div>
+<br/>
+
+
+
+
+## Principal components analysis
+
+```
+mkdir /data/scratch/mpx469/tGBS_enset_project/pca
+cd /data/scratch/mpx469/tGBS_enset_project/pca
+
+module load plink
+module load R/3.6.1
+
+bash plot_plink_pca.sh
+```
+
+
+<br/>
+<div align="right">
+    <b><a href="#enset-tgbs">↥ back to top</a></b>
+</div>
+<br/>
+
+
+
+
+## Convert file formats
+
+The stack phylip output is in interleaved format. For raxml-ng it need to be in sequential format. We also create other potentailly useful formats including nexus and fasta.
+
+```
+mkdir /data/scratch/mpx469/tGBS_enset_project/convert_file_formats
+cd /data/scratch/mpx469/tGBS_enset_project/convert_file_formats
+
+for l in `seq 70 10 120`; do 
+    for d in all_snps single_snp; do
+	   echo ${l} ${d}
+	done
+done >> input_args
+
+qsub script_convert_file_formats_array.sh
+```
+
+
+<br/>
+<div align="right">
+    <b><a href="#enset-tgbs">↥ back to top</a></b>
+</div>
+<br/>
+
+
+
+
+
+## Modeltest
+
+Perform model test to identifiy the best substitution model for raxml-ng
+
+```
+mkdir /data/scratch/mpx469/tGBS_enset_project/modeltest_ng
+cd /data/scratch/mpx469/tGBS_enset_project/modeltest_ng
+
+script_modeltest_ng_array.sh
+```
+
+
+
+
+<br/>
+<div align="right">
+    <b><a href="#enset-tgbs">↥ back to top</a></b>
+</div>
+<br/>
+
+
+
+
+## Raxml
+
+Maximum likelihood tree eatimation with raxml-ng. We analyse the dataset with a read length of 80 and a single snp per locus.
+
+```
+mkdir /data/scratch/mpx469/tGBS_enset_project/raxml_ng
+mkdir /data/scratch/mpx469/tGBS_enset_project/raxml_ng/raxml_ng_80_single_snp
+cd /data/scratch/mpx469/tGBS_enset_project/raxml_ng/raxml_ng_80_single_snp
+
+qsub script_raxml_ng_01_parse.sh
+qsub script_raxml_ng_02_tree_search_rand_array.sh
+qsub script_raxml_ng_03_tree_search_pars_array.sh
+qsub script_raxml_ng_04_bootstrap_array.sh
+
+# check if jobs completed
+cat raxml_ng_output/all_tree_search_rand*.log | grep -e "Elapsed time" -c
+cat raxml_ng_output/all_tree_search_pars*.log | grep -e "Elapsed time" -c
+cat raxml_ng_output/all_bootstrap*.log | grep -e "Elapsed time" -c
+
+# resubmit jobs if they did not complete
+# raxml-ng will retart from checkpoint
+# note these jobs are submitted individually rather than as an array
+
+# rand tree search
+for i in {1..5000}; do
+   RAND=$(grep "Elapsed time" raxml_ng_output/all_tree_search_rand_${i}.raxml.log -c)
+   if [ $RAND -eq 0 ]; then
+      qsub -t ${i} script_raxml_ng_02_tree_search_rand_array.sh
+   fi
+done
+
+# pars tree search
+for i in {1..5000}; do
+   PARS=$(grep "Elapsed time" raxml_ng_output/all_tree_search_pars_${i}.raxml.log -c)
+   if [ $PARS -eq 0 ]; then
+      qsub -t ${i} script_raxml_ng_03_tree_search_pars_array.sh
+   fi
+done
+
+# bootstrap
+for i in {1..5000}; do
+   BOOT=$(grep "Elapsed time" raxml_ng_output/all_bootstrap_${i}.raxml.log -c)
+   if [ $BOOT -eq 0 ]; then
+      qsub -t ${i} script_raxml_ng_04_bootstrap_array.sh
+   fi
+done
+
+# check again that all jobs have completed as above
+
+# see best scoring trees
+grep "Final LogLikelihood:" raxml_ng_output/all_tree_search_*.raxml.log | sort -k 3 | head
+
+# create symbolic link to best tree
+ln -s `grep "Final LogLikelihood:" raxml_ng_output/all_tree_search_*.raxml.log | sort -k 3 | head -n 1 | cut -f 1 -d ":" | sed 's/log/bestTree/g'` best.tre
+
+
+# add bootstrap values to best tree
+
+module add gcc/7.1.0
+export PATH=/data/home/mpx469/software/raxml-ng-pthreads/raxml-ng/bin/:$PATH
+
+raxml-ng \
+   --support \
+   --tree best.tre \
+   --bs-trees raxml_ng_output/all_bootstraps \
+   --bs-metric fbp \
+   --prefix best.tre.fbp
+
+raxml-ng \
+   --support \
+   --tree best.tre \
+   --bs-trees raxml_ng_output/all_bootstraps \
+   --bs-metric tbe \
+   --prefix best.tre.tbe
+
+```
+
+
+
+<br/>
+<div align="right">
+    <b><a href="#enset-tgbs">↥ back to top</a></b>
+</div>
+<br/>
+
+
+## Iqtree
+
+Maximum likelihood tree estimation with iq-tree. We use the same data as above for raxml-ng. 
+
+```
+mkdir /data/scratch/mpx469/tGBS_enset_project/iq_tree
+mkdir /data/scratch/mpx469/tGBS_enset_project/iq_tree/iq_tree_80_single_snp
+cd /data/scratch/mpx469/tGBS_enset_project/iq_tree/iq_tree_80_single_snp
+
+for i in `seq 0.1 0.1 0.5`; do
+   for r in {1..100}; 
+      do echo -pers ${i} -nstop 1000 -pre iq_tree_output/out_pers_${i}_r${r}; 
+   done 
+done > input_args
+
+qsub script_iq_tree_array.sh
+```
+
+<br/>
+<div align="right">
+    <b><a href="#enset-tgbs">↥ back to top</a></b>
+</div>
+<br/>
+
+
+
 
 ## Blast tGBS reads against a custom refseq bacterial database
 
@@ -539,8 +828,8 @@ create_summary_tables_xcm_bp_cov.R
 cd /data/scratch/mpx469/tGBS_enset_project/
 mkdir /data/scratch/mpx469/tGBS_enset_project/github
 
-# cp files with *.R or *sh endings to git folder
-for i in .R .sh; do 
+# cp files with *.R, *sh, .py endings to git folder
+for i in .R .sh .py; do 
    find . -type f -name \*${i}
 done | while read i; do 
    cp ${i} github/ 
