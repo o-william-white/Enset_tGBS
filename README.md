@@ -266,6 +266,7 @@ mkdir /data/scratch/mpx469/tGBS_enset_project/blacklists
 
 ```
 mkdir /data/scratch/mpx469/tGBS_enset_project/blacklists/blobtools
+cd /data/scratch/mpx469/tGBS_enset_project/blacklists/blobtools
 
 # blobtools_contigs_to_filter.txt imported to aporcrita
 # contigs idenfied using blobtoolkit viewer
