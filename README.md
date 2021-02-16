@@ -21,6 +21,7 @@ All scripts located in the following dir
    - [Use process radtags to truncate reads to uniform length](#use-process-radtags-to-truncate-reads-to-uniform-length)
    
    [STACKs reference mapped pipeline](#stacks-reference-mapped-pipeline)
+   - [Get Bedadeti reference](#get-Bedadeti-reference)
    - [Map reads against the Bedadeti reference genome assembly](#map-reads-against-the-Bedadeti-reference-genome-assembly)
    - [Assemble loci with gstacks](#assemble-loci-with-gstacks)
    - [Call snps with populations](#call-snps-with-populations)
@@ -177,6 +178,20 @@ qsub script_process_radtags_array.sh
 <br/>
 
 ## STACKs reference mapped pipeline
+
+### Get Bedadeti reference
+```
+# set dir
+mkdir /data/scratch/mpx469/tGBS_enset_project/bedadeti_assembly
+cd /data/scratch/mpx469/tGBS_enset_project/bedadeti_assembly
+
+# cp script
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/script_wget_Bedadeti.sh .
+
+# run script
+qsub script_wget_Bedadeti.sh
+```
+
 
 ### Map reads against the Bedadeti reference genome assembly
 
