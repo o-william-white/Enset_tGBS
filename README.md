@@ -98,20 +98,25 @@ cd /data/scratch/mpx469/tGBS_enset_project
 
 Import GBS_metadata in .csv format and create a sample list to iterate through
 ```
-cut -f 2 -d "," tGBS_metadata.csv | tail -n +2 > sample_list.txt
+cut -f 2 -d "," tGBS_metadata_working_fmt.csv | tail -n +2 > sample_list.txt
 ```
 
-
+Scripts located in the following dir
+```
+/data/scratch/mpx469/tGBS_enset_project/scripts
+```
 
 ### Use trimmomatic to filter raw reads
 
 ```
 # set dir
 mkdir /data/scratch/mpx469/tGBS_enset_project/trimmomatic
-mkdir /data/scratch/mpx469/tGBS_enset_project/trimmomatic/trimmomatic_output
-
 cd /data/scratch/mpx469/tGBS_enset_project/trimmomatic
 
+# cp script
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/script_trimmomatic_array.sh .
+
+# run trimmomatic
 qsub script_trimmomatic_array.sh
 ```
 
