@@ -141,17 +141,12 @@ qsub script_cutadapt_array.sh
 
 ### Use process radtags to truncate reads to uniform length
 
+Will truncate reads at varying read lengths (60 bp to 120 bp in steps of 10)
+
 ```
 # set dir
 mkdir /data/scratch/mpx469/tGBS_enset_project/process_radtags
-
-# will truncate reads at varying read lengths
-# 60 bp to 120 bp in steps of 10
-
-# create output files
-for l in `seq 70 10 120`; do  
-   mkdir /data/scratch/mpx469/tGBS_enset_project/process_radtags/process_radtags_${l}_output
-done
+cd /data/scratch/mpx469/tGBS_enset_project/process_radtags
 
 # create input args for array script
 for l in `seq 70 10 120`; do 
@@ -160,6 +155,13 @@ for l in `seq 70 10 120`; do
    done	  
 done
 
+wc -l input_args
+# 1500 input_args
+
+# cp script
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/script_process_radtags_array.sh .
+
+# run process radtags
 qsub script_process_radtags_array.sh
 ```
 
