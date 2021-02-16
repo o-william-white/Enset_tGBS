@@ -158,7 +158,7 @@ for l in `seq 70 10 120`; do
 done
 
 wc -l input_args
-# 1500 input_args
+# 1698 input_args
 
 # cp script
 cp /data/scratch/mpx469/tGBS_enset_project/scripts/script_process_radtags_array.sh .
