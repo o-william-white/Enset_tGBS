@@ -102,7 +102,9 @@ cd /data/scratch/mpx469/tGBS_enset_project
 
 Import GBS_metadata in .csv format and create a sample list to iterate through
 ```
-ls -1 Data2Bio_final/raw/ | sed 's/.digested.fq.gz//g' > sample_list.txt
+ls -1 Data2Bio_final/raw/*fq.gz | sed -e 's/.digested.fq.gz//g' -e 's:Data2Bio_final/raw/::g' > sample_list.txt
+wc -l sample_list.txt
+# 283 sample_list.txt
 ```
 
 
