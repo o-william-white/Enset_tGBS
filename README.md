@@ -181,14 +181,12 @@ qsub script_process_radtags_array.sh
 ### Map reads against the Bedadeti reference genome assembly
 
 ```
+# set dir
 mkdir /data/scratch/mpx469/tGBS_enset_project/map_reads_bedadeti
-
-for l in `seq 70 10 120`; do  
-   mkdir /data/scratch/mpx469/tGBS_enset_project/map_reads_bedadeti/bwa_mem_${l}_output
-   mkdir /data/scratch/mpx469/tGBS_enset_project/map_reads_bedadeti/samtools_${l}_output
-done
-
 cd /data/scratch/mpx469/tGBS_enset_project/map_reads_bedadeti
+
+# cp scripts
+
 
 # index genome 
 qsub script_bwa_index.sh
