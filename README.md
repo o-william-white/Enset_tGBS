@@ -201,16 +201,17 @@ mkdir /data/scratch/mpx469/tGBS_enset_project/map_reads_bedadeti
 cd /data/scratch/mpx469/tGBS_enset_project/map_reads_bedadeti
 
 # cp scripts
-
-
-# index genome 
-qsub script_bwa_index.sh
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/script_bwa_index.sh .
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/script_map_reads_bedadeti_array.sh .
 
 # cp input_args to dir
 cp /data/scratch/mpx469/tGBS_enset_project/process_radtags/input_args .
 
-qsub script_map_reads_bedadeti_array.sh
+# index genome 
+qsub script_bwa_index.sh
 
+# map reads
+qsub script_map_reads_bedadeti_array.sh
 ```
 
 
