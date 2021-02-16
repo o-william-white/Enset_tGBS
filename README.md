@@ -128,10 +128,12 @@ qsub script_trimmomatic_array.sh
 ```
 # set dir
 mkdir /data/scratch/mpx469/tGBS_enset_project/cutadapt
-mkdir /data/scratch/mpx469/tGBS_enset_project/cutadapt/cutadapt_output
-
 cd /data/scratch/mpx469/tGBS_enset_project/cutadapt
 
+# cp script
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/script_cutadapt_array.sh .
+
+# run cutadapt
 qsub script_cutadapt_array.sh
 ```
 
