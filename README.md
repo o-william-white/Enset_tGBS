@@ -219,13 +219,12 @@ qsub script_map_reads_bedadeti_array.sh
 ### Assemble loci with gstacks 
 
 ```
+# set dir
 mkdir /data/scratch/mpx469/tGBS_enset_project/gstacks
-
-for i in `seq 70 10 120`; do  
-   mkdir /data/scratch/mpx469/tGBS_enset_project/gstacks/gstacks_${i}_output
-done
-
 cd /data/scratch/mpx469/tGBS_enset_project/gstacks
+
+# cp script
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/script_gstacks_array.sh .
 
 # Create popmap, filtering out samples classed as "Disease" or "NA" and submit script
 
