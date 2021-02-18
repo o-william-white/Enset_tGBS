@@ -225,11 +225,14 @@ cd /data/scratch/mpx469/tGBS_enset_project/gstacks
 
 # cp script
 cp /data/scratch/mpx469/tGBS_enset_project/scripts/script_gstacks_array.sh .
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/write_popmap.R .
 
-# Create popmap, filtering out samples classed as "Disease" or "NA" and submit script
-
+# write popmap
+# note that this requires the .csv file in /data/scratch/mpx469/tGBS_enset_project/tGBS_metadata_phylogenetic_analysis.csv
+modula add R
 Rscript write_popmap.R
 
+# run gstacks
 qsub script_gstacks_array.sh
 
 # get summary stats for loci assembled at each read length
