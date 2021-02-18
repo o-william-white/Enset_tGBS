@@ -223,9 +223,10 @@ qsub script_map_reads_bedadeti_array.sh
 mkdir /data/scratch/mpx469/tGBS_enset_project/gstacks
 cd /data/scratch/mpx469/tGBS_enset_project/gstacks
 
-# cp script
+# cp scripts
 cp /data/scratch/mpx469/tGBS_enset_project/scripts/script_gstacks_array.sh .
 cp /data/scratch/mpx469/tGBS_enset_project/scripts/write_popmap.R .
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/plot_gstacks_summary.R .
 
 # write popmap
 # note that this requires the .csv file in /data/scratch/mpx469/tGBS_enset_project/tGBS_metadata_phylogenetic_analysis.csv
@@ -252,15 +253,15 @@ Rscript plot_gstacks_summary.R
 ### Call snps with populations
 
 ```
+set dir
 mkdir /data/scratch/mpx469/tGBS_enset_project/populations
-
-for l in `seq 70 10 120`; do  
-   mkdir /data/scratch/mpx469/tGBS_enset_project/populations/populations_${l}_single_snp_output
-   mkdir /data/scratch/mpx469/tGBS_enset_project/populations/populations_${l}_all_snps_output
-done
-
 cd /data/scratch/mpx469/tGBS_enset_project/populations
 
+# cp scripts
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/script_populations_all_snps_array.sh .
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/script_populations_single_snp_array.sh .
+
+# run populations
 qsub script_populations_all_snps_array.sh
 qsub script_populations_single_snp_array.sh
 
