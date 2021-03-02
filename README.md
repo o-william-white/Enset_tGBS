@@ -396,6 +396,9 @@ cp /data/scratch/mpx469/tGBS_enset_project/scripts/top_hit.R .
 
 qsub script_makeblastdb_organelle.sh
 
+
+# run blastn and write blacklists
+
 # create inupt list
 for l in `seq 70 10 120`; do 
     for d in all_snps single_snp; do
