@@ -260,6 +260,7 @@ cd /data/scratch/mpx469/tGBS_enset_project/populations
 # cp scripts
 cp /data/scratch/mpx469/tGBS_enset_project/scripts/script_populations_all_snps_array.sh .
 cp /data/scratch/mpx469/tGBS_enset_project/scripts/script_populations_single_snp_array.sh .
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/plot_populations_summary.R .
 
 # run populations
 qsub script_populations_all_snps_array.sh
