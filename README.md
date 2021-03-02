@@ -299,9 +299,18 @@ mkdir /data/scratch/mpx469/tGBS_enset_project/blacklists/blobtools
 cd /data/scratch/mpx469/tGBS_enset_project/blacklists/blobtools
 
 # blobtools_contigs_to_filter.txt imported to aporcrita
-# contigs idenfied using blobtoolkit viewer
+# contigs identfied using blobtoolkit viewer
 
-cut -f 6 blobtools_contigs_to_filter.txt  | grep id -v | grep -f - /data/scratch/mpx469/tGBS_enset_project/populations/populations_*_output/populations.snps.vcf
+# get contigs 
+cut -f 6 blobtools_contigs_to_filter.txt  | grep id -v > contigs.txt
+
+# grep for contigs in vcf files
+for l in `seq 70 10 120`; do 
+    for d in all_snps single_snp; do
+	echo Checking vcf for read length $i and dataset ${d}
+   grep -f contigs.txt /data/scratch/mpx469/tGBS_enset_project/populations/populations_${l}_${d}_output/populations.snps.vcf   
+    done
+done
 
 # no loci map to these regions
 ```
@@ -314,76 +323,80 @@ cut -f 6 blobtools_contigs_to_filter.txt  | grep id -v | grep -f - /data/scratch
 mkdir /data/scratch/mpx469/tGBS_enset_project/blacklists/blastn
 cd /data/scratch/mpx469/tGBS_enset_project/blacklists/blastn
 
+# set up blast database
+mkdir /data/scratch/mpx469/tGBS_enset_project/blacklists/blastn/references
+
 
 # get refseq sequences
 
 # download refseq data for chloroplast and mitochondrial sequences
-rsync --copy-links --recursive --times --verbose rsync://ftp.ncbi.nlm.nih.gov/refseq/release/plastid/ ftp_refseq_chloro/
+rsync --copy-links --recursive --times --verbose rsync://ftp.ncbi.nlm.nih.gov/refseq/release/plastid/       ftp_refseq_chloro/
 rsync --copy-links --recursive --times --verbose rsync://ftp.ncbi.nlm.nih.gov/refseq/release/mitochondrion/ ftp_refseq_mito/
 
 # gunzip
 gunzip ftp_refseq_chloro/plastid.*.1.genomic.fna.gz
 gunzip ftp_refseq_mito/mitochondrion.*.1.genomic.fna.gz
 
-# spaces removed so descriptions included in output
-# commas emoved just to make it look tidy
-cat ftp_refseq_chloro/plastid.*.1.genomic.fna |     sed -e 's/ /_/g' -e 's/,//g' > ftp_refseq_chloro/plastid.genomic.fna
-cat ftp_refseq_mito/mitochondrion.*.1.genomic.fna | sed -e 's/ /_/g' -e 's/,//g' > ftp_refseq_mito/mitochondrion.genomic.fna
+# cat ftp download to a single file
+#	spaces removed so descriptions included in output
+#	commas emoved just to make it look tidy
+#	there was one assembly with a "#" in name which was also removed
+cat ftp_refseq_chloro/plastid.*.1.genomic.fna     | sed -e 's/ /_/g' -e 's/,//g' -e 's/#/_/' > references/refseq_plastid_genomic.fasta
+cat ftp_refseq_mito/mitochondrion.*.1.genomic.fna | sed -e 's/ /_/g' -e 's/,//g' -e 's/#/_/' > references/refseq_mitochondrion_genomic.fasta
+
+# rm ftp download
+rm -r ftp_refseq_chloro
+rm -r ftp_refseq_mito
 
 
 # get novoplasty assembly for Bedadeti SRA data
 
-mkdir /data/scratch/mpx469/tGBS_enset_project/blacklists/blastn/novoplasty
-
-# cp aacross novoplasty assembled chloroplast for Bedadeti
-cp /data/scratch/mpx469/sra_enset_project/novoplasty/Option_1_Bedadeti1_chloro.fasta novoplasty/
+# cp across novoplasty assembled chloroplast for Bedadeti
+cp /data/scratch/mpx469/assemble_bedadeti_plastome/novoplasty/Option_1_Bedadeti1.fasta references/
 
 # change name of fasta sequence "Contig1" to something more meaningful
-sed -i -e 's/Contig1/Bedadeti_chloro_novoplasty/g' novoplasty/Option_1_Bedadeti1_chloro.fasta
+sed -i -e 's/Contig1/Bedadeti_chloro_novoplasty/g' references/Option_1_Bedadeti1.fasta
 
 
 # get ensete partial chloroplast asssembly
 
-mkdir /data/scratch/mpx469/tGBS_enset_project/blacklists/blastn/ensete
-
 # manually download partial chloroplast assembly for ensete from:
 # https://www.ncbi.nlm.nih.gov/nuccore/MH603417.1
-# call "MH603417.1_Ensete_ventricosum_chloro_partial.fasta" and add to ensete folder
+# call "MH603417.1_Ensete_ventricosum_chloro_partial.fasta" and add to references folder
 
 # spaces removed so descriptions included in output
 # commas emoved just to make it look tidy
-sed -i -e 's/ /_/g' -e 's/,//g' ensete/MH603417.1_Ensete_ventricosum_chloro_partial.fasta 
+sed -i -e 's/ /_/g' -e 's/,//g' references/MH603417.1_Ensete_ventricosum_chloro_partial.fasta 
 
 
-## get musa mitochondrial contigs
-
-mkdir /data/scratch/mpx469/tGBS_enset_project/blacklists/blastn/musa
+# get musa mitochondrial contigs
 
 # download musa assembly
-wget https://banana-genome-hub.southgreen.fr/sites/banana-genome-hub.southgreen.fr/files/data/fasta/version2/musa_acuminata_v2_pseudochromosome.fna -P musa/
+# note this webpage no longer available # replaced by https://banana-genome-hub.southgreen.fr/node/50/413 and I was unable to find the relevant file
+wget https://banana-genome-hub.southgreen.fr/sites/banana-genome-hub.southgreen.fr/files/data/fasta/version2/musa_acuminata_v2_pseudochromosome.fna -P references/
 
 # get mitocondrial contigs
-grep -e "^>mito" musa/musa_acuminata_v2_pseudochromosome.fna | sed 's/>//g' > musa/mito.contigs
+grep -e "^>mito" references/musa_acuminata_v2_pseudochromosome.fna | sed 's/>//g' > references/mito_contigs
 
 # extract mitchondrial contigs
 module load seqtk
-seqtk subseq musa/musa_acuminata_v2_pseudochromosome.fna musa/mito.contigs > musa/mito.contigs.fastaca
+seqtk subseq references/musa_acuminata_v2_pseudochromosome.fna references/mito_contigs > references/musa_acuminata_mito_contigs.fasta 
 
 # change names to something more meaningful
-sed -i -e 's/mito/musa_acuminata_v2_mito/g' musa/mito.contigs.fasta
+sed -i -e 's/mito/musa_acuminata_v2_mito/g' references/musa_acuminata_mito_contigs.fasta
 
 
 # create blast db
 
-cat ftp_refseq_chloro/plastid.genomic.fna \
-    ftp_refseq_mito/mitochondrion.genomic.fna \
-	novoplasty/Option_1_Bedadeti1_chloro.fasta \
-	ensete/MH603417.1_Ensete_ventricosum_chloro_partial.fasta \
-	musa/mito.contigs.fasta > organelle_seq.fasta
+cat references/*.fasta > organelle.fasta
 
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/script_makeblastdb_organelle.sh .
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/script_blastn_organelle.sh .
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/top_hit.R .
 
-qsub script_makeblastdb.sh
+qsub script_makeblastdb_organelle.sh
 
+# create inupt list
 for l in `seq 70 10 120`; do 
     for d in all_snps single_snp; do
 	   echo ${l} ${d}
@@ -391,13 +404,6 @@ for l in `seq 70 10 120`; do
 done >> input_args
 
 qsub script_blastn.sh
-
-# write blast blacklists
-for l in `seq 70 10 120`; do 
-    for d in all_snps single_snp; do
-	   cut -f 1 blast_out_${l}_${d}_top_hits | sed 's/CLocus_//g' | grep qseqid -v > blacklist_blast_${l}_${d}
-	done
-done
 ```
 
 
