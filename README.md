@@ -28,7 +28,7 @@ All scripts located in the following dir
 
 [Blacklist contaminants and paralogues](#blacklist-contaminants-and-paralogues)
    - [Identify loci that map to contaminant sequeces in Bedadeti assembly](#identify-loci-that-map-to-contaminant-sequeces-in-bedadeti-assembly)
-   - [Identify loci that show high sequence homology to organlle genomes](#identify-loci-that-show-high-sequence-homology-to-organlle-genomes)
+   - [Identify loci that show high sequence homology to organelle genomes](#identify-loci-that-show-high-sequence-homology-to-organelle-genomes)
    - [Identify loci that show consistently high site depth](#identify-loci-that-show-consistently-high-site-depth)
    - [Identify duplicate loci with differing start sites](#identify-duplicate-loci-with-differing-start-sites)
    - [Create overall blacklists](#create-overall-blacklists)
@@ -316,7 +316,7 @@ done
 ```
 
 
-### Identify loci that show high sequence homology to organlle genomes
+### Identify loci that show high sequence homology to organelle genomes
 
 
 ```
