@@ -414,47 +414,23 @@ qsub script_blastn.sh
 ### Identify loci that show consistently high site depth
 
 ```
-mkdir /data/scratch/mpx469/tGBS_enset_project/blacklists/site_depth
-cd /data/scratch/mpx469/tGBS_enset_project/blacklists/site_depth
+# set dir
+mkdir /data/scratch/mpx469/tGBS_enset_project/blacklists/locus_depth
+cd /data/scratch/mpx469/tGBS_enset_project/blacklists/locus_depth
 
+# cp script
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/script_identify_high_depth_loci.sh .
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/identify_high_depth_loci.R .
 
-# sort and index vcf 
-
-mkdir /data/scratch/mpx469/tGBS_enset_project/blacklists/site_depth/vcf_sorted_indexed
-
+# create inupt list
 for l in `seq 70 10 120`; do 
     for d in all_snps single_snp; do
 	   echo ${l} ${d}
 	done
 done >> input_args
 
-qsub script_vcf_sort_index_array.sh
-
-
-# get site depth per loci across samples
-
-for l in `seq 70 10 120`; do 
-    for d in all_snps single_snp; do
-	    cat /data/scratch/mpx469/tGBS_enset_project/gstacks/popmap.txt | cut -f 1 | sed 's/.unique.sorted//g' | while read i; do
-	       echo ${l} ${d} ${i}
-	    done
-	done
-done >> input_args_site_depth
-
-qsub script_site_depth_array.sh
-
-
-# get loci info (loci chr pos) for each dataset
-# required to join chr pos to loci numbers
-for l in `seq 70 10 120`; do 
-    for d in all_snps single_snp; do
-	   grep -e "^#" -v /data/scratch/mpx469/tGBS_enset_project/populations/populations_${l}_${d}_output/populations.sumstats.tsv | cut -f 1-3 | uniq > loci_info_${l}_${d}
-	done
-done
-
-
-# run script to identify site with consistently high depth to be blacklisted
-qsub script_identify_sites_with_high_depth_array.sh
+# run script
+qsub script_identify_high_depth_loci.sh
 ```
 
 
