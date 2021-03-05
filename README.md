@@ -464,7 +464,11 @@ qsub script_identify_duplicate_loci.sh
 mkdir /data/scratch/mpx469/tGBS_enset_project/blacklists/blacklists_overall
 cd /data/scratch/mpx469/tGBS_enset_project/blacklists/blacklists_overall
 
-bash blacklist_summary_stats.sh
+# cp script
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/write_overall_blacklist.R .
+
+# run Rscript
+Rscript write_overall_blacklist.R
 ```
 
 
