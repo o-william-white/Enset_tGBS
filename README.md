@@ -298,7 +298,7 @@ mkdir /data/scratch/mpx469/tGBS_enset_project/blacklists
 mkdir /data/scratch/mpx469/tGBS_enset_project/blacklists/blobtools
 cd /data/scratch/mpx469/tGBS_enset_project/blacklists/blobtools
 
-# blobtools_contigs_to_filter.txt imported to aporcrita
+# blobtools_contigs_to_filter.txt imported to apocrita
 # contigs identfied using blobtoolkit viewer
 
 # get contigs 
@@ -387,17 +387,15 @@ sed -i -e 's/mito/musa_acuminata_v2_mito/g' references/musa_acuminata_mito_conti
 
 
 # create blast db
-
 cat references/*.fasta > organelle.fasta
 
+# cp scripts
 cp /data/scratch/mpx469/tGBS_enset_project/scripts/script_makeblastdb_organelle.sh .
 cp /data/scratch/mpx469/tGBS_enset_project/scripts/script_blastn_organelle.sh .
 cp /data/scratch/mpx469/tGBS_enset_project/scripts/top_hit.R .
 
+# makeblastdb
 qsub script_makeblastdb_organelle.sh
-
-
-# run blastn and write blacklists
 
 # create inupt list
 for l in `seq 70 10 120`; do 
@@ -406,6 +404,7 @@ for l in `seq 70 10 120`; do
 	done
 done >> input_args
 
+# run blastn and write blacklists
 qsub script_blastn.sh
 ```
 
@@ -438,16 +437,23 @@ qsub script_identify_high_depth_loci.sh
 ### Identify duplicate loci with differing start sites
 
 ```
-mkdir /data/scratch/mpx469/tGBS_enset_project/blacklists/duplicates
-cd /data/scratch/mpx469/tGBS_enset_project/blacklists/duplicates
+# set dir
+mkdir /data/scratch/mpx469/tGBS_enset_project/blacklists/duplicate_loci
+cd /data/scratch/mpx469/tGBS_enset_project/blacklists/duplicate_loci
 
+# create input list
 for l in `seq 70 10 120`; do 
     for d in all_snps single_snp; do
 	   echo ${l} ${d}
 	done
 done >> input_args
 
-qsub script_duplicates_array.sh
+# cp script
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/script_identify_duplicate_loci.sh .
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/identify_duplicate_loci.R .
+
+# run script
+qsub script_identify_duplicate_loci.sh
 ```
 
 
