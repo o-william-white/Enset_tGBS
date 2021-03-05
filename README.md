@@ -414,8 +414,8 @@ qsub script_blastn.sh
 
 ```
 # set dir
-mkdir /data/scratch/mpx469/tGBS_enset_project/blacklists/locus_depth
-cd /data/scratch/mpx469/tGBS_enset_project/blacklists/locus_depth
+mkdir /data/scratch/mpx469/tGBS_enset_project/blacklists/loci_depth
+cd /data/scratch/mpx469/tGBS_enset_project/blacklists/loci_depth
 
 # cp script
 cp /data/scratch/mpx469/tGBS_enset_project/scripts/script_identify_high_depth_loci.sh .
@@ -460,7 +460,9 @@ qsub script_identify_duplicate_loci.sh
 ### Create overall blacklists
 
 ```
-cd /data/scratch/mpx469/tGBS_enset_project/blacklists
+# set dir
+mkdir /data/scratch/mpx469/tGBS_enset_project/blacklists/blacklists_overall
+cd /data/scratch/mpx469/tGBS_enset_project/blacklists/blacklists_overall
 
 bash blacklist_summary_stats.sh
 ```
