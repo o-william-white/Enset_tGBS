@@ -34,20 +34,14 @@ All scripts located in the following dir
    - [Create overall blacklists](#create-overall-blacklists)
    - [Repeat populations with blacklists](#repeat-populations-with-blacklists)
 
-[Read summary statistics](#read-summary-statistics)
-
-[Calculate missingness](#calculate-missingness)
-
-[Principal components analysis](#principal-components-analysis)
-
 [Convert file formats](#convert-file-formats)
+[Main phylogenetic analyses](#main-phylogenetic-analyses)
+   - [Principal components analysis](#principal-components-analysis)
+   - [Modeltest](#modeltest)
+   - [Raxml](#raxml)
+   - [Iqtree](#iqtree)
 
-[Modeltest](#modeltest)
-
-[Raxml](#raxml)
-
-[Iqtree](#iqtree)
-
+[Read summary statistics](#read-summary-statistics)
 [Blast tGBS reads against a custom refseq bacterial database](#blast-tgbs-reads-against-a-custom-refseq-bacterial-database)
    - [Creating custom blast db from refseq genomes](#creating-custom-blast-db-from-refseq-genomes)
    - [Blast all samples against custom refseq reference](#blast-all-samples-against-custom-refseq-reference)
@@ -509,37 +503,27 @@ Rscript plot_populations_blacklist_summary.R
 
 
 
-## Read summary statistics
-```
-mkdir /data/scratch/mpx469/tGBS_enset_project/summary_stats/
-cd /data/scratch/mpx469/tGBS_enset_project/summary_stats/
+## Convert file formats
 
-qsub script_00_raw_reads.sh
-qsub script_01_trimmomatic_reads.sh
-qsub script_02_cutadapt_reads.sh
-qsub script_03_count_process_radtags_reads.sh
-qsub script_04_count_bwa_mapped_reads.sh
-qsub script_05_count_samtools_mapped_reads.sh
-
-# one all complete
-qsub script_06_write_summary_tables.sh
-```
-
-<br/>
-<div align="right">
-    <b><a href="#enset-tgbs">↥ back to top</a></b>
-</div>
-<br/>
-
-
-
-## Calculate missingness 
+The stacks phylip output is in interleaved format. For raxml-ng it need to be in sequential format. We also create other potentailly useful formats including nexus and fasta.
 
 ```
-mkdir /data/scratch/mpx469/tGBS_enset_project/missingness
-cd /data/scratch/mpx469/tGBS_enset_project/missingness
+# set dir
+mkdir /data/scratch/mpx469/tGBS_enset_project/convert_file_formats
+cd /data/scratch/mpx469/tGBS_enset_project/convert_file_formats
 
-qsub script_missingness.sh
+# cp scripts
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/script_convert_file_formats_array.sh .
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/convert_alignment_format.py .
+
+# create input list
+for l in `seq 70 10 120`; do 
+    for d in all_snps single_snp; do
+	   echo ${l} ${d}
+	done
+done >> input_args
+
+qsub script_convert_file_formats_array.sh
 ```
 
 <br/>
@@ -549,9 +533,9 @@ qsub script_missingness.sh
 <br/>
 
 
+## Main phylogenetic analyses
 
-
-## Principal components analysis
+### Principal components analysis
 
 ```
 mkdir /data/scratch/mpx469/tGBS_enset_project/pca
@@ -564,44 +548,9 @@ bash plot_plink_pca.sh
 ```
 
 
-<br/>
-<div align="right">
-    <b><a href="#enset-tgbs">↥ back to top</a></b>
-</div>
-<br/>
 
 
-
-
-## Convert file formats
-
-The stack phylip output is in interleaved format. For raxml-ng it need to be in sequential format. We also create other potentailly useful formats including nexus and fasta.
-
-```
-mkdir /data/scratch/mpx469/tGBS_enset_project/convert_file_formats
-cd /data/scratch/mpx469/tGBS_enset_project/convert_file_formats
-
-for l in `seq 70 10 120`; do 
-    for d in all_snps single_snp; do
-	   echo ${l} ${d}
-	done
-done >> input_args
-
-qsub script_convert_file_formats_array.sh
-```
-
-
-<br/>
-<div align="right">
-    <b><a href="#enset-tgbs">↥ back to top</a></b>
-</div>
-<br/>
-
-
-
-
-
-## Modeltest
+### Modeltest
 
 Perform model test to identifiy the best substitution model for raxml-ng
 
@@ -615,16 +564,7 @@ script_modeltest_ng_array.sh
 
 
 
-<br/>
-<div align="right">
-    <b><a href="#enset-tgbs">↥ back to top</a></b>
-</div>
-<br/>
-
-
-
-
-## Raxml
+### Raxml
 
 Maximum likelihood tree eatimation with raxml-ng. We analyse the dataset with a read length of 80 and a single snp per locus.
 
@@ -703,12 +643,6 @@ raxml-ng \
 
 
 
-<br/>
-<div align="right">
-    <b><a href="#enset-tgbs">↥ back to top</a></b>
-</div>
-<br/>
-
 
 ## Iqtree
 
@@ -733,6 +667,40 @@ qsub script_iq_tree_array.sh
     <b><a href="#enset-tgbs">↥ back to top</a></b>
 </div>
 <br/>
+
+
+<br/>
+<div align="right">
+    <b><a href="#enset-tgbs">↥ back to top</a></b>
+</div>
+<br/>
+
+
+
+
+
+## Read summary statistics
+```
+mkdir /data/scratch/mpx469/tGBS_enset_project/summary_stats/
+cd /data/scratch/mpx469/tGBS_enset_project/summary_stats/
+
+qsub script_00_raw_reads.sh
+qsub script_01_trimmomatic_reads.sh
+qsub script_02_cutadapt_reads.sh
+qsub script_03_count_process_radtags_reads.sh
+qsub script_04_count_bwa_mapped_reads.sh
+qsub script_05_count_samtools_mapped_reads.sh
+
+# one all complete
+qsub script_06_write_summary_tables.sh
+```
+
+
+
+
+
+
+
 
 
 
