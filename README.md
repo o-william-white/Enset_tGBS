@@ -275,6 +275,7 @@ for l in `seq 70 10 120`; do
     echo ${l} $(grep Kept populations_${l}_single_snp_output/populations.log | cut -f 2,6,8,14 -d " ") >> summary_single_snp
 done
 
+# summary plot
 Rscript plot_populations_summary.R
 
 ```
@@ -475,15 +476,17 @@ Rscript write_overall_blacklist.R
 ### Repeat populations with blacklists
 
 ```
+# set dir
 cd /data/scratch/mpx469/tGBS_enset_project/populations
 
-for l in `seq 70 10 120`; do  
-   mkdir /data/scratch/mpx469/tGBS_enset_project/populations/populations_${l}_single_snp_blacklist_output
-   mkdir /data/scratch/mpx469/tGBS_enset_project/populations/populations_${l}_all_snps_blacklist_output
-done
+# cp scripts
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/script_populations_all_snps_blacklist_array.sh .
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/script_populations_single_snp_blacklist_array.sh .
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/plot_populations_blacklist_summary.R .
 
-script_populations_all_snps_blacklist_array.sh
-script_populations_single_snp_blacklist_array.sh
+# run populations
+qsub script_populations_all_snps_blacklist_array.sh
+qsub script_populations_single_snp_blacklist_array.sh
 
 # get summary stats for each assembly
 echo -e 'loci sites filtered variant' > summary_all_snps_blacklist
@@ -494,6 +497,7 @@ for l in `seq 70 10 120`; do
     echo ${l} $(grep Kept populations_${l}_single_snp_blacklist_output/populations.log | cut -f 2,6,8,14 -d " ") >> summary_single_snp_blacklist
 done
 
+# summary plot
 Rscript plot_populations_blacklist_summary.R
 ```
 
