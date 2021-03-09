@@ -559,13 +559,16 @@ bash plot_plink_pca.sh
 
 ### Modeltest
 
-Perform model test to identifiy the best substitution model for raxml-ng
-
 ```
+# set dir
 mkdir /data/scratch/mpx469/tGBS_enset_project/modeltest_ng
 cd /data/scratch/mpx469/tGBS_enset_project/modeltest_ng
 
-script_modeltest_ng_array.sh
+# cp script
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/script_modeltest_ng_array.sh .
+
+# run modeltest
+qsub script_modeltest_ng_array.sh
 ```
 
 
@@ -576,9 +579,13 @@ script_modeltest_ng_array.sh
 Maximum likelihood tree eatimation with raxml-ng. We analyse the dataset with a read length of 80 and a single snp per locus.
 
 ```
+# set dir
 mkdir /data/scratch/mpx469/tGBS_enset_project/raxml_ng
 mkdir /data/scratch/mpx469/tGBS_enset_project/raxml_ng/raxml_ng_80_single_snp
 cd /data/scratch/mpx469/tGBS_enset_project/raxml_ng/raxml_ng_80_single_snp
+
+# cp scripts
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/script_raxml_ng_* .
 
 qsub script_raxml_ng_01_parse.sh
 qsub script_raxml_ng_02_tree_search_rand_array.sh
