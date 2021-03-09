@@ -539,12 +539,18 @@ qsub script_convert_file_formats_array.sh
 ### Principal components analysis
 
 ```
+# set dir
 mkdir /data/scratch/mpx469/tGBS_enset_project/pca
 cd /data/scratch/mpx469/tGBS_enset_project/pca
 
-module load plink
-module load R/3.6.1
+# cp scripts
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/plot_plink_pca.sh .
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/plot_plink_pca.R .
 
+# need a tab-delimited text file with family IDs in the first column and within-family IDs for outgroup samples
+grep Outgroup /data/scratch/mpx469/tGBS_enset_project/tGBS_metadata_phylogenetic_analysis.csv | cut -f2 -d "," | grep -f - /data/scratch/mpx469/tGBS_enset_project/populations/populations_80_single_snp_blacklist_output/populations.plink.ped | cut -f 1,2 > outgroups.txt
+
+# run script
 bash plot_plink_pca.sh
 ```
 
