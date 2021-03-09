@@ -587,7 +587,10 @@ cd /data/scratch/mpx469/tGBS_enset_project/raxml_ng/raxml_ng_80_single_snp
 # cp scripts
 cp /data/scratch/mpx469/tGBS_enset_project/scripts/script_raxml_ng_* .
 
+# run script to parse alignment
 qsub script_raxml_ng_01_parse.sh
+
+# run scripts for tree searches
 qsub script_raxml_ng_02_tree_search_rand_array.sh
 qsub script_raxml_ng_03_tree_search_pars_array.sh
 qsub script_raxml_ng_04_bootstrap_array.sh
