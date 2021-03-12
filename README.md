@@ -19,10 +19,11 @@ All scripts located in the following dir
    - [Use trimmomatic to filter raw reads](#use-trimmomatic-to-filter-raw-reads)
    - [Use cutadapt to filter reads without restriction enzyme cutsites](#use-cutadapt-to-filter-reads-without-restriction-enzyme-cutsites)
    - [Use process radtags to truncate reads to uniform length](#use-process-radtags-to-truncate-reads-to-uniform-length)
-   
-   [STACKs reference mapped pipeline](#stacks-reference-mapped-pipeline)
+ 
+ [STACKs reference mapped pipeline](#stacks-reference-mapped-pipeline)
    - [Get Bedadeti reference](#get-Bedadeti-reference)
    - [Map reads against the Bedadeti reference genome assembly](#map-reads-against-the-Bedadeti-reference-genome-assembly)
+   - [Read summary statistics](#read-summary-statistics)
    - [Assemble loci with gstacks](#assemble-loci-with-gstacks)
    - [Call snps with populations](#call-snps-with-populations)
 
@@ -42,7 +43,7 @@ All scripts located in the following dir
    - [Raxml](#raxml)
    - [Iqtree](#iqtree)
 
-[Read summary statistics](#read-summary-statistics)
+
 [Blast tGBS reads against a custom refseq bacterial database](#blast-tgbs-reads-against-a-custom-refseq-bacterial-database)
    - [Creating custom blast db from refseq genomes](#creating-custom-blast-db-from-refseq-genomes)
    - [Blast all samples against custom refseq reference](#blast-all-samples-against-custom-refseq-reference)
@@ -208,6 +209,29 @@ qsub script_bwa_index.sh
 # map reads
 qsub script_map_reads_bedadeti_array.sh
 ```
+
+
+
+## Read summary statistics
+```
+# set dir
+mkdir /data/scratch/mpx469/tGBS_enset_project/summary_stats/
+cd /data/scratch/mpx469/tGBS_enset_project/summary_stats/
+
+# cp scripts
+
+# run 
+qsub script_00_raw_reads.sh
+qsub script_01_trimmomatic_reads.sh
+qsub script_02_cutadapt_reads.sh
+qsub script_03_count_process_radtags_reads.sh
+qsub script_04_count_bwa_mapped_reads.sh
+qsub script_05_count_samtools_mapped_reads.sh
+
+# one all complete
+qsub script_06_write_summary_tables.sh
+```
+
 
 
 
@@ -696,21 +720,7 @@ qsub script_iq_tree_array.sh
 
 
 
-## Read summary statistics
-```
-mkdir /data/scratch/mpx469/tGBS_enset_project/summary_stats/
-cd /data/scratch/mpx469/tGBS_enset_project/summary_stats/
 
-qsub script_00_raw_reads.sh
-qsub script_01_trimmomatic_reads.sh
-qsub script_02_cutadapt_reads.sh
-qsub script_03_count_process_radtags_reads.sh
-qsub script_04_count_bwa_mapped_reads.sh
-qsub script_05_count_samtools_mapped_reads.sh
-
-# one all complete
-qsub script_06_write_summary_tables.sh
-```
 
 
 
