@@ -212,7 +212,7 @@ qsub script_map_reads_bedadeti_array.sh
 
 
 
-## Read summary statistics
+### Read summary statistics
 ```
 # set dir
 mkdir /data/scratch/mpx469/tGBS_enset_project/summary_stats/
