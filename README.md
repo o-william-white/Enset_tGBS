@@ -600,7 +600,7 @@ qsub script_modeltest_ng_array.sh
 
 ### Raxml
 
-Maximum likelihood tree eatimation with raxml-ng. We analyse the dataset with a read length of 80 and a single snp per locus.
+Maximum likelihood tree estimation with raxml-ng. We analyse the dataset with a read length of 80 and a single snp per locus.
 
 ```
 # set dir
