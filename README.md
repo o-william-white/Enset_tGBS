@@ -219,19 +219,16 @@ mkdir /data/scratch/mpx469/tGBS_enset_project/summary_stats/
 cd /data/scratch/mpx469/tGBS_enset_project/summary_stats/
 
 # cp scripts
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/script_read_summary_array.sh .
 
-# run 
-qsub script_00_raw_reads.sh
-qsub script_01_trimmomatic_reads.sh
-qsub script_02_cutadapt_reads.sh
-qsub script_03_count_process_radtags_reads.sh
-qsub script_04_count_bwa_mapped_reads.sh
-qsub script_05_count_samtools_mapped_reads.sh
+# set up output prior to running script
+for LENGTH in `seq 70 10 120`; do
+   echo SAMPLE,RAW,TRIMMOMATIC,CUTADAPT,CUTADAPT_BP,PROCESS_RADTAGS,PROCESS_RADTAGS_BP,BWA_UNMAPPED,BWA_MAPPED,BWA_XA_SA,SAM_UNMAPPED,SAM_MAPPED > summary_$LENGTH.csv
+done
 
-# one all complete
-qsub script_06_write_summary_tables.sh
+# run script
+qsub script_read_summary_array.sh
 ```
-
 
 
 
