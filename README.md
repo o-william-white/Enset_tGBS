@@ -218,7 +218,7 @@ qsub script_map_reads_bedadeti_array.sh
 mkdir /data/scratch/mpx469/tGBS_enset_project/summary_stats/
 cd /data/scratch/mpx469/tGBS_enset_project/summary_stats/
 
-# cp scripts
+# cp script
 cp /data/scratch/mpx469/tGBS_enset_project/scripts/script_read_summary_array.sh .
 
 # set up output prior to running script
