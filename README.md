@@ -669,14 +669,14 @@ export PATH=/data/home/mpx469/software/raxml-ng-pthreads/raxml-ng/bin/:$PATH
 raxml-ng \
    --support \
    --tree best.tre \
-   --bs-trees raxml_ng_output/all_bootstraps \
+   --bs-trees raxml_ng_output/all_bootstrap \
    --bs-metric fbp \
    --prefix best.tre.fbp
 
 raxml-ng \
    --support \
    --tree best.tre \
-   --bs-trees raxml_ng_output/all_bootstraps \
+   --bs-trees raxml_ng_output/all_bootstrap \
    --bs-metric tbe \
    --prefix best.tre.tbe
 
