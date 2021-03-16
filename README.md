@@ -660,6 +660,8 @@ grep "Final LogLikelihood:" raxml_ng_output/all_tree_search_*.raxml.log | sort -
 # create symbolic link to best tree
 ln -s `grep "Final LogLikelihood:" raxml_ng_output/all_tree_search_*.raxml.log | sort -k 3 | head -n 1 | cut -f 1 -d ":" | sed 's/log/bestTree/g'` best.tre
 
+# cat all bootstrap trees
+cat raxml_ng_output/all_bootstrap*bootstraps > bootstrap_trees
 
 # add bootstrap values to best tree
 
@@ -669,14 +671,14 @@ export PATH=/data/home/mpx469/software/raxml-ng-pthreads/raxml-ng/bin/:$PATH
 raxml-ng \
    --support \
    --tree best.tre \
-   --bs-trees raxml_ng_output/all_bootstrap \
+   --bs-trees bootstrap_trees \
    --bs-metric fbp \
    --prefix best.tre.fbp
 
 raxml-ng \
    --support \
    --tree best.tre \
-   --bs-trees raxml_ng_output/all_bootstrap \
+   --bs-trees bootstrap_trees \
    --bs-metric tbe \
    --prefix best.tre.tbe
 
