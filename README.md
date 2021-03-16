@@ -679,7 +679,7 @@ raxml-ng \
    --bs-metric tbe \
    --prefix best.tre.tbe
 
-# root best support trees
+# root best supported trees
 cp /data/scratch/mpx469/tGBS_enset_project/scripts/root_and_ladderise_tree.py .
 source /data/home/mpx469/software/python-virtualenv/ete3/bin/activate
 python root_and_ladderise_tree.py best.tre.fbp.raxml.support best.tre.fbp.raxml.support.rooted.newick pop82,pop160,pop162
