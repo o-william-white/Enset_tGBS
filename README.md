@@ -42,6 +42,7 @@ All scripts located in the following dir
    - [Modeltest](#modeltest)
    - [Raxml](#raxml)
    - [Iqtree](#iqtree)
+   - [Radpainter](#radpainter)
 
 
 [Blast tGBS reads against a custom refseq bacterial database](#blast-tgbs-reads-against-a-custom-refseq-bacterial-database)
@@ -710,6 +711,27 @@ done > input_args
 qsub script_iq_tree_array.sh
 ```
 
+
+
+
+## Radpainter
+
+Note for this analysis we use a clone corrected dataset, with representatives of each MLG in the file "mlg_farthest_bitwise_monophyletic_single_rep.txt"
+
+```
+#set up dir
+mkdir /data/scratch/mpx469/tGBS_enset_project/radpainter
+cd    /data/scratch/mpx469/tGBS_enset_project/radpainter
+
+# cp scripts
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/script_radpainter.sh .
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/clone_correct_radpainter_input.R . 
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/mlg_farthest_bitwise_monophyletic_single_rep.txt . 
+
+# run radpainter
+qsub script_radpainter.sh
+```
+
 <br/>
 <div align="right">
     <b><a href="#enset-tgbs">↥ back to top</a></b>
@@ -717,11 +739,7 @@ qsub script_iq_tree_array.sh
 <br/>
 
 
-<br/>
-<div align="right">
-    <b><a href="#enset-tgbs">↥ back to top</a></b>
-</div>
-<br/>
+
 
 
 
