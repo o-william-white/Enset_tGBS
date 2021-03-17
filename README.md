@@ -684,7 +684,7 @@ python root_and_ladderise_tree.py best.tre.tbe.raxml.support best.tre.tbe.raxml.
 
 
 
-## Iqtree
+### Iqtree
 
 Maximum likelihood tree estimation with iq-tree. We use the same data as above for raxml-ng. 
 
@@ -705,7 +705,7 @@ qsub script_iq_tree_array.sh
 
 
 
-## Radpainter
+### Radpainter
 
 Note for this analysis we use a clone corrected dataset, with representatives of each MLG in the file "mlg_farthest_bitwise_monophyletic_single_rep.txt"
 
