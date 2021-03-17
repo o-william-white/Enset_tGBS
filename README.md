@@ -660,6 +660,9 @@ ln -s `grep "Final LogLikelihood:" raxml_ng_output/all_tree_search_*.raxml.log |
 # cat all bootstrap trees
 cat raxml_ng_output/all_bootstrap*bootstraps > bootstrap_trees
 
+# check bootstrap convergence
+qsub script_raxml_ng_05_bsconverge.sh
+
 # add bootstrap values to best tree
 
 module add gcc/7.1.0
