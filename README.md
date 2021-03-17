@@ -246,7 +246,7 @@ cp /data/scratch/mpx469/tGBS_enset_project/scripts/plot_gstacks_summary.R .
 
 # write popmap
 # note that this requires the .csv file in /data/scratch/mpx469/tGBS_enset_project/tGBS_metadata_phylogenetic_analysis.csv
-modula add R
+module add R
 Rscript write_popmap.R
 
 # run gstacks
