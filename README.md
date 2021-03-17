@@ -45,15 +45,6 @@ All scripts located in the following dir
    - [Radpainter](#radpainter)
 
 
-[Blast tGBS reads against a custom refseq bacterial database](#blast-tgbs-reads-against-a-custom-refseq-bacterial-database)
-   - [Creating custom blast db from refseq genomes](#creating-custom-blast-db-from-refseq-genomes)
-   - [Blast all samples against custom refseq reference](#blast-all-samples-against-custom-refseq-reference)
-   - [Count the Xanthomonas campestris pv musacearum genome contigs hit in each sample](#count-the-xanthomonas-campestris-pv-musacearum-genome-contigs-hit-in-each-sample)
-   - [Calculate proportion of the Xanthomonas campestris pv musacearum genome identified in the blast search](#calculate-proportion-of-the-Xanthomonas-campestris-pv-musacearum-genome-identified-in-the-blast-search)
-   
-[Save script files to be exported to github](#save-script-files-to-be-exported-to-github)
-
-
 
 
 <br/>
