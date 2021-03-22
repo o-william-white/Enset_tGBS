@@ -689,16 +689,22 @@ python root_and_ladderise_tree.py best.tre.tbe.raxml.support best.tre.tbe.raxml.
 Maximum likelihood tree estimation with iq-tree. We use the same data as above for raxml-ng. 
 
 ```
+# set dir
 mkdir /data/scratch/mpx469/tGBS_enset_project/iq_tree
 mkdir /data/scratch/mpx469/tGBS_enset_project/iq_tree/iq_tree_80_single_snp
 cd /data/scratch/mpx469/tGBS_enset_project/iq_tree/iq_tree_80_single_snp
 
+# cp scripts
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/script_iq_tree_array.sh .
+
+# write input args
 for i in `seq 0.1 0.1 0.5`; do
    for r in {1..100}; 
       do echo -pers ${i} -nstop 1000 -pre iq_tree_output/out_pers_${i}_r${r}; 
    done 
 done > input_args
 
+# run iqtree
 qsub script_iq_tree_array.sh
 ```
 
