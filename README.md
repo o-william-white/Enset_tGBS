@@ -261,7 +261,7 @@ Rscript plot_gstacks_summary.R
 ### Call snps with populations
 
 ```
-set dir
+# set dir
 mkdir /data/scratch/mpx469/tGBS_enset_project/populations
 cd /data/scratch/mpx469/tGBS_enset_project/populations
 
