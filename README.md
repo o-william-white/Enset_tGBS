@@ -706,7 +706,19 @@ done > input_args
 
 # run iqtree
 qsub script_iq_tree_array.sh
+
+# note I needed to repeat some scripts, but it is no problem with checkpoints
+
+# get tree likelihood scores
+grep -e "BEST SCORE FOUND" iq_tree_output/*log | sed -e 's/:BEST SCORE FOUND : /\t/g' -e 's/.log/.treefile/g' > tree_likelihood.txt
+
+# identify tree with the best score
+BEST_TREE=$(sort -k 2 -n -r tree_likelihood.txt | head -n 1 | cut -f 1)
+
+# create symbolic link
+ln -s $BEST_TREE best.tre.iqtree
 ```
+Tree copied to local dir and rooted on outgroups pop82,pop160,pop162 and ladderised
 
 
 
