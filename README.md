@@ -771,7 +771,7 @@ qsub script_dsuite_by_sample.sh
 
 
 ### EasySFS
-Set up data fro fastsimcoal
+Set up data for fastsimcoal
 ```
 mkdir /data/scratch/mpx469/tGBS_enset_project/easy_sfs
 cd    /data/scratch/mpx469/tGBS_enset_project/easy_sfs
