@@ -746,3 +746,33 @@ qsub script_radpainter.sh
     <b><a href="#enset-tgbs">↥ back to top</a></b>
 </div>
 <br/>
+
+
+
+
+### Dsuite
+```
+#set up dir
+mkdir /data/scratch/mpx469/tGBS_enset_project/dsuite
+cd    /data/scratch/mpx469/tGBS_enset_project/dsuite
+
+# cp scripts
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/write_dsuite_sets.R .
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/write_tree_renamed_tip_labels.R .
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/script_dsuite_by_pop.sh .
+cp /data/scratch/mpx469/tGBS_enset_project/scripts/script_dsuite_by_sample.sh .
+
+# mlg_farthest_bitwise_monophyletic_single_rep.txt copied from local dir
+
+# run scripts
+Rscript write_dsuite_sets.R
+Rscript write_tree_renamed_tip_labels.R
+qsub script_dsuite_by_pop.sh
+qsub script_dsuite_by_sample.sh
+```
+
+<br/>
+<div align="right">
+    <b><a href="#enset-tgbs">↥ back to top</a></b>
+</div>
+<br/>
