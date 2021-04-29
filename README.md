@@ -44,6 +44,7 @@ All scripts located in the following dir
    - [Iqtree](#iqtree)
    - [Radpainter](#radpainter)
    - [Dsuite](#dsuite)
+   - [EasySFS](#easysfs)
 
 
 
@@ -764,6 +765,69 @@ Rscript write_dsuite_sets.R
 Rscript write_tree_renamed_tip_labels.R
 qsub script_dsuite_by_pop.sh
 qsub script_dsuite_by_sample.sh
+```
+
+
+
+
+### EasySFS
+Set up data fro fastsimcoal
+```
+mkdir /data/scratch/mpx469/tGBS_enset_project/easy_sfs
+cd    /data/scratch/mpx469/tGBS_enset_project/easy_sfs
+
+module load anaconda3/
+conda activate easySFS
+export PATH=/data/home/mpx469/software/conda/easySFS/:$PATH
+
+# popmap_sfs.txt copied from local treemix dir
+# the popmap contain samples data for 1 wild and 5 domesticated populations
+# select 1 wild and 2 domesticated
+grep -e Wild -e Domesticated_2 -e Domesticated_5 popmap_sfs.txt > popmap_sfs_select.txt
+
+# cp vcf to dir
+cp /data/scratch/mpx469/tGBS_enset_project/populations/populations_80_single_snp_blacklist_output/populations.snps.vcf .
+
+# we cannot use a folded sfs as we do not have accurately polarised data 
+# i.e. we do not know the ancestral allele
+
+# preview
+easySFS.py -i populations.snps.vcf -p popmap_sfs_select.txt --order Wild,Domesticated_2,Domesticated_5 --preview
+
+# Continue, excluding samples not in both pops file and VCF? (yes/no)
+# yes
+
+#Wild
+#(2, 1739)       (3, 2609)       (4, 3192)       (5, 3625)       (6, 3975)       (7, 4252)       (8, 4493)       (9, 4687)       (10, 4864)      (11, 4980)      (12, 5115)      (13, 5164)      (14, 5268)      (15, 5232)      (16, 5313)(17, 5131)      (18, 5196)      (19, 4802)      (20, 4853)      (21, 4055)      (22, 4091)      (23, 2896)      (24, 2918)      (25, 1314)      (26, 1323)
+#
+#
+#Domesticated_2
+#(2, 1087)       (3, 1630)       (4, 1984)       (5, 2243)       (6, 2444)       (7, 2608)       (8, 2746)       (9, 2863)       (10, 2965)      (11, 3054)      (12, 3134)      (13, 3197)      (14, 3262)      (15, 3276)      (16, 3331)(17, 3272)      (18, 3318)      (19, 3038)      (20, 3075)      (21, 2476)      (22, 2503)      (23, 1617)      (24, 1635)      (25, 694)       (26, 702)
+#
+#
+#Domesticated_5
+#(2, 794)        (3, 1192)       (4, 1444)       (5, 1623)       (6, 1760)       (7, 1870)       (8, 1961)       (9, 2038)       (10, 2105)      (11, 2160)      (12, 2213)      (13, 2260)      (14, 2303)      (15, 2332)      (16, 2369)(17, 2370)      (18, 2402)      (19, 2322)      (20, 2348)      (21, 2104)      (22, 2126)      (23, 1540)      (24, 1555)      (25, 765)       (26, 773)
+#
+
+Each column is the number of samples in the projection and the number of segregating sites at that projection value. 
+The dadi manual recommends maximizing the number of segregating sites, but at the same time if you have lots of missing
+data then you might have to balance # of segregating sites against # of samples to avoid downsampling too far.
+
+# max segregating sites
+# Wild           (16, 5313)
+# Domesticated_2 (16, 3331)
+# Domesticated_5 (18, 2399)
+
+# easysfs
+easySFS.py -i populations.snps.vcf -p popmap_sfs_select.txt --order Wild,Domesticated_2,Domesticated_5 --proj 16,16,18
+
+# Continue, excluding samples not in both pops file and VCF? (yes/no)
+# yes
+
+# note pop order is very important 
+# 0 = Wild
+# 1 = Domesticated_2
+# 2 = Domesticated_5
 ```
 
 <br/>
