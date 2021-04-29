@@ -742,12 +742,6 @@ cp /data/scratch/mpx469/tGBS_enset_project/scripts/mlg_farthest_bitwise_monophyl
 qsub script_radpainter.sh
 ```
 
-<br/>
-<div align="right">
-    <b><a href="#enset-tgbs">↥ back to top</a></b>
-</div>
-<br/>
-
 
 
 
