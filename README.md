@@ -43,6 +43,7 @@ All scripts located in the following dir
    - [Raxml](#raxml)
    - [Iqtree](#iqtree)
    - [Radpainter](#radpainter)
+   - [Dsuite](#dsuite)
 
 
 
