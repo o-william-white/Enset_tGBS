@@ -46,6 +46,7 @@ All scripts located in the following dir
    - [Dsuite](#dsuite)
    - [EasySFS](#easysfs)
 
+[Repeat SNP calling for population genetic dataset](#repeat-snp-calling-for-population-genetic-dataset)
 
 
 
@@ -835,3 +836,8 @@ easySFS.py -i populations.snps.vcf -p popmap_sfs_select.txt --order Wild,Domesti
     <b><a href="#enset-tgbs">↥ back to top</a></b>
 </div>
 <br/>
+
+
+### Repeat SNP calling for population genetic dataset
+
+See README_population_genetic_dataset.md for details
