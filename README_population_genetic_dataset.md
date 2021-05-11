@@ -37,7 +37,7 @@ qsub script_populations_select_single_snp_array.sh
 Note that the single snps dataset is treated differently to the all snps dataset
 
 For the single_snp dataset, it is possible for a site to be heterozygous for one category (wil) and not for another (dom)
-in this situation another snp will be selelcted for the dom and the resulting whitelist has nore than one snp for a given locus
+in this situation another snp will be selelcted for the dom and the resulting whitelist has more than one snp for a given locus
 
 Hence we filter all_snps for uniq loci_pos combinations and filter single_snp for the first snp in the whitelist
 
