@@ -121,7 +121,7 @@ for l in `seq 70 10 120`; do
     echo ${l} $(wc -l populations_select_${l}_all_snps_output/whitelist_overall | cut -f 1 -d " ")
 done
 ```
-|     |       |
+
 |-----|-------|
 | 70  | 62167 |
 | 80  | 69630 |
