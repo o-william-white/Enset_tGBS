@@ -1,0 +1,144 @@
+popmap,sequence_id,type,sample_id,landrace,latitude,longitude,sample_date,regions,subregions
+pop1,EXS11ID000851,Domesticated,000236,Chamo,6.191268003,37.57450757,18/10/2018,Southern Nations Nationalities and Peoples,Gamo Gofa
+pop2,EXS12ID000488,Domesticated,000155,Worsaife,6.049165501,37.22941625,20/10/2018,Southern Nations Nationalities and Peoples,Gamo Gofa
+pop7,EXS5ID000604,Domesticated,000185,Toracho,6.137371431,38.1996072,04/04/2018,Southern Nations Nationalities and Peoples,Gedeo
+pop8,EXS8ID000683,Domesticated,000211,Wanade,6.778954922,37.76874955,10/04/2018,Southern Nations Nationalities and Peoples,Wolayita
+pop12,P1EN006,Domesticated,000022,Amerat,8.109740093,37.94747941,04/02/2018,Southern Nations Nationalities and Peoples,Gurage
+pop13,P1EN007,Domesticated,000087,Anhauriye,7.988862405,37.87177054,07/02/2018,Southern Nations Nationalities and Peoples,Gurage
+pop14,P1EN008,Domesticated,000078,Ankafuye,7.964639878,37.88194123,05/02/2018,Southern Nations Nationalities and Peoples,Gurage
+pop16,P1EN010,Domesticated,000038,Awugne,8.703316175,37.88128241,29/01/2018,Oromia,South West Shewa
+pop17,P1EN011,Domesticated,000048,Badadet,8.381723044,37.85846553,02/02/2018,Oromia,South West Shewa
+pop20,P1EN014,Domesticated,000125,Bashalga,8.620383823,37.90502314,30/01/2018,Oromia,South West Shewa
+pop21,P1EN015,Domesticated,000105,Bazariya,7.98749167,37.87566075,05/02/2018,Southern Nations Nationalities and Peoples,Gurage
+pop25,P1EN019,Domesticated,000082,Busara,7.960613421,37.88266853,05/02/2018,Southern Nations Nationalities and Peoples,Gurage
+pop27,P1EN021,Domesticated,000039,Dere,8.489701822,38.01724861,27/01/2018,Oromia,South West Shewa
+pop15,P1EN009,Domesticated,000074,Astara North,7.967711887,37.87879701,05/02/2018,Southern Nations Nationalities and Peoples,Gurage
+pop35,P1EN029,Domesticated,000010,Ganchwe,8.362931949,37.8160852,02/02/2018,Oromia,South West Shewa
+pop38,P1EN032,Domesticated,000092,Guadbadadet,8.076002597,37.74723733,08/02/2018,Southern Nations Nationalities and Peoples,Gurage
+pop41,P1EN035,Domesticated,000025,Inniba,8.594414005,38.12798713,26/01/2018,Oromia,South West Shewa
+pop43,P1EN037,Domesticated,000013,Kekeso,8.472651397,37.9550647,31/01/2018,Oromia,South West Shewa
+pop48,P1EN042,Domesticated,000075,Moyete,7.96762635,37.87874781,05/02/2018,Southern Nations Nationalities and Peoples,Gurage
+pop49,P1EN043,Domesticated,000106,Nechisedi,8.622934814,37.90426064,30/01/2018,Oromia,South West Shewa
+pop50,P1EN044,Domesticated,000081,Nechwe,8.200857039,37.80185499,04/02/2018,Southern Nations Nationalities and Peoples,Gurage
+pop56,P1EN050,Domesticated,000071,Quashquashye,7.987469709,37.87582914,05/02/2018,Southern Nations Nationalities and Peoples,Gurage
+pop57,P1EN051,Domesticated,000228,Quiminar,8.506377661,38.0003569,25/01/2018,Oromia,South West Shewa
+pop60,P1EN054,Domesticated,000083,Shertiye,7.960663545,37.88271965,05/02/2018,Southern Nations Nationalities and Peoples,Gurage
+pop63,P1EN057,Domesticated,000031,Teganen,8.58355504,37.9397912,30/01/2018,Oromia,South West Shewa
+pop64,P1EN058,Domesticated,000085,Tereriye,7.960512084,37.88264757,05/02/2018,Southern Nations Nationalities and Peoples,Gurage
+pop65,P1EN059,Domesticated,000028,Umbati,8.539869902,38.09192215,26/01/2018,Oromia,South West Shewa
+pop66,P1EN060,Domesticated,000019,Usmail,8.196011041,37.80935906,04/02/2018,Southern Nations Nationalities and Peoples,Gurage
+pop68,P1EN062,Domesticated,000086,Wanade,7.964798003,37.88184199,05/02/2018,Southern Nations Nationalities and Peoples,Gurage
+pop71,P1EN065,Domesticated,000057,Yesherakinke,8.148023933,37.92101406,03/02/2018,Southern Nations Nationalities and Peoples,Gurage
+pop73,P1EN070,Wild,000158,Wild (Ilubabor),8.35342,35.79897,NA,Oromia,Ilubabor
+pop74,P1EN071,Wild,000042,Wild (Ilubabor),8.055449,35.52457,NA,Oromia,Ilubabor
+pop75,P1EN072,Wild,000043,Wild (Ilubabor),8.055449,35.52457,NA,Oromia,Ilubabor
+pop77,P1EN074,Wild,000045,Wild (Sheka),7.577567,35.47841,NA,Southern Nations Nationalities and Peoples,Sheka
+pop78,P1EN075,Wild,000046,Wild (Sheka),7.577567,35.47841,NA,Southern Nations Nationalities and Peoples,Sheka
+pop79,P1EN076,Wild,000047,Wild (Sheka),7.577567,35.47841,NA,Southern Nations Nationalities and Peoples,Sheka
+pop80,P1EN077,Wild,000012,Wild (Bench Maji),6.536185,35.48835,NA,Southern Nations Nationalities and Peoples,Bench Maji
+pop81,P1EN082,Domesticated,000259,Maurelii (horticultural),NA,NA,NA,NA,NA
+pop9,P1EN003,Domesticated,000029,Achachet,8.491123519,38.01776645,27/01/2018,Oromia,South West Shewa
+pop86,P1EN098,Domesticated,000217,Kekar,8.726524282,37.99397207,24/01/2018,Oromia,West Shewa
+pop87,P2S10ID586,Domesticated,000178,Derassiado,6.569658758,38.39582614,06/04/2018,Southern Nations Nationalities and Peoples,Sidama
+pop88,P2S11ID386,Domesticated,000118,Birbo,6.746445443,38.44308682,02/04/2018,Southern Nations Nationalities and Peoples,Sidama
+pop89,P2S12ID339,Domesticated,000095,Birra,6.55894908,38.52763055,23/03/2018,Southern Nations Nationalities and Peoples,Sidama
+pop95,P2S18ID615,Domesticated,000188,Nifo,6.133694682,38.20019615,04/04/2018,Southern Nations Nationalities and Peoples,Gedeo
+pop18,P1EN012,Domesticated,000040,Badadet,8.555345787,38.11014893,26/01/2018,Oromia,South West Shewa
+pop102,P2S26ID640,Domesticated,000199,Shallakuma,6.991096137,37.7420115,10/04/2018,Southern Nations Nationalities and Peoples,Wolayita
+pop103,P2S28ID607,Domesticated,000187,Dimoye,6.1373219,38.19947597,04/04/2018,Southern Nations Nationalities and Peoples,Gedeo
+pop101,P2S25ID589,Domesticated,000180,Dowiramo,6.568908779,38.39673026,06/04/2018,Southern Nations Nationalities and Peoples,Sidama
+pop108,P2S32ID684,Domesticated,000216,Bole,7.050234839,37.9306831,17/04/2018,Southern Nations Nationalities and Peoples,Wolayita
+pop110,P2S34ID644,Domesticated,000201,Nakaka,6.997606312,37.73762515,10/04/2018,Southern Nations Nationalities and Peoples,Wolayita
+pop111,P2S35ID393,Domesticated,000121,Agena (red),6.747928373,38.44697205,02/04/2018,Southern Nations Nationalities and Peoples,Sidama
+pop24,P1EN018,Domesticated,000107,Bishastara,7.98747675,37.87568456,05/02/2018,Southern Nations Nationalities and Peoples,Gurage
+pop115,P2S39ID395,Domesticated,000122,Dirbo,7.197594985,37.95322617,09/04/2018,Southern Nations Nationalities and Peoples,Kembata Tembaro
+pop117,P2S40ID387,Domesticated,000119,Dishira,7.200975661,37.95640686,09/04/2018,Southern Nations Nationalities and Peoples,Kembata Tembaro
+pop119,P2S42ID343,Domesticated,000166,Gadime,7.010310739,38.7212735,20/03/2018,Oromia,West Arsi
+pop120,P2S43ID605,Domesticated,000186,Harame,6.137442862,38.19953563,04/04/2018,Southern Nations Nationalities and Peoples,Gedeo
+pop122,P2S45ID129,Domesticated,000015,Adara,6.938876852,38.52335214,20/03/2018,Southern Nations Nationalities and Peoples,Sidama
+pop123,P2S46ID235,Domesticated,000052,Askala,6.547981531,38.50469081,22/03/2018,Southern Nations Nationalities and Peoples,Sidama
+pop125,P2S48ID373,Domesticated,000111,Dambale,6.127350571,38.20318386,04/04/2018,Southern Nations Nationalities and Peoples,Gedeo
+pop126,P2S49ID275,Domesticated,000065,Gullumo,6.549068094,38.50386499,22/03/2018,Southern Nations Nationalities and Peoples,Sidama
+pop128,P2S50ID106,Domesticated,000004,Kanko,7.010186505,38.72114,25/03/2018,Oromia,West Arsi
+pop99,P2S23ID619,Domesticated,000189,Halle,6.93446594,37.8372434,09/04/2018,Southern Nations Nationalities and Peoples,Wolayita
+pop29,P1EN023,Domesticated,000017,Dinkinet,8.194216895,37.80640385,04/02/2018,Southern Nations Nationalities and Peoples,Gurage
+pop100,P2S24ID556,Domesticated,000064,Chacho,6.473811523,38.53928269,23/03/2018,Southern Nations Nationalities and Peoples,Sidama
+pop70,P1EN064,Domesticated,000069,Yegondiye,7.987493975,37.87568305,05/02/2018,Southern Nations Nationalities and Peoples,Gurage
+pop134,P2S56ID533,Domesticated,000169,Alaticho,7.047413859,38.75921452,20/03/2018,Oromia,West Arsi
+pop138,P2S5ID354,Domesticated,000102,Adoyo,6.64356143,38.35502826,03/04/2018,Southern Nations Nationalities and Peoples,Sidama
+pop59,P1EN053,Domesticated,000070,Separa,7.987493975,37.87568305,05/02/2018,Southern Nations Nationalities and Peoples,Gurage
+pop112,P2S36ID268,Domesticated,000063,Agena (white),6.473477563,38.53980403,23/03/2018,Southern Nations Nationalities and Peoples,Sidama
+pop121,P2S44ID662,Domesticated,000207,Silkante,6.776688243,37.76892052,01/09/2018,Southern Nations Nationalities and Peoples,Wolayita
+pop148,P2S69ID341,Domesticated,000096,Shawe,6.558899733,38.5267463,23/03/2018,Southern Nations Nationalities and Peoples,Sidama
+pop153,P2S73ID635,Domesticated,000197,Banga,6.915685583,37.68292975,10/04/2018,Southern Nations Nationalities and Peoples,Wolayita
+pop154,P2S74ID645,Domesticated,000202,Hoye,6.892755243,37.81049256,09/04/2018,Southern Nations Nationalities and Peoples,Wolayita
+pop30,P1EN024,Domesticated,000084,Edemert,7.960681482,37.88266291,05/02/2018,Southern Nations Nationalities and Peoples,Gurage
+pop158,P2S78ID491,Domesticated,000157,Mandaloka,7.350114328,37.90693296,02/09/2018,Southern Nations Nationalities and Peoples,Kembata Tembaro
+pop166,P3S12ID478,Domesticated,000151,Itine,7.374275812,37.78857482,01/09/2018,Southern Nations Nationalities and Peoples,Kembata Tembaro
+pop170,P3S16ID881,Domesticated,000242,Anchero,8.317976033,36.43796099,24/10/2018,Oromia,Ilubabor
+pop171,P3S17ID505,Domesticated,000161,Argama,6.940210388,37.84146518,09/04/2018,Southern Nations Nationalities and Peoples,Wolayita
+pop173,P3S19ID852,Domesticated,000237,Bod'a,6.191296629,37.57445595,18/10/2018,Southern Nations Nationalities and Peoples,Gamo Gofa
+pop175,P3S21ID237,Domesticated,000053,Bullo,6.548009916,38.50473472,22/03/2018,Southern Nations Nationalities and Peoples,Sidama
+pop10,P1EN004,Domesticated,000026,Achora,8.594391793,38.12799501,26/01/2018,Oromia,South West Shewa
+pop177,P3S23ID840,Domesticated,000229,Chamesa,5.940710523,37.28936324,19/10/2018,Southern Nations Nationalities and Peoples,Gamo Gofa
+pop178,P3S24ID834,Domesticated,000226,Chamo,6.22188646,37.55800935,18/10/2018,Southern Nations Nationalities and Peoples,Gamo Gofa
+pop180,P3S26ID695,Domesticated,000213,Genna (white),6.885457768,38.45728414,21/03/2018,Southern Nations Nationalities and Peoples,Sidama
+pop92,P2S15ID621,Domesticated,000191,Arke,6.934471186,37.83723854,09/04/2018,Southern Nations Nationalities and Peoples,Wolayita
+pop183,P3S29ID15,Wild,000023,Wild (Bench Maji),6.536185,35.48835,NA,Southern Nations Nationalities and Peoples,Bench Maji
+pop184,P3S2ID439,Domesticated,000138,Separa,NA,NA,26/10/2018,NA,NA
+pop91,P2S14ID130,Domesticated,000016,Huwisho,6.939551771,38.52314249,20/03/2018,Southern Nations Nationalities and Peoples,Sidama
+pop40,P1EN034,Domesticated,000011,Horate,8.362860912,37.81615938,02/02/2018,Oromia,South West Shewa
+pop188,P3S33ID479,Domesticated,000152,Balaka,7.373997682,37.78865294,01/09/2018,Southern Nations Nationalities and Peoples,Kembata Tembaro
+pop189,P3S34ID867,Domesticated,000239,Akatonke,6.016449632,37.26892448,20/10/2018,Southern Nations Nationalities and Peoples,Gamo Gofa
+pop190,P3S35ID829,Domesticated,000224,Ambaro,5.940563595,37.28853649,19/10/2018,Southern Nations Nationalities and Peoples,Gamo Gofa
+pop191,P3S36ID480,Domesticated,000153,Lekaka,7.373615893,37.78957152,01/09/2018,Southern Nations Nationalities and Peoples,Kembata Tembaro
+pop192,P3S37ID267,Domesticated,000062,Lemicho,6.474820444,38.53908673,23/03/2018,Southern Nations Nationalities and Peoples,Sidama
+pop193,P3S38ID487,Domesticated,000154,Liso,5.940579381,37.28859713,19/10/2018,Southern Nations Nationalities and Peoples,Gamo Gofa
+pop196,P3S40ID185,Domesticated,000037,Ayshakit,8.432889283,37.92439322,31/01/2018,Oromia,South West Shewa
+pop200,P3S44ID850,Domesticated,000235,Maze,6.190259765,37.57394535,18/10/2018,Southern Nations Nationalities and Peoples,Gamo Gofa
+pop3,EXS13ID000895,Domesticated,000247,Arooko,7.933571263,36.51323982,24/10/2018,Oromia,Jimma
+pop118,P2S41ID654,Domesticated,000205,Fello,6.918856107,37.67684072,10/04/2018,Southern Nations Nationalities and Peoples,Wolayita
+pop209,P3S52ID824,Domesticated,000222,Sassa,5.94086967,37.2893566,19/10/2018,Southern Nations Nationalities and Peoples,Gamo Gofa
+pop212,P3S55ID841,Domesticated,000230,Sinayso,5.940890921,37.28937135,19/10/2018,Southern Nations Nationalities and Peoples,Gamo Gofa
+pop213,P3S56ID466,Domesticated,000146,Siskela,7.653904517,37.8892555,31/08/2018,Southern Nations Nationalities and Peoples,Hadiya
+pop58,P1EN052,Domesticated,000067,Sebara,8.732460178,37.86117523,29/01/2018,Oromia,South West Shewa
+pop216,P3S59ID911,Domesticated,000251,Unnamed,9.018652539,37.40794217,25/10/2018,Oromia,West Shewa
+pop221,P3S63ID490,Domesticated,000156,Worsaife,6.318693065,37.56676569,17/10/2018,Southern Nations Nationalities and Peoples,Gamo Gofa
+pop222,P3S64ID681,Domesticated,000209,Dumo,6.474434844,38.32462055,06/04/2018,Southern Nations Nationalities and Peoples,Sidama
+pop223,P3S65ID831,Domesticated,000225,Gopo,5.929357032,37.29643476,19/10/2018,Southern Nations Nationalities and Peoples,Gamo Gofa
+pop93,P2S16ID103,Domesticated,000002,Genna,6.938125942,38.52490226,20/03/2018,Southern Nations Nationalities and Peoples,Sidama
+pop225,P3S68ID877,Domesticated,000241,Oysie,5.907960196,37.30957281,19/10/2018,Southern Nations Nationalities and Peoples,Gamo Gofa
+pop226,P3S69ID849,Domesticated,000234,Chade,6.190202888,37.57393247,18/10/2018,Southern Nations Nationalities and Peoples,Gamo Gofa
+pop228,P3S70ID337,Domesticated,000093,Awolcho,6.558652917,38.52735935,23/03/2018,Southern Nations Nationalities and Peoples,Sidama
+pop229,P3S71ID111,Domesticated,000008,Benjo,7.010104124,38.72123252,20/03/2018,Oromia,West Arsi
+pop230,P3S72ID823,Domesticated,000221,Bonozo,5.940946992,37.28932598,19/10/2018,Southern Nations Nationalities and Peoples,Gamo Gofa
+pop22,P1EN016,Domesticated,000021,Bishaganchwe,8.196865031,37.81074297,04/02/2018,Southern Nations Nationalities and Peoples,Gurage
+pop211,P3S54ID698,Domesticated,000214,Separa,6.88531295,38.45736356,21/03/2018,Southern Nations Nationalities and Peoples,Sidama
+pop233,P3S75ID842,Domesticated,000231,Bundo,5.940714028,37.28936421,19/10/2018,Southern Nations Nationalities and Peoples,Gamo Gofa
+pop234,P3S76ID826,Domesticated,000223,Charga,5.940546957,37.28860667,19/10/2018,Southern Nations Nationalities and Peoples,Gamo Gofa
+pop98,P2S22ID101,Domesticated,000115,Gussalo,6.774098423,38.43823972,02/04/2018,Southern Nations Nationalities and Peoples,Sidama
+pop6,EXS1ID000384,Domesticated,000116,Ganticha,6.774082442,38.43834313,02/04/2018,Southern Nations Nationalities and Peoples,Sidama
+pop237,P3S79ID602,Domesticated,000184,Astara South,6.137624961,38.19976433,04/04/2018,Southern Nations Nationalities and Peoples,Gedeo
+pop94,P2S17ID580,Domesticated,000177,Gulumo,6.589632695,38.40212708,06/04/2018,Southern Nations Nationalities and Peoples,Sidama
+pop33,P1EN027,Domesticated,000024,Ferezye,8.614446167,38.12945221,26/01/2018,Oromia,South West Shewa
+pop39,P1EN033,Domesticated,000058,Guariye,8.142538732,37.9210796,03/02/2018,Southern Nations Nationalities and Peoples,Gurage
+pop244,P3S85ID909,Wild,000249,Wild (East Wellega),8.717559704,36.47079916,NA,Oromia,East Wellega
+pop245,P3S86ID910,Wild,000250,Wild (East Wellega),8.717482601,36.47075741,NA,Oromia,East Wellega
+pop246,P3S87ID010,Wild,000001,Wild (Bench Maji),6.536185,35.48835,NA,Southern Nations Nationalities and Peoples,Bench Maji
+pop247,P3S88ID883,Wild,000243,Wild (Ilubabor),8.131199673,36.45686155,NA,Oromia,Ilubabor
+pop248,P3S89ID887,Wild,000244,Wild (Ilubabor),8.130827574,36.45648249,NA,Oromia,Ilubabor
+pop249,P3S8ID437,Domesticated,000136,Mashile,NA,NA,30/08/2018,NA,NA
+pop45,P1EN039,Domesticated,000051,Lemat,8.361686482,37.81746478,02/02/2018,Oromia,South West Shewa
+pop28,P1EN022,Domesticated,000219,Dima,8.504658155,38.00339517,25/01/2018,Oromia,South West Shewa
+pop61,P1EN055,Domesticated,000248,Shifere,8.460542816,38.0505681,25/01/2018,Oromia,South West Shewa
+pop72,P1EN066,Domesticated,000088,Zoober,7.988847233,37.87186266,07/02/2018,Southern Nations Nationalities and Peoples,Gurage
+pop55,P1EN049,Domesticated,000041,Qore,8.590179551,38.12754264,26/01/2018,Oromia,South West Shewa
+pop172,P3S18ID244,Domesticated,000055,Beresey,8.138184291,37.79779019,08/02/2018,Southern Nations Nationalities and Peoples,Gurage
+pop104,P2S29ID694,Domesticated,000212,Genna (red),6.885518719,38.45734176,21/03/2018,Southern Nations Nationalities and Peoples,Sidama
+pop109,P2S33ID633,Domesticated,000208,Katane,6.779472263,37.76834231,10/04/2018,Southern Nations Nationalities and Peoples,Wolayita
+pop11,P1EN005,Domesticated,000077,Agade,7.967592026,37.87879265,05/02/2018,Southern Nations Nationalities and Peoples,Gurage
+pop36,P1EN030,Domesticated,000104,Gimbowa,7.98684685,37.87609099,05/02/2018,Southern Nations Nationalities and Peoples,Gurage
+pop147,P2S68ID396,Domesticated,000123,Tassa,7.191091445,37.95316564,09/04/2018,Southern Nations Nationalities and Peoples,Kembata Tembaro
+pop150,P2S70ID548,Domesticated,000171,Islama,6.935031726,37.83688143,09/04/2018,Southern Nations Nationalities and Peoples,Wolayita
+pop206,P3S4ID441,Domesticated,000140,Agade,NA,NA,26/10/2018,NA,NA
+pop238,P3S7ID469,Domesticated,000149,Fereziye,NA,NA,30/08/2018,NA,NA
